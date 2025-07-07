@@ -1,0 +1,18 @@
+@use '@/styles/mixins.scss' as mixins;
+
+.container {
+  @include mixins.flex-column;
+
+  min-height: 100vh;
+  background: #7affdc;
+  background: linear-gradient(
+    147deg,
+    rgb(122 255 220 / 100%) 0%,
+    rgb(194 255 218 / 100%) 50%,
+    rgb(101 194 169 / 100%) 100%
+  );
+}
+
+.content {
+  flex: 1;
+}
