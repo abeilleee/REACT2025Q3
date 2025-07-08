@@ -1,5 +1,5 @@
 import { Component, type ReactNode } from 'react';
-import { Footer, Header } from '../ui';
+import { Footer, Header } from '@/components/ui';
 import styles from './Layout.module.scss';
 
 type LayoutProps = {

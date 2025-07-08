@@ -1,0 +1,38 @@
+@use '@/styles/mixins.scss' as mixins;
+
+.card {
+  @include mixins.flex-column;
+
+  position: relative;
+  overflow: hidden;
+
+  width: 200px;
+  padding: 20px;
+  border-radius: 16px;
+  background-color: var(--white);
+  box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
+}
+
+.content {
+  @include mixins.flex-column;
+
+  position: relative;
+  z-index: 1;
+  gap: 10px;
+}
+
+.img-box {
+  @include mixins.flex-center;
+
+  width: 120px;
+  height: 120px;
+
+  img {
+    width: 100%;
+  }
+}
+
+.name {
+  text-align: center;
+  text-transform: capitalize;
+}

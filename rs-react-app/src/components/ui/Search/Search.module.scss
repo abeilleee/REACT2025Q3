@@ -1,0 +1,5 @@
+@use '@/styles/mixins.scss' as mixins;
+
+.search-box {
+  @include mixins.flex-center;
+}

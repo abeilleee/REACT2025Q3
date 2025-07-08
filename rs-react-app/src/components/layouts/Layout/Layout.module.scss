@@ -4,15 +4,22 @@
   @include mixins.flex-column;
 
   min-height: 100vh;
-  background: #7affdc;
+
   background: linear-gradient(
-    147deg,
-    rgb(122 255 220 / 100%) 0%,
-    rgb(194 255 218 / 100%) 50%,
-    rgb(101 194 169 / 100%) 100%
+    45deg,
+    #bbe2fa,
+    #edf3ff,
+    #e0f6ff,
+    #f7ffff,
+    #ebffff,
+    #d7e1fc,
+    #d9fcf5
   );
 }
 
 .content {
+  @include mixins.flex-column;
+
+  width: 100%;
   flex: 1;
 }
