@@ -1,17 +1,16 @@
-// import { Card } from '@/components/ui/Card';
 import { CardsLayout } from '@/components/layouts/CardsLayout';
 import { Search } from '@/components/ui/Search';
 import { pokeApi } from '@/services/api/api';
 import type { PokemonData } from '@/utils/pokemonDataMapper';
 import { Component } from 'react';
 
-interface MainPageProps {}
+type MainPageProps = {};
 
 interface MainPageState {
   pokemons: (PokemonData | undefined)[];
   isLoading: boolean;
   error: string | null;
-  searchParams: string;
+  searchTerm: string;
 }
 
 export class MainPage extends Component<MainPageProps, MainPageState> {
@@ -20,9 +19,9 @@ export class MainPage extends Component<MainPageProps, MainPageState> {
 
     this.state = {
       pokemons: [],
-      searchParams: '',
       isLoading: true,
       error: null,
+      searchTerm: '',
     };
   }
 
@@ -56,12 +55,33 @@ export class MainPage extends Component<MainPageProps, MainPageState> {
     }
   }
 
+  private handleSearch = async (searchTerm: string) => {
+    if (!searchTerm.trim()) {
+      await this.loadPokemons();
+      return;
+    }
+
+    this.setState({ isLoading: true, searchTerm: searchTerm, pokemons: [] });
+
+    try {
+      const response = await pokeApi.getPokemonData(searchTerm.trim());
+
+      if (response) {
+        this.setState({ pokemons: [response], error: null });
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+
   render() {
     const { pokemons, isLoading } = this.state;
 
     return (
       <>
-        <Search />
+        <Search onSearch={this.handleSearch} />
         <CardsLayout
           pokemonsData={pokemons}
           isLoading={isLoading}

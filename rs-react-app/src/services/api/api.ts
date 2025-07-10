@@ -35,8 +35,6 @@ export class Api {
 
         return mapDataToPokemonData(data);
       }
-
-      return;
     } catch (error) {
       console.error(error);
     }
