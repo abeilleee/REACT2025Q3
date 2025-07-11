@@ -1,1 +1,1 @@
-export * from './SkeletonsCard';
+export * from './SkeletonCard';

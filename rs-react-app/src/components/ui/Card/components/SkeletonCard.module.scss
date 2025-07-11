@@ -3,7 +3,9 @@
 .card {
   @include mixins.flex-column;
 
-  width: 240px;
+  width: 200px;
+  height: 335px;
+  justify-content: flex-start;
   padding: 10px;
   border-radius: var(--border-radius);
   margin: 10px;
@@ -12,7 +14,7 @@
 
 .image {
   width: 80%;
-  height: 150px;
+  height: 120px;
   border-radius: var(--border-radius);
   margin-bottom: 10px;
 }
@@ -22,6 +24,13 @@
   height: 16px;
   border-radius: var(--border-radius);
   margin-bottom: 5px;
+}
+
+.ability {
+  border-radius: var(--border-radius);
+  margin-top: 6px;
+  width: 70px;
+  height: 25px;
 }
 
 .pulsate {

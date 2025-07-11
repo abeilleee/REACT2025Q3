@@ -2,7 +2,7 @@ import { Component } from 'react';
 import styles from './CardsLayout.module.scss';
 import type { PokemonData } from '@/utils/pokemonDataMapper';
 import { Card } from '@/components/ui/Card';
-import { SkeletonsCard } from '@/components/ui/Card/components';
+import { SkeletonCard } from '@/components/ui/Card/components';
 
 type CardsLayoutProps = {
   pokemonsData: (PokemonData | undefined)[];
@@ -18,9 +18,11 @@ export class CardsLayout extends Component<CardsLayoutProps> {
     return (
       <>
         {this.props.isLoading ? (
-          Array.from({ length: 20 }).map((_, index) => (
-            <SkeletonsCard key={index} />
-          ))
+          <div className={styles.container}>
+            {Array.from({ length: 20 }).map((_, index) => (
+              <SkeletonCard key={index} />
+            ))}
+          </div>
         ) : this.props.pokemonsData.length === 0 ||
           this.props.pokemonsData.every((item) => item === undefined) ? (
           <div className={styles['not-found']}>No results found</div>
