@@ -1,6 +1,7 @@
 import { CardsLayout } from '@/components/layouts/CardsLayout';
 import { Search } from '@/components/ui/Search';
 import { pokeApi } from '@/services/api/api';
+import { storage } from '@/services/localStorage/localStorage';
 import type { PokemonData } from '@/utils/pokemonDataMapper';
 import { Component } from 'react';
 
@@ -24,7 +25,13 @@ export class MainPage extends Component<MainPageProps, MainPageState> {
   }
 
   componentDidMount = async () => {
-    await this.loadPokemons();
+    const value = storage.getItem();
+
+    if (value) {
+      await this.handleSearch(value);
+    } else {
+      await this.loadPokemons();
+    }
   };
 
   private async loadPokemons() {

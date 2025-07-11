@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Button } from '../Button';
 import styles from './Search.module.scss';
+import { storage } from '@/services/localStorage/localStorage';
 
 type SearchProps = {
   onSearch: (searchTerm: string) => void;
@@ -19,8 +20,15 @@ export class Search extends Component<SearchProps, SearchState> {
     };
   }
 
+  componentDidMount() {
+    const storageValue = storage.getItem();
+
+    if (storageValue) this.setState({ searchTerm: storageValue });
+  }
+
   private onClick = () => {
     this.props.onSearch(this.state.searchTerm);
+    storage.setItem(this.state.searchTerm);
   };
 
   private onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
