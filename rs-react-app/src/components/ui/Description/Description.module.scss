@@ -17,7 +17,7 @@
   margin-top: 6px;
   margin-bottom: 6px;
   background-color: #ff682c;
-  box-shadow: inset 0 3px 5px #ffffff4d;
+  box-shadow: var(--btn-box-shadow);
   color: var(--white);
   text-align: center;
 }

@@ -31,14 +31,12 @@ export class Search extends Component<SearchProps, SearchState> {
   render() {
     return (
       <div className={styles['search-box']}>
-        <div>
-          <input
-            type="text"
-            placeholder="Search..."
-            onChange={this.onChange}
-            value={this.state.searchTerm}
-          />
-        </div>
+        <input
+          type="text"
+          placeholder="Enter the full pokemon name"
+          onChange={this.onChange}
+          value={this.state.searchTerm}
+        />
         <Button onClick={this.onClick} />
       </div>
     );

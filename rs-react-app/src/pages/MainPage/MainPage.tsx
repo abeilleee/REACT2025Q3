@@ -9,7 +9,6 @@ type MainPageProps = {};
 interface MainPageState {
   pokemons: (PokemonData | undefined)[];
   isLoading: boolean;
-  error: string | null;
   searchTerm: string;
 }
 
@@ -20,39 +19,29 @@ export class MainPage extends Component<MainPageProps, MainPageState> {
     this.state = {
       pokemons: [],
       isLoading: true,
-      error: null,
       searchTerm: '',
     };
   }
 
-  componentDidMount() {
-    //eslint-disable-next-line @typescript-eslint/no-floating-promises
-    this.loadPokemons();
-  }
+  componentDidMount = async () => {
+    await this.loadPokemons();
+  };
 
   private async loadPokemons() {
-    this.setState({ isLoading: true, error: null });
+    this.setState({ isLoading: true });
 
-    try {
-      const pokemonList = await pokeApi.getPokemons();
+    const pokemonList = await pokeApi.getPokemons();
 
-      if (pokemonList) {
-        const pokemonData = await Promise.all(
-          pokemonList.map(async (pokemon: { name: string }) => {
-            return await pokeApi.getPokemonData(pokemon.name);
-          })
-        );
-        this.setState({ pokemons: pokemonData, isLoading: false });
-      } else {
-        this.setState({ pokemons: [], isLoading: false });
-      }
-    } catch (error) {
-      console.error('Error while loading pokemons: ', error);
-      if (error instanceof Error)
-        this.setState({ error: error.message, isLoading: false });
-    } finally {
-      this.setState({ isLoading: false });
+    if (pokemonList) {
+      const pokemonData = await Promise.all(
+        pokemonList.map(async (pokemon: { name: string }) => {
+          return await pokeApi.getPokemonData(pokemon.name);
+        })
+      );
+      this.setState({ pokemons: pokemonData, isLoading: false });
     }
+
+    this.setState({ isLoading: false });
   }
 
   private handleSearch = async (searchTerm: string) => {
@@ -62,18 +51,8 @@ export class MainPage extends Component<MainPageProps, MainPageState> {
     }
 
     this.setState({ isLoading: true, searchTerm: searchTerm, pokemons: [] });
-
-    try {
-      const response = await pokeApi.getPokemonData(searchTerm.trim());
-
-      if (response) {
-        this.setState({ pokemons: [response], error: null });
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      this.setState({ isLoading: false });
-    }
+    const response = await pokeApi.getPokemonData(searchTerm.trim());
+    this.setState({ pokemons: [response], isLoading: false });
   };
 
   render() {

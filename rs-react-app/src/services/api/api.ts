@@ -9,17 +9,9 @@ export class Api {
       const response = await fetch(`${this.baseUrl}/pokemon`);
 
       if (response.ok) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const data: ApiResponse = await response.json();
-
-        if (data) {
-          const results = data.results;
-
-          return results;
-        }
+        const data = (await response.json()) as ApiResponse;
+        return data.results;
       }
-
-      return;
     } catch (error) {
       console.error(error);
     }
@@ -30,9 +22,7 @@ export class Api {
       const response = await fetch(`${this.baseUrl}/pokemon/${name}`);
 
       if (response.ok) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const data: Pokemon = await response.json();
-
+        const data = (await response.json()) as Pokemon;
         return mapDataToPokemonData(data);
       }
     } catch (error) {

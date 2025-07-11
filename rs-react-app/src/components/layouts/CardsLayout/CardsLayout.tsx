@@ -15,25 +15,23 @@ export class CardsLayout extends Component<CardsLayoutProps> {
   }
 
   render() {
-    if (this.props.isLoading) {
-      return (
-        <>
-          <div className={styles.container}>
-            {Array.from({ length: 20 }).map((_, index) => (
-              <SkeletonsCard key={index} />
-            ))}
-          </div>
-          ;
-        </>
-      );
-    }
-
     return (
-      <div className={styles.container}>
-        {this.props.pokemonsData.map((pokemon, index) =>
-          pokemon ? <Card key={index} pokemon={pokemon} /> : null
+      <>
+        {this.props.isLoading ? (
+          Array.from({ length: 20 }).map((_, index) => (
+            <SkeletonsCard key={index} />
+          ))
+        ) : this.props.pokemonsData.length === 0 ||
+          this.props.pokemonsData.every((item) => item === undefined) ? (
+          <div className={styles['not-found']}>No results found</div>
+        ) : (
+          <div className={styles.container}>
+            {this.props.pokemonsData.map((pokemon, index) =>
+              pokemon ? <Card key={index} pokemon={pokemon} /> : null
+            )}
+          </div>
         )}
-      </div>
+      </>
     );
   }
 }

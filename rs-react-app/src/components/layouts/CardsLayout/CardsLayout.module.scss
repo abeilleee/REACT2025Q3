@@ -1,3 +1,5 @@
+@use '@/styles/mixins.scss' as mixins;
+
 .container {
   display: grid;
   width: 90%;
@@ -6,4 +8,11 @@
   gap: 20px;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   place-items: center;
+}
+
+.not-found {
+  @include mixins.flex-center;
+
+  height: 200px;
+  font-size: 1.5em;
 }
