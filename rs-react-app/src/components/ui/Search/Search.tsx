@@ -31,6 +31,10 @@ export class Search extends Component<SearchProps, SearchState> {
     storage.setItem(this.state.searchTerm);
   };
 
+  private onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') this.onClick();
+  };
+
   private onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     this.setState({ searchTerm: value });
@@ -43,9 +47,10 @@ export class Search extends Component<SearchProps, SearchState> {
           type="text"
           placeholder="Enter the full pokemon name"
           onChange={this.onChange}
+          onKeyDown={this.onKeyDown}
           value={this.state.searchTerm}
         />
-        <Button onClick={this.onClick} />
+        <Button onClick={this.onClick} textContent="Search" />
       </div>
     );
   }
