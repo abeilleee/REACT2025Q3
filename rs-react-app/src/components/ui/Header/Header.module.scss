@@ -7,6 +7,19 @@
   height: 60px;
   justify-content: space-between;
   padding: var(--padding-base);
+
+  button {
+    width: 170px;
+    background-color: #f00;
+
+    &:hover {
+      background-color: #ff3939;
+    }
+
+    &:active {
+      background-color: #c61010;
+    }
+  }
 }
 
 .logo {
@@ -19,4 +32,9 @@
     width: 100%;
     height: 100%;
   }
+}
+
+.error-button {
+  width: 170px;
+  background-color: red;
 }

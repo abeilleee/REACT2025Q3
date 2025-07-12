@@ -5,24 +5,18 @@ import { storage } from '@/services/localStorage/localStorage';
 import type { PokemonData } from '@/utils/pokemonDataMapper';
 import { Component } from 'react';
 
-type MainPageProps = {};
-
 interface MainPageState {
   pokemons: (PokemonData | undefined)[];
   isLoading: boolean;
   searchTerm: string;
 }
 
-export class MainPage extends Component<MainPageProps, MainPageState> {
-  constructor(props: MainPageProps) {
-    super(props);
-
-    this.state = {
-      pokemons: [],
-      isLoading: true,
-      searchTerm: '',
-    };
-  }
+export class MainPage extends Component {
+  state: MainPageState = {
+    pokemons: [],
+    isLoading: true,
+    searchTerm: '',
+  };
 
   componentDidMount = async () => {
     const value = storage.getItem();

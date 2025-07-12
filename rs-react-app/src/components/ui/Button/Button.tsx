@@ -3,6 +3,7 @@ import styles from './Button.module.scss';
 
 type ButtonProps = {
   onClick: () => void;
+  textContent: string;
 };
 export class Button extends Component<ButtonProps> {
   constructor(props: ButtonProps) {
@@ -16,7 +17,7 @@ export class Button extends Component<ButtonProps> {
   render() {
     return (
       <button className={styles.button} onClick={this.handleClick}>
-        Search
+        {this.props.textContent}
       </button>
     );
   }
