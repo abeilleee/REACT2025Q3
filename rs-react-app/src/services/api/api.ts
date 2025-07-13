@@ -1,32 +1,41 @@
 import { mapDataToPokemonData } from '@/utils/pokemonDataMapper';
 import type { ApiResponse, Pokemon } from './types';
+import { BASE_ENDPOINT, DEFAULT_ERROR, STATUS_CODE } from './constants';
 
 export class Api {
   private baseUrl = 'https://pokeapi.co/api/v2';
 
-  public async getPokemons() {
+  private async fetchData<T>(endpoint: string): Promise<T | undefined> {
     try {
-      const response = await fetch(`${this.baseUrl}/pokemon`);
+      const response = await fetch(`${this.baseUrl}/${endpoint}`);
 
-      if (response.ok) {
-        const data = (await response.json()) as ApiResponse;
-        return data.results;
+      if (!response.ok) {
+        if (response.status === STATUS_CODE.NOT_FOUND) {
+          return;
+        }
+        throw new Error(`${response.status} ${response.statusText}`);
       }
+
+      const data = (await response.json()) as T;
+      return data;
     } catch (error) {
-      console.error(error);
+      throw new Error(error instanceof Error ? error.message : DEFAULT_ERROR);
+    }
+  }
+
+  public async getPokemons() {
+    const data = await this.fetchData<ApiResponse>(BASE_ENDPOINT);
+
+    if (data) {
+      return data.results;
     }
   }
 
   public async getPokemonData(name: string) {
-    try {
-      const response = await fetch(`${this.baseUrl}/pokemon/${name}`);
+    const data = await this.fetchData<Pokemon>(`${BASE_ENDPOINT}/${name}`);
 
-      if (response.ok) {
-        const data = (await response.json()) as Pokemon;
-        return mapDataToPokemonData(data);
-      }
-    } catch (error) {
-      console.error(error);
+    if (data) {
+      return mapDataToPokemonData(data);
     }
   }
 }

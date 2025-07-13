@@ -6,9 +6,10 @@ import type { PokemonData } from '@/utils/pokemonDataMapper';
 import { Component } from 'react';
 
 interface MainPageState {
-  pokemons: (PokemonData | undefined)[];
+  pokemons?: PokemonData[];
   isLoading: boolean;
   searchTerm: string;
+  errorMessage: string;
 }
 
 export class MainPage extends Component {
@@ -16,6 +17,7 @@ export class MainPage extends Component {
     pokemons: [],
     isLoading: true,
     searchTerm: '',
+    errorMessage: '',
   };
 
   componentDidMount = async () => {
@@ -29,20 +31,26 @@ export class MainPage extends Component {
   };
 
   private async loadPokemons() {
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true, pokemons: [], errorMessage: '' });
 
-    const pokemonList = await pokeApi.getPokemons();
+    try {
+      const pokemonList = await pokeApi.getPokemons();
 
-    if (pokemonList) {
-      const pokemonData = await Promise.all(
-        pokemonList.map(async (pokemon: { name: string }) => {
-          return await pokeApi.getPokemonData(pokemon.name);
-        })
-      );
-      this.setState({ pokemons: pokemonData, isLoading: false });
+      if (pokemonList) {
+        const pokemonData = await Promise.all(
+          pokemonList.map(async (pokemon: { name: string }) => {
+            return await pokeApi.getPokemonData(pokemon.name);
+          })
+        );
+        this.setState({ pokemons: pokemonData });
+      }
+    } catch (error) {
+      this.setState({
+        errorMessage: String(error),
+      });
+    } finally {
+      this.setState({ isLoading: false });
     }
-
-    this.setState({ isLoading: false });
   }
 
   private handleSearch = async (searchTerm: string) => {
@@ -51,13 +59,29 @@ export class MainPage extends Component {
       return;
     }
 
-    this.setState({ isLoading: true, searchTerm: searchTerm, pokemons: [] });
-    const response = await pokeApi.getPokemonData(searchTerm.trim());
-    this.setState({ pokemons: [response], isLoading: false });
+    this.setState({
+      isLoading: true,
+      searchTerm: searchTerm,
+      pokemons: [],
+      errorMessage: '',
+    });
+
+    try {
+      const response = await pokeApi.getPokemonData(searchTerm.trim());
+      if (response) {
+        this.setState({ pokemons: [response] });
+      }
+    } catch (error) {
+      this.setState({
+        errorMessage: String(error),
+      });
+    } finally {
+      this.setState({ isLoading: false });
+    }
   };
 
   render() {
-    const { pokemons, isLoading } = this.state;
+    const { pokemons, isLoading, errorMessage } = this.state;
 
     return (
       <>
@@ -65,6 +89,7 @@ export class MainPage extends Component {
         <CardsLayout
           pokemonsData={pokemons}
           isLoading={isLoading}
+          errorMessage={errorMessage}
         ></CardsLayout>
       </>
     );

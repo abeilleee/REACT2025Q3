@@ -3,37 +3,66 @@ import styles from './CardsLayout.module.scss';
 import type { PokemonData } from '@/utils/pokemonDataMapper';
 import { Card } from '@/components/ui/Card';
 import { SkeletonCard } from '@/components/ui/Card/components';
+import pic from '@/assets/images/egg.png';
 
 type CardsLayoutProps = {
-  pokemonsData: (PokemonData | undefined)[];
+  pokemonsData?: PokemonData[];
   isLoading: boolean;
+  errorMessage: string;
 };
 
 export class CardsLayout extends Component<CardsLayoutProps> {
-  constructor(props: CardsLayoutProps) {
-    super(props);
+  private renderLoadingState() {
+    return (
+      <div className={styles.container}>
+        {Array.from({ length: 20 }).map((_, index) => (
+          <SkeletonCard key={index} />
+        ))}
+      </div>
+    );
+  }
+
+  private renderNotFoundState() {
+    return <div className={styles['not-found']}>No results found</div>;
+  }
+
+  private renderErrorState() {
+    return (
+      <div className={styles['error']}>
+        <p>{this.props.errorMessage}</p>
+        <img src={pic} alt="egg" height="120px" />
+        <p>Please, try again</p>
+      </div>
+    );
+  }
+
+  private renderCards() {
+    return (
+      <div className={styles.container}>
+        {this.props.pokemonsData &&
+          this.props.pokemonsData.length > 0 &&
+          this.props.pokemonsData.map((pokemon, index) => (
+            <Card key={index} pokemon={pokemon} />
+          ))}
+      </div>
+    );
   }
 
   render() {
-    return (
-      <>
-        {this.props.isLoading ? (
-          <div className={styles.container}>
-            {Array.from({ length: 20 }).map((_, index) => (
-              <SkeletonCard key={index} />
-            ))}
-          </div>
-        ) : this.props.pokemonsData.length === 0 ||
-          this.props.pokemonsData.every((item) => item === undefined) ? (
-          <div className={styles['not-found']}>No results found</div>
-        ) : (
-          <div className={styles.container}>
-            {this.props.pokemonsData.map((pokemon, index) =>
-              pokemon ? <Card key={index} pokemon={pokemon} /> : null
-            )}
-          </div>
-        )}
-      </>
-    );
+    const { isLoading, pokemonsData, errorMessage } = this.props;
+
+    if (isLoading) {
+      return this.renderLoadingState();
+    }
+
+    if (!pokemonsData || (pokemonsData.length === 0 && !errorMessage)) {
+      return this.renderNotFoundState();
+    }
+
+    if (errorMessage) {
+      return this.renderErrorState();
+    }
+
+    return this.renderCards();
   }
 }
