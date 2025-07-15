@@ -1,8 +1,8 @@
-import { Component, type ErrorInfo } from 'react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
 import { Fallback } from '@/components/common';
 
 type ErrorBoundaryProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 type ErrorBoundaryState = {
