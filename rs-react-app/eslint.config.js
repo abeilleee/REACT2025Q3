@@ -7,6 +7,8 @@ import { globalIgnores } from 'eslint/config';
 import react from 'eslint-plugin-react';
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
 import reactCompiler from 'eslint-plugin-react-compiler';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import importPlugin from 'eslint-plugin-import';
 
 export default tseslint.config([
   globalIgnores(['dist']),
@@ -27,9 +29,11 @@ export default tseslint.config([
     },
     plugins: {
       react,
+      import: importPlugin,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       'react-compiler': reactCompiler,
+      'simple-import-sort': simpleImportSort,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -42,6 +46,24 @@ export default tseslint.config([
       ...react.configs['jsx-runtime'].rules,
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-misused-promises': 'off',
+      'import/order': [
+        'error',
+        {
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            ['parent', 'sibling'],
+            'object',
+            'type',
+            'index',
+          ],
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+        },
+      ],
     },
     settings: {
       react: {
