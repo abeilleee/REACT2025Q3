@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import styles from './Header.module.scss';
-import logo from '@/assets/images/logo.png';
 import { Button } from '../Button';
+import logo from '@/assets/images/logo.png';
 
 export type HeaderState = {
   hasError: boolean;

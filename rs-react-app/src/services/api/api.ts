@@ -1,6 +1,6 @@
-import { mapDataToPokemonData } from '@/utils/pokemonDataMapper';
-import type { ApiResponse, Pokemon } from './types';
 import { BASE_ENDPOINT, DEFAULT_ERROR, STATUS_CODE } from './constants';
+import type { ApiResponse, Pokemon } from './types';
+import { mapDataToPokemonData } from '@/utils/pokemonDataMapper';
 
 export class Api {
   private baseUrl = 'https://pokeapi.co/api/v2';

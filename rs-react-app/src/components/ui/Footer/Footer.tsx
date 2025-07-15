@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import styles from './Footer.module.scss';
-import rs from '@/assets/images/rs.svg';
 import gh from '@/assets/images/gh.svg';
+import rs from '@/assets/images/rs.svg';
 
 export class Footer extends Component {
   render() {
