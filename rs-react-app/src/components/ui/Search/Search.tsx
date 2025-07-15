@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import { Button } from '../Button';
 import styles from './Search.module.scss';
-import { storage } from '@/services/localStorage/localStorage';
+import { Button } from '@/components/ui';
+import { storage } from '@/services';
 
 type SearchProps = {
   onSearch: (searchTerm: string) => void;

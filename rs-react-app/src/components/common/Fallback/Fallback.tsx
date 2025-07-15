@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import styles from './Fallback.module.scss';
 import img from '@/assets/images/pikachu.png';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui';
 
 export class Fallback extends Component {
   onClick = () => {

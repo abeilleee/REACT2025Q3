@@ -1,11 +1,5 @@
+import type { PokemonData } from './types';
 import type { Pokemon } from '@/services/api/types';
-
-export type PokemonData = Pick<Pokemon, 'name' | 'height' | 'weight'> & {
-  abilities: string[];
-  sprites: {
-    homefrontDefault?: string;
-  };
-};
 
 export const mapDataToPokemonData = (data: Pokemon): PokemonData => {
   return {

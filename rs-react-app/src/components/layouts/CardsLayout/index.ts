@@ -1,1 +1,1 @@
-export * from './CardsLayout';
+export { CardsLayout } from './CardsLayout';

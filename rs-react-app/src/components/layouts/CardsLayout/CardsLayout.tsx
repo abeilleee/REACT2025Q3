@@ -1,9 +1,8 @@
 import { Component } from 'react';
 import styles from './CardsLayout.module.scss';
-import type { PokemonData } from '@/utils/pokemonDataMapper';
+import type { PokemonData } from '@/utils/types';
 import pic from '@/assets/images/egg.png';
-import { Card } from '@/components/ui/Card';
-import { SkeletonCard } from '@/components/ui/Card/components';
+import { Card, SkeletonCard } from '@/components/ui';
 
 type CardsLayoutProps = {
   pokemonsData?: PokemonData[];

@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import styles from './Card.module.scss';
-import { Description } from '../Description';
-import type { PokemonData } from '@/utils/pokemonDataMapper';
+import type { PokemonData } from '@/utils/types';
+import { Description } from '@/components/ui';
 
 type CardProps = {
   pokemon: PokemonData;

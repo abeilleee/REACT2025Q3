@@ -1,9 +1,7 @@
 import { Component } from 'react';
-import type { PokemonData } from '@/utils/pokemonDataMapper';
-import { CardsLayout } from '@/components/layouts/CardsLayout';
-import { Search } from '@/components/ui/Search';
-import { pokeApi } from '@/services/api/api';
-import { storage } from '@/services/localStorage/localStorage';
+import type { PokemonData } from '@/utils/types';
+import { CardsLayout, Search } from '@/components';
+import { pokeApi, storage } from '@/services';
 
 interface MainPageState {
   pokemons?: PokemonData[];
