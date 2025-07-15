@@ -1,13 +1,16 @@
-import { BASE_ENDPOINT, DEFAULT_ERROR, STATUS_CODE } from './constants';
+import {
+  BASE_ENDPOINT,
+  BASE_URL,
+  DEFAULT_ERROR,
+  STATUS_CODE,
+} from './constants';
 import type { ApiResponse, Pokemon } from './types';
 import { mapDataToPokemonData } from '@/utils/pokemonDataMapper';
 
 export class Api {
-  private baseUrl = 'https://pokeapi.co/api/v2';
-
   private async fetchData<T>(endpoint: string): Promise<T | undefined> {
     try {
-      const response = await fetch(`${this.baseUrl}/${endpoint}`);
+      const response = await fetch(`${BASE_URL}/${endpoint}`);
 
       if (!response.ok) {
         if (response.status === STATUS_CODE.NOT_FOUND) {
