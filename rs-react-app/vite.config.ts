@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import path from 'path';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
@@ -18,5 +19,34 @@ export default defineConfig({
   },
   server: {
     open: true,
+  },
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./src/__tests__/setupTests.ts'],
+    globals: true,
+    coverage: {
+      reporter: ['text', 'lcov', 'html'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        'src/**/*.test.{js,jsx,ts,tsx}',
+        'src/__tests__/**',
+        'src/__mocks__/**',
+        'src/**/index.*',
+        'src/**/constants.*',
+        'src/**/types.*',
+        'src/**/*.d.ts',
+        'src/main.tsx',
+        'src/App.tsx',
+        'config/**/*',
+      ],
+      thresholds: {
+        global: {
+          statements: 80,
+          branches: 50,
+          functions: 50,
+          lines: 50,
+        },
+      },
+    },
   },
 });
