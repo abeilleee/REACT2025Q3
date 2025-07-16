@@ -1,0 +1,54 @@
+@use '@/styles/mixins.scss' as mixins;
+
+.card {
+  @include mixins.flex-column;
+
+  width: 200px;
+  height: 335px;
+  justify-content: flex-start;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  margin: 10px;
+  background-color: #f4f4f480;
+}
+
+.image {
+  width: 80%;
+  height: 120px;
+  border-radius: var(--border-radius);
+  margin-bottom: 10px;
+}
+
+.text {
+  width: 60%;
+  height: 16px;
+  border-radius: var(--border-radius);
+  margin-bottom: 5px;
+}
+
+.ability {
+  border-radius: var(--border-radius);
+  margin-top: 6px;
+  width: 70px;
+  height: 25px;
+}
+
+.pulsate {
+  animation: skeleton-animation 2.25s ease infinite;
+  background: linear-gradient(-45deg, #ddd, #f0f0f0, #ddd, #f0f0f0);
+  background-size: 400% 400%;
+}
+
+@keyframes skeleton-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}

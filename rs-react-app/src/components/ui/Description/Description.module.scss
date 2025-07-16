@@ -1,0 +1,23 @@
+@use '@/styles/mixins.scss' as mixins;
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.title {
+  color: #363636;
+  font-size: 0.8em;
+}
+
+.ability {
+  padding: 5px;
+  border-radius: var(--border-radius);
+  margin-top: 6px;
+  margin-bottom: 6px;
+  background-color: #ff682c;
+  box-shadow: var(--btn-box-shadow);
+  color: var(--white);
+  text-align: center;
+}
