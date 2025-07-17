@@ -1,2 +1,1 @@
-export { Fallback } from './Fallback';
 export { ErrorButton } from './ErrorButton';
