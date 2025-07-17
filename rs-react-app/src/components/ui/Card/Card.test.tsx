@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { Card } from './Card';
-import { cardData } from '@/__mocks__/mocks';
+import { cardData } from '@/__mocks__/mocksData';
 
 describe('Card test', () => {
   test('should render Card with correct data', () => {
