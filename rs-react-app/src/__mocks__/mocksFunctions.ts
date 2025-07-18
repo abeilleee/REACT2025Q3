@@ -6,3 +6,13 @@ export const mockStorage = {
 vi.mock('@/storage', () => ({
   storage: mockStorage,
 }));
+
+export const mockReload = vi.fn();
+
+Object.defineProperty(window, 'location', {
+  configurable: true,
+  value: {
+    ...window.location,
+    reload: mockReload,
+  },
+});
