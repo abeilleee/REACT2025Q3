@@ -1,12 +1,12 @@
-export class LocalStorage {
-  private storageName: string = 'abeilleee_searchTerm';
+import { STORAGE_NAME } from './constants';
 
+export class LocalStorage {
   public setItem(value: string) {
-    localStorage.setItem(this.storageName, value.trim());
+    localStorage.setItem(STORAGE_NAME, value.trim());
   }
 
   public getItem() {
-    return localStorage.getItem(this.storageName);
+    return localStorage.getItem(STORAGE_NAME);
   }
 }
 

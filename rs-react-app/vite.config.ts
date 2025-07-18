@@ -37,6 +37,7 @@ export default defineConfig({
         'src/**/*.d.ts',
         'src/main.tsx',
         'src/App.tsx',
+        'src/utils',
         'config/**/*',
       ],
       thresholds: {

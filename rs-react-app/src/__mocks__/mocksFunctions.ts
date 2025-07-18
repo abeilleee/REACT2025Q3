@@ -1,12 +1,7 @@
-export const mockStorage = {
-  getItem: vi.fn(),
-  setItem: vi.fn(),
-};
+import { storage } from '@/services';
 
-vi.mock('@/storage', () => ({
-  storage: mockStorage,
-}));
-
+export const mockSetItem = vi.spyOn(storage, 'setItem');
+export const mockGetItem = vi.spyOn(storage, 'getItem');
 export const mockReload = vi.fn();
 
 Object.defineProperty(window, 'location', {
