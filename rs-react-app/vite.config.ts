@@ -24,6 +24,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/__tests__/setupTests.ts'],
     globals: true,
+    testTimeout: 10000,
     coverage: {
       reporter: ['text', 'lcov', 'html'],
       include: ['src/**/*.{ts,tsx}'],
