@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { Search } from './Search';
 import userEvent from '@testing-library/user-event';
+import { Search } from './Search';
 import { mockGetItem, mockSetItem } from '@/__mocks__/mocksFunctions';
 
 describe('Search test', () => {
