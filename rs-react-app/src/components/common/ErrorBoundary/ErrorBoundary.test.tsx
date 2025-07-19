@@ -6,6 +6,8 @@ describe('Error Boundary test', () => {
     Fallback: () => <p>There was an error</p>,
   }));
 
+  vi.spyOn(console, 'error').mockImplementation(() => {});
+
   test('should render children when there are no errors', () => {
     const childText = 'This is a child component';
 

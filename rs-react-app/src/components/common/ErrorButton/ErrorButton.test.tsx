@@ -11,6 +11,8 @@ describe('Error Button test', () => {
   });
 
   test('should display fallback ui when button clicked', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
     render(
       <MockErrorBoundary>
         <ErrorButton />
