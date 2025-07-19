@@ -2,11 +2,13 @@ import { http, HttpResponse } from 'msw';
 import { pokeApi } from './api';
 import { BASE_ENDPOINT, BASE_URL } from './constants';
 import {
-  cardData,
   MOCK_ENDPOINT,
   mockApiResponseResults,
+  mockPokemonDataResponse,
+  NOT_EXISTING_ENDPOINT,
 } from '@/__mocks__/mocksData';
 import { server } from '@/__mocks__/msw/server';
+import { mapDataToPokemonData } from '@/utils/pokemonDataMapper';
 
 describe('API test', () => {
   test('should fetch and return correct data of all pokemons', async () => {
@@ -18,12 +20,11 @@ describe('API test', () => {
   test('should fetch and return correct data of one pokemon', async () => {
     const result = await pokeApi.getPokemonData(MOCK_ENDPOINT);
 
-    expect(result).toEqual(cardData);
+    expect(result).toEqual(mapDataToPokemonData(mockPokemonDataResponse));
   });
 
   test('should fetch and return undefined with incorrect pokemon name', async () => {
-    const notExistingEndpoint = 'abc';
-    const result = await pokeApi.getPokemonData(notExistingEndpoint);
+    const result = await pokeApi.getPokemonData(NOT_EXISTING_ENDPOINT);
 
     expect(result).toEqual(undefined);
   });
