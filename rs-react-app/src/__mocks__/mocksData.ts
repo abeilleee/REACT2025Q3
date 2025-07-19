@@ -43,3 +43,17 @@ export const mockPokemonsData: PokemonData[] = [
     },
   },
 ];
+
+export const MOCK_ENDPOINT = 'pidgeot';
+
+export const mockApiResponseResults = [
+  { name: 'test', url: 'test url' },
+  { name: 'test1', url: 'test1 url' },
+];
+
+export const mockApiResponse = {
+  count: 22,
+  next: '2',
+  previous: null,
+  results: mockApiResponseResults,
+};
