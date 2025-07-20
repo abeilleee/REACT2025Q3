@@ -52,7 +52,7 @@ export class MainPage extends Component {
   }
 
   private handleSearch = async (searchTerm: string) => {
-    if (!searchTerm.trim()) {
+    if (!searchTerm) {
       await this.loadPokemons();
       return;
     }

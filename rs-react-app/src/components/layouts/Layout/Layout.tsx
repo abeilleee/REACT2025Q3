@@ -12,9 +12,11 @@ export class Layout extends Component<LayoutProps> {
   }
   render() {
     return (
-      <div className={styles.container}>
+      <div className={styles.container} data-testid={'layout-container'}>
         <Header />
-        <main className={styles.content}>{this.props.children}</main>
+        <main className={styles.content} data-testid={'layout-main'}>
+          {this.props.children}
+        </main>
         <Footer />
       </div>
     );
