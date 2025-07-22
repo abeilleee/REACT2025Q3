@@ -1,7 +1,7 @@
 import { type FC } from 'react';
-import styles from './Footer.module.scss';
 import gh from '@/assets/images/gh.svg';
 import rs from '@/assets/images/rs.svg';
+import styles from './Footer.module.scss';
 
 export const Footer: FC = () => {
   return (

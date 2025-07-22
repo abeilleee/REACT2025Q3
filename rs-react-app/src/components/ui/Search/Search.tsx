@@ -1,7 +1,7 @@
 import { useEffect, useState, type FC } from 'react';
-import styles from './Search.module.scss';
 import { Button } from '@/components/ui';
 import { storage } from '@/services';
+import styles from './Search.module.scss';
 
 type SearchProps = {
   onSearch: (searchTerm: string) => void;

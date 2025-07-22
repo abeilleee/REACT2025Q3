@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import { ErrorButton } from './ErrorButton';
 import { MockErrorBoundary } from '@/__mocks__/MockErrorBoundary';
+import { ErrorButton } from './ErrorButton';
 
 describe('Error Button test', () => {
   test('should render error button', () => {

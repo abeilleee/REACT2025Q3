@@ -1,5 +1,5 @@
-import type { PokemonData } from './types';
 import type { Pokemon } from '@/services/api/types';
+import type { PokemonData } from './types';
 
 export const mapDataToPokemonData = (data: Pokemon): PokemonData => {
   return {

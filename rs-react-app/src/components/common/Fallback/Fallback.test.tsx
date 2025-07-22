@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Fallback } from './Fallback';
 import { mockReload } from '@/__mocks__/mocksFunctions';
+import { Fallback } from './Fallback';
 
 describe('Fallback test', () => {
   beforeEach(() => {

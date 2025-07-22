@@ -1,6 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MainPage } from './MainPage';
 import {
   mockApiResponseResults,
   NOT_EXISTING_ENDPOINT,
@@ -8,6 +7,7 @@ import {
 } from '@/__mocks__/mocksData';
 import { mockGetItem } from '@/__mocks__/mocksFunctions';
 import { pokeApi } from '@/services';
+import { MainPage } from './MainPage';
 
 describe('Main Page test', () => {
   beforeEach(() => {

@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import type { PokemonData } from '@/utils/types';
 import { CardsLayout, Search } from '@/components';
 import { pokeApi, storage } from '@/services';
+import type { PokemonData } from '@/utils/types';
 
 interface MainPageState {
   pokemons?: PokemonData[];

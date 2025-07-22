@@ -1,8 +1,8 @@
 import { type FC } from 'react';
-import styles from './CardsLayout.module.scss';
-import type { PokemonData } from '@/utils/types';
 import pic from '@/assets/images/egg.png';
 import { Card, SkeletonCard } from '@/components/ui';
+import type { PokemonData } from '@/utils/types';
+import styles from './CardsLayout.module.scss';
 
 type CardsLayoutProps = {
   pokemonsData?: PokemonData[];

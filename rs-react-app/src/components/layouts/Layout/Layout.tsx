@@ -1,6 +1,6 @@
 import { type FC, type ReactNode } from 'react';
-import styles from './Layout.module.scss';
 import { Footer, Header } from '@/components/ui';
+import styles from './Layout.module.scss';
 
 type LayoutProps = {
   children: ReactNode;

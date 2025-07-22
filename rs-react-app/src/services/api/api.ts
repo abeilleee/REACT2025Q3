@@ -1,3 +1,4 @@
+import { mapDataToPokemonData } from '@/utils/pokemonDataMapper';
 import {
   BASE_ENDPOINT,
   BASE_URL,
@@ -5,7 +6,6 @@ import {
   STATUS_CODE,
 } from './constants';
 import type { ApiResponse, Pokemon } from './types';
-import { mapDataToPokemonData } from '@/utils/pokemonDataMapper';
 
 export class Api {
   private async fetchData<T>(endpoint: string): Promise<T | undefined> {

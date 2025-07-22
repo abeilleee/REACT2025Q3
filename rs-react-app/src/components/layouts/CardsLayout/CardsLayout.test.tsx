@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { CardsLayout } from './CardsLayout';
 import { mockPokemonsData } from '@/__mocks__/mocksData';
+import { CardsLayout } from './CardsLayout';
 
 describe('Cards Layout test', () => {
   test('should render loading state when isLoading is true', () => {

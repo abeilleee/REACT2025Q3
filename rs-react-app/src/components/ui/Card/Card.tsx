@@ -1,7 +1,7 @@
 import { type FC } from 'react';
-import styles from './Card.module.scss';
-import type { PokemonData } from '@/utils/types';
 import { Description } from '@/components/ui';
+import type { PokemonData } from '@/utils/types';
+import styles from './Card.module.scss';
 
 type CardProps = {
   pokemon: PokemonData;

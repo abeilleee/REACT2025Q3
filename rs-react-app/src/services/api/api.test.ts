@@ -1,6 +1,4 @@
 import { http, HttpResponse } from 'msw';
-import { pokeApi } from './api';
-import { BASE_ENDPOINT, BASE_URL } from './constants';
 import {
   MOCK_ENDPOINT,
   mockApiResponseResults,
@@ -9,6 +7,8 @@ import {
 } from '@/__mocks__/mocksData';
 import { server } from '@/__mocks__/msw/server';
 import { mapDataToPokemonData } from '@/utils/pokemonDataMapper';
+import { pokeApi } from './api';
+import { BASE_ENDPOINT, BASE_URL } from './constants';
 
 describe('API test', () => {
   test('should fetch and return correct data of all pokemons', async () => {

@@ -1,5 +1,5 @@
-import { storage } from './localStorage';
 import { mockSetItem } from '@/__mocks__/mocksFunctions';
+import { storage } from './localStorage';
 
 describe('Local storage test', () => {
   beforeEach(() => {
