@@ -1,8 +1,7 @@
 import { type FC } from 'react';
-import styles from './Header.module.scss';
 import logo from '@/assets/images/logo.png';
-import styles from './Header.module.scss';
 import { ErrorButton } from '@/components/common';
+import styles from './Header.module.scss';
 
 export const Header: FC = () => {
   return (
