@@ -1,24 +1,19 @@
-import { Component } from 'react';
+import { type FC } from 'react';
 import styles from './Button.module.scss';
 
 type ButtonProps = {
   onClick: () => void;
   textContent: string;
 };
-export class Button extends Component<ButtonProps> {
-  constructor(props: ButtonProps) {
-    super(props);
-  }
 
-  private handleClick = () => {
-    this.props.onClick();
+export const Button: FC<ButtonProps> = ({ onClick, textContent }) => {
+  const handleClick = () => {
+    onClick();
   };
 
-  render() {
-    return (
-      <button className={styles.button} onClick={this.handleClick}>
-        {this.props.textContent}
-      </button>
-    );
-  }
-}
+  return (
+    <button className={styles.button} onClick={handleClick}>
+      {textContent}
+    </button>
+  );
+};
