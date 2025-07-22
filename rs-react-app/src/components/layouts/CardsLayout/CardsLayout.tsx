@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { type FC } from 'react';
 import styles from './CardsLayout.module.scss';
 import type { PokemonData } from '@/utils/types';
 import pic from '@/assets/images/egg.png';
@@ -10,8 +10,12 @@ type CardsLayoutProps = {
   errorMessage: string;
 };
 
-export class CardsLayout extends Component<CardsLayoutProps> {
-  private renderLoadingState() {
+export const CardsLayout: FC<CardsLayoutProps> = ({
+  pokemonsData,
+  isLoading,
+  errorMessage,
+}) => {
+  const renderLoadingState = () => {
     return (
       <div className={styles.container}>
         {Array.from({ length: 20 }).map((_, index) => (
@@ -19,49 +23,45 @@ export class CardsLayout extends Component<CardsLayoutProps> {
         ))}
       </div>
     );
-  }
+  };
 
-  private renderNotFoundState() {
+  const renderNotFoundState = () => {
     return <div className={styles['not-found']}>No results found</div>;
-  }
+  };
 
-  private renderErrorState() {
+  const renderErrorState = () => {
     return (
       <div className={styles['error']}>
-        <p>{this.props.errorMessage}</p>
+        <p>{errorMessage}</p>
         <img src={pic} alt="egg" height="120px" />
         <p>Please, try again</p>
       </div>
     );
-  }
+  };
 
-  private renderCards() {
+  const renderCards = () => {
     return (
       <div className={styles.container}>
-        {this.props.pokemonsData &&
-          this.props.pokemonsData.length > 0 &&
-          this.props.pokemonsData.map((pokemon, index) => (
+        {pokemonsData &&
+          pokemonsData.length > 0 &&
+          pokemonsData.map((pokemon, index) => (
             <Card key={index} pokemon={pokemon} />
           ))}
       </div>
     );
+  };
+
+  if (isLoading) {
+    return renderLoadingState();
   }
 
-  render() {
-    const { isLoading, pokemonsData, errorMessage } = this.props;
-
-    if (isLoading) {
-      return this.renderLoadingState();
-    }
-
-    if (!pokemonsData || (pokemonsData.length === 0 && !errorMessage)) {
-      return this.renderNotFoundState();
-    }
-
-    if (errorMessage) {
-      return this.renderErrorState();
-    }
-
-    return this.renderCards();
+  if (!pokemonsData || (pokemonsData.length === 0 && !errorMessage)) {
+    return renderNotFoundState();
   }
-}
+
+  if (errorMessage) {
+    return renderErrorState();
+  }
+
+  return renderCards();
+};
