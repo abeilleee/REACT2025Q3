@@ -1,28 +1,20 @@
-import { Component } from 'react';
+import { useState, type FC } from 'react';
 import { Button } from '@/components/ui';
 
-type ErrorButtonState = {
-  hasError: boolean;
-};
+export const ErrorButton: FC = () => {
+  const [hasError, setHasError] = useState(false);
 
-export class ErrorButton extends Component {
-  state: ErrorButtonState = {
-    hasError: false,
+  const handleClick = () => {
+    setHasError(true);
   };
 
-  private handleClick = () => {
-    this.setState({ hasError: true });
-  };
-
-  private simulateError() {
-    if (this.state.hasError) {
+  const simulateError = () => {
+    if (hasError) {
       throw new Error('Simulated error');
     }
-  }
+  };
 
-  render() {
-    this.simulateError();
+  simulateError();
 
-    return <Button onClick={this.handleClick} textContent="Throw Error" />;
-  }
-}
+  return <Button onClick={handleClick} textContent="Throw Error" />;
+};
