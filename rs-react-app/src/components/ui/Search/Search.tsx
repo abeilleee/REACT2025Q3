@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import styles from './Search.module.scss';
 import { Button } from '@/components/ui';
 import { storage } from '@/services';
@@ -7,51 +7,39 @@ type SearchProps = {
   onSearch: (searchTerm: string) => void;
 };
 
-type SearchState = {
-  searchTerm: string;
-};
+export const Search: FC<SearchProps> = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState('');
 
-export class Search extends Component<SearchProps, SearchState> {
-  constructor(props: SearchProps) {
-    super(props);
-
-    this.state = {
-      searchTerm: '',
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     const storageValue = storage.getItem();
 
-    if (storageValue) this.setState({ searchTerm: storageValue });
-  }
+    if (storageValue) setSearchTerm(storageValue);
+  }, []);
 
-  private onClick = () => {
-    this.props.onSearch(this.state.searchTerm);
-    storage.setItem(this.state.searchTerm);
+  const onClick = () => {
+    onSearch(searchTerm);
+    storage.setItem(searchTerm);
   };
 
-  private onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') this.onClick();
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') onClick();
   };
 
-  private onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    this.setState({ searchTerm: value });
+    setSearchTerm(value);
   };
 
-  render() {
-    return (
-      <div className={styles['search-box']}>
-        <input
-          type="text"
-          placeholder="Enter the full pokemon name"
-          onChange={this.onChange}
-          onKeyDown={this.onKeyDown}
-          value={this.state.searchTerm}
-        />
-        <Button onClick={this.onClick} textContent="Search" />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={styles['search-box']}>
+      <input
+        type="text"
+        placeholder="Enter the full pokemon name"
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        value={searchTerm}
+      />
+      <Button onClick={onClick} textContent="Search" />
+    </div>
+  );
+};
