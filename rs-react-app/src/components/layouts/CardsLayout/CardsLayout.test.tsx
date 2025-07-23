@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { mockPokemonsData } from '@/__mocks__/mocksData';
+import { mockPokemonsData } from '@/__mocks__/mockData';
 import { CardsLayout } from './CardsLayout';
 
 describe('Cards Layout test', () => {

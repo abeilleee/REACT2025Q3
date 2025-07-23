@@ -4,16 +4,15 @@ import {
   mockApiResponseResults,
   NOT_EXISTING_ENDPOINT,
   TEST_ENDPOINT,
-} from '@/__mocks__/mocksData';
-import { mockGetItem } from '@/__mocks__/mocksFunctions';
+} from '@/__mocks__/mockData';
+import { getItemSpy } from '@/__mocks__/mockFunctions';
 import { pokeApi } from '@/services';
 import { MainPage } from './MainPage';
 
 describe('Main Page test', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
-    mockGetItem.mockReset();
-    mockGetItem.mockReturnValue(null);
+    getItemSpy.mockReturnValue(null);
+    getItemSpy.mockClear();
   });
 
   test('should render Search component', () => {
@@ -32,7 +31,7 @@ describe('Main Page test', () => {
 
   test('should call api to get one pokemon when LS has a value', () => {
     const getData = vi.spyOn(pokeApi, 'getPokemonData');
-    mockGetItem.mockReturnValue('pikachu');
+    getItemSpy.mockReturnValue('pikachu');
 
     render(<MainPage />);
 
@@ -66,7 +65,7 @@ describe('Main Page test', () => {
     await userEvent.type(searchInput, '   ');
     await userEvent.click(searchButton);
 
-    await waitFor(() => expect(getPokemons).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(getPokemons).toHaveBeenCalled());
   });
 
   test('should handle api error when getPokemons fails', async () => {

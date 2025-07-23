@@ -1,6 +1,6 @@
 import { useEffect, useState, type FC } from 'react';
 import { Button } from '@/components/ui';
-import { storage } from '@/services';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 import styles from './Search.module.scss';
 
 type SearchProps = {
@@ -9,16 +9,16 @@ type SearchProps = {
 
 export const Search: FC<SearchProps> = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [storageValue, setStorageValue] = useLocalStorage();
 
   useEffect(() => {
-    const storageValue = storage.getItem();
-
     if (storageValue) setSearchTerm(storageValue);
-  }, []);
+  }, [storageValue]);
 
   const onClick = () => {
-    onSearch(searchTerm);
-    storage.setItem(searchTerm);
+    onSearch(searchTerm.trim());
+    setSearchTerm(searchTerm.trim());
+    setStorageValue(searchTerm.trim());
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

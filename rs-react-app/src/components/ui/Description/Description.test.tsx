@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { cardData } from '@/__mocks__/mocksData';
+import { cardData } from '@/__mocks__/mockData';
 import { Description } from '@/components/ui';
 
 describe('Description test', () => {

@@ -4,7 +4,7 @@ import {
   mockApiResponseResults,
   mockPokemonDataResponse,
   NOT_EXISTING_ENDPOINT,
-} from '@/__mocks__/mocksData';
+} from '@/__mocks__/mockData';
 import { server } from '@/__mocks__/msw/server';
 import { mapDataToPokemonData } from '@/utils/pokemonDataMapper';
 import { pokeApi } from './api';
