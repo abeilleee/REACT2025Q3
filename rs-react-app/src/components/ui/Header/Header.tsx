@@ -1,5 +1,5 @@
 import { type FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '@/assets/images/logo.png';
 import { PATHS } from '@/services/router/constants';
 import styles from './Header.module.scss';
@@ -7,6 +7,8 @@ import { Button } from '../Button';
 
 export const Header: FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isMainPage = location.pathname === PATHS.ROOT;
 
   const onClick = () => {
     navigate(PATHS.ABOUT);
@@ -17,7 +19,7 @@ export const Header: FC = () => {
       <div className={styles.logo}>
         <img src={logo} alt="logo" />
       </div>
-      <Button onClick={onClick} textContent="About"></Button>
+      {isMainPage && <Button onClick={onClick} textContent="About"></Button>}
     </header>
   );
 };

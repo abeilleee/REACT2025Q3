@@ -1,13 +1,21 @@
 import { type FC } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Footer, Header } from '@/components/ui';
 import styles from './Layout.module.scss';
+import { PATHS } from '@/services/router/constants';
 
 export const Layout: FC = () => {
+  const location = useLocation();
+  const isRoot = location.pathname === PATHS.ROOT;
+
+  const mainStyle = isRoot
+    ? `${styles.content} ${styles['content-flex-start']}`
+    : styles.content;
+
   return (
     <div className={styles.container} data-testid={'layout-container'}>
       <Header />
-      <main className={styles.content} data-testid={'layout-main'}>
+      <main className={mainStyle} data-testid={'layout-main'}>
         <Outlet />
       </main>
       <Footer />
