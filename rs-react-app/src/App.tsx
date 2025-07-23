@@ -1,13 +1,8 @@
 import { type FC } from 'react';
-import { Layout } from '@/components';
-import { MainPage } from '@/pages/MainPage';
+import { Router } from './services/router/Router';
 
 const App: FC = () => {
-  return (
-    <Layout>
-      <MainPage />
-    </Layout>
-  );
+  return <Router />;
 };
 
 export default App;
