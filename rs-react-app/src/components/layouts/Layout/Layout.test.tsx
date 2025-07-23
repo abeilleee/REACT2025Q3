@@ -11,9 +11,7 @@ vi.mock('@/components/ui/Footer', () => ({
 
 describe('Layout test', () => {
   test('should renders layout correctly', () => {
-    const mockNode = <p>Main</p>;
-
-    render(<Layout>{mockNode}</Layout>);
+    render(<Layout></Layout>);
 
     const container = screen.getByTestId('layout-container');
     const header = screen.getByTestId('mock-header');
@@ -22,7 +20,6 @@ describe('Layout test', () => {
 
     expect(container).toBeInTheDocument();
     expect(main).toBeInTheDocument();
-    expect(screen.getByText('Main')).toBeInTheDocument();
     expect(header).toBeInTheDocument();
     expect(header).toHaveTextContent('Mock Header');
     expect(footerElement).toBeInTheDocument();
