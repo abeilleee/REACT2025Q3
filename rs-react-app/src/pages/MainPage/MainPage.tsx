@@ -1,35 +1,27 @@
-import { Component } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import { CardsLayout, Search } from '@/components';
 import { pokeApi, storage } from '@/services';
 import type { PokemonData } from '@/utils/types';
 
-interface MainPageState {
-  pokemons?: PokemonData[];
-  isLoading: boolean;
-  searchTerm: string;
-  errorMessage: string;
-}
+export const MainPage: FC = () => {
+  const [data, setData] = useState<PokemonData[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [error, setError] = useState('');
 
-export class MainPage extends Component {
-  state: MainPageState = {
-    pokemons: [],
-    isLoading: true,
-    searchTerm: '',
-    errorMessage: '',
-  };
-
-  componentDidMount = async () => {
+  useEffect(() => {
     const value = storage.getItem();
 
     if (value) {
-      await this.handleSearch(value);
+      handleSearch(value);
     } else {
-      await this.loadPokemons();
+      loadPokemons();
     }
-  };
+  }, [searchTerm]);
 
-  private async loadPokemons() {
-    this.setState({ isLoading: true, pokemons: [], errorMessage: '' });
+  const loadPokemons = async () => {
+    setIsLoading(true);
+    setError('');
 
     try {
       const pokemonList = await pokeApi.getPokemons();
@@ -40,56 +32,45 @@ export class MainPage extends Component {
             return await pokeApi.getPokemonData(pokemon.name);
           })
         );
-        this.setState({ pokemons: pokemonData });
+        if (pokemonData.every((item) => item !== undefined))
+          setData(pokemonData);
       }
     } catch (error) {
-      this.setState({
-        errorMessage: String(error),
-      });
+      setError(String(error));
     } finally {
-      this.setState({ isLoading: false });
+      setIsLoading(false);
     }
-  }
-
-  private handleSearch = async (searchTerm: string) => {
+  };
+  const handleSearch = async (searchTerm: string) => {
     if (!searchTerm) {
-      await this.loadPokemons();
+      await loadPokemons();
       return;
     }
-
-    this.setState({
-      isLoading: true,
-      searchTerm: searchTerm,
-      pokemons: [],
-      errorMessage: '',
-    });
+    setIsLoading(true);
+    setError('');
+    setSearchTerm(searchTerm);
+    setData([]);
 
     try {
       const response = await pokeApi.getPokemonData(searchTerm.trim());
       if (response) {
-        this.setState({ pokemons: [response] });
+        setData([response]);
       }
     } catch (error) {
-      this.setState({
-        errorMessage: String(error),
-      });
+      setError(String(error));
     } finally {
-      this.setState({ isLoading: false });
+      setIsLoading(false);
     }
   };
 
-  render() {
-    const { pokemons, isLoading, errorMessage } = this.state;
-
-    return (
-      <>
-        <Search onSearch={this.handleSearch} />
-        <CardsLayout
-          pokemonsData={pokemons}
-          isLoading={isLoading}
-          errorMessage={errorMessage}
-        ></CardsLayout>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Search onSearch={handleSearch} />
+      <CardsLayout
+        pokemonsData={data}
+        isLoading={isLoading}
+        errorMessage={error}
+      ></CardsLayout>
+    </>
+  );
+};
