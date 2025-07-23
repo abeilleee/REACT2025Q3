@@ -7,19 +7,6 @@
   height: 60px;
   justify-content: space-between;
   padding: var(--padding-base);
-
-  button {
-    width: 170px;
-    background-color: #f00;
-
-    &:hover {
-      background-color: #ff3939;
-    }
-
-    &:active {
-      background-color: #c61010;
-    }
-  }
 }
 
 .logo {
