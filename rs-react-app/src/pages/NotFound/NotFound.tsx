@@ -16,12 +16,7 @@ export const NotFound: FC = () => {
     <div className={styles.wrapper}>
       <p className={styles.text}>Oops! Page not found...</p>
       <div className={styles['img-box']}>
-        <img
-          src={img}
-          alt="pikachu"
-          height="256px"
-          data-testId={'img-not-found'}
-        />
+        <img src={img} alt="pikachu" height="256px" />
       </div>
       <Button onClick={onClick} textContent="Back to main"></Button>
     </div>

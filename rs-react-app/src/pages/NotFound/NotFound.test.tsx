@@ -22,7 +22,7 @@ describe('Not Found page tests', () => {
     );
 
     const title = screen.getByText('Oops! Page not found...');
-    const img = screen.getByTestId('img-not-found');
+    const img = screen.getByAltText('pikachu');
     const button = screen.getByText('Back to main');
 
     expect(title).toBeInTheDocument();
