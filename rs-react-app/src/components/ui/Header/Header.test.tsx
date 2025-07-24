@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { Header } from './Header';
-import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 import { navigateMock } from '@/__tests__/setupTests';
 import { PATHS } from '@/services/router/constants';
+import { Header } from './Header';
 
 describe('Header test', () => {
   beforeAll(() => {

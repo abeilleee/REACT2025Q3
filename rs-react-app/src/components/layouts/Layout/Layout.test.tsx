@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { Layout } from './Layout';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { Layout } from './Layout';
 import styles from './Layout.module.scss';
 
 vi.mock('@/components/ui/Header', () => ({
