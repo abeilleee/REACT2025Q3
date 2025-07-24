@@ -1,8 +1,8 @@
 import { type FC } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Footer, Header } from '@/components/ui';
-import styles from './Layout.module.scss';
 import { PATHS } from '@/services/router/constants';
+import styles from './Layout.module.scss';
 
 export const Layout: FC = () => {
   const location = useLocation();
