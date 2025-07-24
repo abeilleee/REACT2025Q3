@@ -1,75 +1,16 @@
-import { useCallback, useEffect, useState, type FC } from 'react';
+import { useCallback, type FC } from 'react';
 import { CardsLayout, Search } from '@/components';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { pokeApi } from '@/services';
-import type { PokemonData } from '@/utils/types';
+import { usePokemon } from '@/hooks/usePokemon';
 
 export const MainPage: FC = () => {
-  const [data, setData] = useState<PokemonData[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [searchTerm, setSearchTerm] = useLocalStorage();
-  const [error, setError] = useState('');
-
-  const loadPokemons = useCallback(async () => {
-    setIsLoading(true);
-    setError('');
-
-    try {
-      const pokemonList = await pokeApi.getPokemons();
-
-      if (pokemonList) {
-        const pokemonData = await Promise.all(
-          pokemonList.map(async (pokemon: { name: string }) => {
-            return await pokeApi.getPokemonData(pokemon.name);
-          })
-        );
-        if (pokemonData.every((item) => item !== undefined))
-          setData(pokemonData);
-      }
-    } catch (error) {
-      setError(String(error));
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  const { data, isLoading, error, setSearchTerm } = usePokemon();
 
   const handleSearch = useCallback(
-    async (searchTerm: string) => {
-      if (!searchTerm) {
-        await loadPokemons();
-        return;
-      }
-
-      setIsLoading(true);
-      setError('');
+    (searchTerm: string) => {
       setSearchTerm(searchTerm);
-      setData([]);
-
-      try {
-        const response = await pokeApi.getPokemonData(searchTerm.trim());
-        if (response) {
-          setData([response]);
-        }
-      } catch (error) {
-        setError(String(error));
-      } finally {
-        setIsLoading(false);
-      }
     },
-    [loadPokemons, setIsLoading, setError, setSearchTerm, setData]
+    [setSearchTerm]
   );
-
-  useEffect(() => {
-    const loadData = async () => {
-      if (typeof searchTerm === 'string') {
-        await handleSearch(searchTerm);
-      } else {
-        await loadPokemons();
-      }
-    };
-
-    loadData();
-  }, [searchTerm, handleSearch, loadPokemons]);
 
   return (
     <>
