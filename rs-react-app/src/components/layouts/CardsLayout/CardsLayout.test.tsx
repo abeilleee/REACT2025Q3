@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { mockPokemonsData } from '@/__mocks__/mockData';
+import { STATUS_CODE } from '@/services/api/constants';
 import { CardsLayout } from './CardsLayout';
 
 describe('Cards Layout test', () => {
@@ -11,23 +12,28 @@ describe('Cards Layout test', () => {
     expect(skeletonCards.length).toBe(20);
   });
 
-  test('should render not found state when pokemonsData is empty and no error message', () => {
-    render(<CardsLayout pokemonsData={[]} isLoading={false} errorMessage="" />);
-    expect(screen.getByText('No results found')).toBeInTheDocument();
-  });
-
-  test('should render error state when errorMessage is provided', () => {
-    const errorMessage = 'Failed to fetch data';
-
+  test('renders "No results found" message when error has 404 status', () => {
     render(
       <CardsLayout
         pokemonsData={[]}
         isLoading={false}
-        errorMessage={errorMessage}
+        errorMessage={`Error ${STATUS_CODE.NOT_FOUND}`}
       />
     );
+    expect(screen.getByText('No results found')).toBeInTheDocument();
+  });
 
-    expect(screen.getByText(errorMessage)).toBeInTheDocument();
+  test('renders error message and image when there is an errorMessage', () => {
+    render(
+      <CardsLayout
+        pokemonsData={[]}
+        isLoading={false}
+        errorMessage="Test Error"
+      />
+    );
+    expect(screen.getByText('Oops... Error: Test Error')).toBeInTheDocument();
+    const errorImage = screen.getByAltText('egg');
+    expect(errorImage).toBeInTheDocument();
   });
 
   test('should render cards when pokemonsData is provided', () => {
