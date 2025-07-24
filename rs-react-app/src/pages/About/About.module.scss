@@ -31,14 +31,16 @@
     color 0.3s,
     border-bottom 0.3s;
 
-  &:hover {
-    border-bottom: 2px solid var(--link-hover);
-    color: var(--link-hover);
-  }
-
   &:active {
     border-bottom: 2px solid var(--link-active);
     color: var(--link-active);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      border-bottom: 2px solid var(--link-hover);
+      color: var(--link-hover);
+    }
   }
 }
 
