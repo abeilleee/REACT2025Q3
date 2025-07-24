@@ -1,7 +1,7 @@
 import { type FC } from 'react';
 import pic from '@/assets/images/egg.png';
 import { Card, SkeletonCard } from '@/components/ui';
-import { STATUS_CODE } from '@/services/api/constants';
+import { LIMIT, STATUS_CODE } from '@/services/api/constants';
 import type { PokemonData } from '@/utils/types';
 import styles from './CardsLayout.module.scss';
 
@@ -22,7 +22,7 @@ export const CardsLayout: FC<CardsLayoutProps> = ({
     return (
       <div className={styles.box}>
         <div className={styles.container}>
-          {Array.from({ length: 20 }).map((_, index) => (
+          {Array.from({ length: LIMIT }).map((_, index) => (
             <SkeletonCard key={index} />
           ))}
         </div>

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { mockPokemonsData } from '@/__mocks__/mockData';
-import { STATUS_CODE } from '@/services/api/constants';
+import { LIMIT, STATUS_CODE } from '@/services/api/constants';
 import { CardsLayout } from './CardsLayout';
 
 describe('Cards Layout test', () => {
@@ -9,7 +9,7 @@ describe('Cards Layout test', () => {
 
     const skeletonCards = screen.getAllByTestId('skeleton-card');
 
-    expect(skeletonCards.length).toBe(20);
+    expect(skeletonCards.length).toBe(LIMIT);
   });
 
   test('renders "No results found" message when error has 404 status', () => {
