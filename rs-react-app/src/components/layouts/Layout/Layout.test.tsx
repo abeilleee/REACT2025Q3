@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { Layout } from './Layout';
+import { MemoryRouter } from 'react-router-dom';
 
 vi.mock('@/components/ui/Header', () => ({
   Header: () => <header data-testid="mock-header">Mock Header</header>,
@@ -11,7 +12,11 @@ vi.mock('@/components/ui/Footer', () => ({
 
 describe('Layout test', () => {
   test('should renders layout correctly', () => {
-    render(<Layout></Layout>);
+    render(
+      <MemoryRouter>
+        <Layout />
+      </MemoryRouter>
+    );
 
     const container = screen.getByTestId('layout-container');
     const header = screen.getByTestId('mock-header');
