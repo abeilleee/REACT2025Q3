@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Layout } from '@/components';
+import { ErrorBoundary, Layout } from '@/components';
 import { About, MainPage, NotFound } from '@/pages';
 import { PATHS } from './constants';
 import type { FC } from 'react';
@@ -21,7 +21,11 @@ export const Router: FC = () => {
     },
     {
       path: PATHS.NOT_FOUND,
-      element: <NotFound />,
+      element: (
+        <ErrorBoundary>
+          <NotFound />
+        </ErrorBoundary>
+      ),
     },
   ]);
 
