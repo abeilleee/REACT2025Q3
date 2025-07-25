@@ -2,6 +2,7 @@ import { type FC } from 'react';
 import { Description } from '@/components/ui';
 import type { PokemonData } from '@/utils/types';
 import styles from './Card.module.scss';
+import placeholder from '@/assets/images/no-img.png';
 
 type CardProps = {
   pokemon: PokemonData;
@@ -13,7 +14,10 @@ export const Card: FC<CardProps> = ({ pokemon }) => {
       <div className={styles.content}>
         <div className={styles.name}>{pokemon.name}</div>
         <div className={styles['img-box']}>
-          <img src={pokemon.sprites?.homefrontDefault} alt={pokemon.name} />
+          <img
+            src={pokemon.sprites?.homefrontDefault || placeholder}
+            alt={pokemon.name}
+          />
         </div>
 
         <Description
