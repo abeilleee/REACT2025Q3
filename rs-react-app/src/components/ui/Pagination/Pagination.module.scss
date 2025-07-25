@@ -1,9 +1,9 @@
 @use '@/styles/mixins.scss' as mixins;
 
 .wrapper {
-  max-width: 690px;
-
   @include mixins.flex-center;
+
+  max-width: 690px;
 }
 
 .pagination {
@@ -27,6 +27,8 @@
 }
 
 .page {
+  @include mixins.flex-center;
+
   width: 56px;
   height: 46px;
   padding: 6px 14px;
@@ -55,8 +57,6 @@
       font-size: 0.8rem;
     }
   }
-
-  @include mixins.flex-center;
 }
 
 .active {
