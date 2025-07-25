@@ -1,17 +1,19 @@
 import { http, HttpResponse } from 'msw';
 import {
   MOCK_ENDPOINT,
+  mockApiResponse,
   mockApiResponseResults,
   mockPokemonDataResponse,
 } from '@/__mocks__/mockData';
 import { server } from '@/__mocks__/msw/server';
+import { ONE } from '@/utils/constants';
 import { mapDataToPokemonData } from '@/utils/pokemonDataMapper';
 import { pokeApi } from './api';
 import { BASE_ENDPOINT, BASE_URL } from './constants';
 
 describe('API test', () => {
   test('should fetch and return correct data of all pokemons', async () => {
-    const result = await pokeApi.getPokemonResults();
+    const result = await pokeApi.getPokemonResults(ONE);
 
     expect(result).toEqual(mockApiResponseResults);
   });
@@ -34,7 +36,7 @@ describe('API test', () => {
       })
     );
 
-    await expect(pokeApi.getPokemonResults()).rejects.toThrowError(
+    await expect(pokeApi.getPokemonResults(ONE)).rejects.toThrowError(
       errorMessage
     );
   });
@@ -48,6 +50,12 @@ describe('API test', () => {
       })
     );
 
-    await expect(pokeApi.getPokemonResults()).rejects.toThrowError();
+    await expect(pokeApi.getPokemonResults(ONE)).rejects.toThrowError();
+  });
+
+  test('should fetch and return correct pokemon count', async () => {
+    const result = await pokeApi.getPokemonCount();
+
+    expect(result).toEqual(mockApiResponse.count);
   });
 });
