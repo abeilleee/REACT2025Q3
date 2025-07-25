@@ -1,0 +1,66 @@
+@use '@/styles/mixins.scss' as mixins;
+
+.wrapper {
+  max-width: 690px;
+
+  @include mixins.flex-center;
+}
+
+.pagination {
+  @include mixins.flex-center;
+
+  width: 90vw;
+  justify-content: space-between;
+  margin: 24px 0;
+  gap: 3px;
+
+  @media screen and (width <= 550px) {
+    & {
+      gap: 2px;
+    }
+  }
+}
+
+.arrow {
+  width: 50px;
+  height: 50px;
+}
+
+.page {
+  width: 56px;
+  height: 46px;
+  padding: 6px 14px;
+  border: 1px solid var(--primary-color);
+  border-radius: var(--border-radius);
+  background: #e6ffe681;
+  box-shadow: var(--btn-box-shadow);
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  @media (hover: hover) {
+    &:hover:not(.active, :disabled) {
+      background: var(--hover-color);
+      color: var(--white);
+    }
+  }
+
+  @media screen and (width <= 600px) {
+    & {
+      min-width: 20px;
+      min-height: 20px;
+      font-size: 0.8rem;
+    }
+  }
+
+  @include mixins.flex-center;
+}
+
+.active {
+  border: none;
+  background: var(--primary-color);
+  color: var(--white);
+}

@@ -5,10 +5,10 @@ import {
   mockApiResponse,
   mockPokemonDataResponse,
   NOT_EXISTING_ENDPOINT,
-  ONE,
   TEST_ENDPOINT,
 } from '@/__mocks__/mockData';
 import { BASE_ENDPOINT, BASE_URL } from '@/services/api/constants';
+import { ONE } from '@/utils/constants';
 
 export const handlers = [
   http.get(`${BASE_URL}/${BASE_ENDPOINT}`, () => {

@@ -1,19 +1,7 @@
+import { ONE } from '@/utils/constants';
 import { mapDataToPokemonData } from '@/utils/pokemonDataMapper';
-import { BASE_ENDPOINT, BASE_URL, LIMIT, START_PAGE } from './constants';
+import { BASE_ENDPOINT, BASE_URL, LIMIT } from './constants';
 import type { ApiResponse, Pokemon } from './types';
-
-export interface Params {
-  /**
-   * cards amount on page
-   * @default 12
-   */
-  limit?: number;
-  /**
-   * page number
-   * @default 0
-   */
-  offset?: number;
-}
 
 export class Api {
   private async fetchData<T>(endpoint: string) {
@@ -28,11 +16,11 @@ export class Api {
     return data;
   }
 
-  public async getPokemonResults(params: Params = {}) {
-    const { limit = LIMIT, offset = START_PAGE } = params;
+  public async getPokemonResults(page: number) {
+    const offset = (page - ONE) * LIMIT;
 
     const data = await this.fetchData<ApiResponse>(
-      `${BASE_ENDPOINT}/?limit=${limit}&offset=${offset}`
+      `${BASE_ENDPOINT}/?limit=${LIMIT}&offset=${offset}`
     );
 
     if (data) {
@@ -45,6 +33,14 @@ export class Api {
 
     if (data) {
       return mapDataToPokemonData(data);
+    }
+  }
+
+  public async getPokemonCount() {
+    const data = await this.fetchData<ApiResponse>(`${BASE_ENDPOINT}`);
+
+    if (data) {
+      return data.count;
     }
   }
 }

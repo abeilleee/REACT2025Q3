@@ -6,8 +6,8 @@
   position: relative;
   overflow: hidden;
 
-  width: 200px;
-  height: 335px;
+  width: var(--card-width);
+  height: var(--card-height);
 
   justify-content: flex-start;
   padding: 15px;

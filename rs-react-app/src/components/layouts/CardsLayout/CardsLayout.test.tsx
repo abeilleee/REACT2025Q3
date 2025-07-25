@@ -1,11 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import { mockPokemonsData } from '@/__mocks__/mockData';
-import { LIMIT, STATUS_CODE } from '@/services/api/constants';
+import { INITIAL_PAGE, LIMIT, STATUS_CODE } from '@/services/api/constants';
 import { CardsLayout } from './CardsLayout';
 
 describe('Cards Layout test', () => {
   test('should render loading state when isLoading is true', () => {
-    render(<CardsLayout pokemonsData={[]} isLoading={true} errorMessage="" />);
+    render(
+      <CardsLayout
+        pokemonsData={[]}
+        isLoading={true}
+        errorMessage=""
+        currentPage={INITIAL_PAGE}
+        handlePageChange={() => {}}
+        total={120}
+      />
+    );
 
     const skeletonCards = screen.getAllByTestId('skeleton-card');
 
@@ -18,6 +27,9 @@ describe('Cards Layout test', () => {
         pokemonsData={[]}
         isLoading={false}
         errorMessage={`Error ${STATUS_CODE.NOT_FOUND}`}
+        currentPage={INITIAL_PAGE}
+        handlePageChange={() => {}}
+        total={120}
       />
     );
     expect(screen.getByText('No results found')).toBeInTheDocument();
@@ -29,6 +41,9 @@ describe('Cards Layout test', () => {
         pokemonsData={[]}
         isLoading={false}
         errorMessage="Test Error"
+        currentPage={INITIAL_PAGE}
+        handlePageChange={() => {}}
+        total={120}
       />
     );
     expect(screen.getByText('Oops... Error: Test Error')).toBeInTheDocument();
@@ -42,6 +57,9 @@ describe('Cards Layout test', () => {
         pokemonsData={mockPokemonsData}
         isLoading={false}
         errorMessage=""
+        currentPage={INITIAL_PAGE}
+        handlePageChange={() => {}}
+        total={120}
       />
     );
 

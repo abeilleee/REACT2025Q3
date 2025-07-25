@@ -4,7 +4,6 @@ import type { PokemonData } from '@/utils/types';
 export const MOCK_ENDPOINT = 'pidgeot';
 export const NOT_EXISTING_ENDPOINT = 'abc';
 export const TEST_ENDPOINT = 'test';
-export const ONE = '1';
 
 export const cardData: PokemonData = {
   name: 'pidgeot',
