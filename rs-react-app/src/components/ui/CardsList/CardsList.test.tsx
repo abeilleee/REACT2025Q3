@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { mockPokemonsData } from '@/__mocks__/mockData';
 import { INITIAL_PAGE, LIMIT, STATUS_CODE } from '@/services/api/constants';
 import { CardsList } from './CardsList';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('Cards List test', () => {
   test('should render loading state when isLoading is true', () => {
@@ -53,14 +54,16 @@ describe('Cards List test', () => {
 
   test('should render cards when pokemonsData is provided', () => {
     render(
-      <CardsList
-        pokemonsData={mockPokemonsData}
-        isLoading={false}
-        errorMessage=""
-        currentPage={INITIAL_PAGE}
-        handlePageChange={() => {}}
-        total={120}
-      />
+      <MemoryRouter>
+        <CardsList
+          pokemonsData={mockPokemonsData}
+          isLoading={false}
+          errorMessage=""
+          currentPage={INITIAL_PAGE}
+          handlePageChange={() => {}}
+          total={120}
+        />
+      </MemoryRouter>
     );
 
     expect(screen.getByText('pidgeot')).toBeInTheDocument();
