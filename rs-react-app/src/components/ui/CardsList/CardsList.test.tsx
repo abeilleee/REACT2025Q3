@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { mockPokemonsData } from '@/__mocks__/mockData';
 import { INITIAL_PAGE, LIMIT, STATUS_CODE } from '@/services/api/constants';
-import { CardsLayout } from './CardsLayout';
+import { CardsList } from './CardsList';
 
-describe('Cards Layout test', () => {
+describe('Cards List test', () => {
   test('should render loading state when isLoading is true', () => {
     render(
-      <CardsLayout
+      <CardsList
         pokemonsData={[]}
         isLoading={true}
         errorMessage=""
@@ -23,7 +23,7 @@ describe('Cards Layout test', () => {
 
   test('renders "No results found" message when error has 404 status', () => {
     render(
-      <CardsLayout
+      <CardsList
         pokemonsData={[]}
         isLoading={false}
         errorMessage={`Error ${STATUS_CODE.NOT_FOUND}`}
@@ -37,7 +37,7 @@ describe('Cards Layout test', () => {
 
   test('renders error message and image when there is an errorMessage', () => {
     render(
-      <CardsLayout
+      <CardsList
         pokemonsData={[]}
         isLoading={false}
         errorMessage="Test Error"
@@ -53,7 +53,7 @@ describe('Cards Layout test', () => {
 
   test('should render cards when pokemonsData is provided', () => {
     render(
-      <CardsLayout
+      <CardsList
         pokemonsData={mockPokemonsData}
         isLoading={false}
         errorMessage=""

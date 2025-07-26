@@ -1,0 +1,21 @@
+@use '@/styles/mixins.scss' as mixins;
+
+.not-found {
+  @include mixins.flex-center;
+
+  height: 200px;
+  font-size: 1.7em;
+
+  text-align: center;
+}
+
+.error {
+  @include mixins.flex-column;
+
+  height: 100%;
+  margin-top: 60px;
+}
+
+.text {
+  font-size: 1.6em;
+}

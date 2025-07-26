@@ -1,11 +1,11 @@
 @use '@/styles/mixins.scss' as mixins;
 
-.box {
+.wrapper {
   @include mixins.flex-column;
 
   width: 90%;
-  max-width: 1290px;
-  min-height: 90vh;
+  max-width: 1078px;
+  min-height: 85vh;
   justify-content: space-between;
   padding: 10px;
 }
@@ -14,28 +14,8 @@
   display: grid;
   width: 90%;
   max-width: 1290px;
-  padding: 40px;
+  padding: 40px 0;
   gap: 20px;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   place-items: center;
-}
-
-.not-found {
-  @include mixins.flex-center;
-
-  height: 200px;
-  font-size: 1.7em;
-
-  text-align: center;
-}
-
-.error {
-  @include mixins.flex-column;
-
-  height: 100%;
-  margin-top: 60px;
-}
-
-.text {
-  font-size: 1.6em;
 }

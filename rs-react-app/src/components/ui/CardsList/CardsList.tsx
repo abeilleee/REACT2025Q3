@@ -1,11 +1,10 @@
 import { type FC } from 'react';
-import pic from '@/assets/images/egg.png';
-import { Card, Pagination, SkeletonCard } from '@/components/ui';
-import { LIMIT, STATUS_CODE } from '@/services/api/constants';
+import { Card, ErrorState, Pagination, SkeletonCard } from '@/components/ui';
+import { LIMIT } from '@/services/api/constants';
 import type { PokemonData } from '@/utils/types';
-import styles from './CardsLayout.module.scss';
+import styles from './CardsList.module.scss';
 
-type CardsLayoutProps = {
+type CardsListProps = {
   pokemonsData: PokemonData[] | null;
   isLoading: boolean;
   errorMessage: string | null;
@@ -14,7 +13,7 @@ type CardsLayoutProps = {
   total: number;
 };
 
-export const CardsLayout: FC<CardsLayoutProps> = ({
+export const CardsList: FC<CardsListProps> = ({
   pokemonsData,
   isLoading,
   errorMessage,
@@ -22,8 +21,6 @@ export const CardsLayout: FC<CardsLayoutProps> = ({
   handlePageChange,
   total,
 }) => {
-  const isNotFoundError = errorMessage?.includes(String(STATUS_CODE.NOT_FOUND));
-
   const renderLoadingState = () => {
     return (
       <div className={styles.box}>
@@ -36,25 +33,9 @@ export const CardsLayout: FC<CardsLayoutProps> = ({
     );
   };
 
-  const renderErrorState = () => {
-    return (
-      <>
-        {isNotFoundError ? (
-          <div className={styles['not-found']}>No results found</div>
-        ) : (
-          <div className={styles['error']}>
-            <p className={styles.text}>Oops... Error: {errorMessage}</p>
-            <img src={pic} alt="egg" height="170px" />
-            <p className={styles.text}>Please, try again</p>
-          </div>
-        )}
-      </>
-    );
-  };
-
   const renderCards = () => {
     return (
-      <div className={styles.box}>
+      <div className={styles.wrapper}>
         <div className={styles.container}>
           {pokemonsData &&
             pokemonsData.map((pokemon, index) => (
@@ -77,7 +58,7 @@ export const CardsLayout: FC<CardsLayoutProps> = ({
   }
 
   if (errorMessage) {
-    return renderErrorState();
+    return <ErrorState errorMessage={errorMessage} />;
   }
 
   return renderCards();
