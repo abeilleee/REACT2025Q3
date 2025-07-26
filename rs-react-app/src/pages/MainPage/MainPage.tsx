@@ -1,35 +1,45 @@
-import { useCallback, type FC } from 'react';
-import { CardsLayout, Search } from '@/components';
-import { usePokemon } from '@/hooks/usePokemon';
+import { useCallback, useEffect, useState, type FC } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { CardsList, Search } from '@/components';
+import { usePokemon } from '@/hooks';
 import { INITIAL_PAGE } from '@/services/api/constants';
 
+const getCurrentPage = (searchParams: URLSearchParams) => {
+  return Number(searchParams.get('page') || INITIAL_PAGE);
+};
+
 export const MainPage: FC = () => {
-  const { data, isLoading, error, setSearchTerm, total, setPage, page } =
-    usePokemon();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [page, setPage] = useState(() => getCurrentPage(searchParams));
+  const { data, isLoading, error, setSearchTerm, total } = usePokemon(page);
+
+  useEffect(() => {
+    setPage(getCurrentPage(searchParams));
+  }, [searchParams]);
 
   const handleSearch = useCallback(
     (searchTerm: string) => {
       setSearchTerm(searchTerm);
-      setPage(INITIAL_PAGE);
     },
-    [setSearchTerm, setPage]
+    [setSearchTerm]
   );
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
+    setSearchParams({ page: String(newPage) });
   };
 
   return (
     <>
       <Search onSearch={handleSearch} />
-      <CardsLayout
+      <CardsList
         pokemonsData={data}
         isLoading={isLoading}
         errorMessage={error}
         currentPage={page}
         handlePageChange={handlePageChange}
         total={total}
-      ></CardsLayout>
+      ></CardsList>
     </>
   );
 };

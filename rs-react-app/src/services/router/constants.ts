@@ -1,5 +1,7 @@
 export const PATHS = {
   ROOT: '/',
-  ABOUT: 'about',
+  ABOUT: '/about',
+  PAGE: '/page',
+  DETAILS: '/pokemon/:name',
   NOT_FOUND: '*',
 };

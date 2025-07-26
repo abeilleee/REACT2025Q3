@@ -1,13 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { pokeApi } from '@/services';
-import { INITIAL_PAGE } from '@/services/api/constants';
 import { useFetch } from './useFetch';
 import { useLocalStorage } from './useLocalStorage';
 
-export const usePokemon = () => {
+export const usePokemon = (page: number) => {
   const [searchTerm, setSearchTerm] = useLocalStorage();
   const [total, setTotal] = useState(0);
-  const [page, setPage] = useState(INITIAL_PAGE);
 
   const fetchFn = useCallback(async () => {
     if (!searchTerm) {
@@ -56,7 +54,5 @@ export const usePokemon = () => {
     error,
     setSearchTerm,
     total,
-    setPage,
-    page,
   };
 };
