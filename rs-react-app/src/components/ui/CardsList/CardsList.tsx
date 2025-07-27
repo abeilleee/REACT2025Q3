@@ -23,12 +23,10 @@ export const CardsList: FC<CardsListProps> = ({
 }) => {
   const renderLoadingState = () => {
     return (
-      <div className={styles.box}>
-        <div className={styles.container}>
-          {Array.from({ length: LIMIT }).map((_, index) => (
-            <SkeletonCard key={index} />
-          ))}
-        </div>
+      <div className={styles.container}>
+        {Array.from({ length: LIMIT }).map((_, index) => (
+          <SkeletonCard key={index} />
+        ))}
       </div>
     );
   };
