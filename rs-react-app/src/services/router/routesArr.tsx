@@ -2,7 +2,7 @@ import { DetailedCard, ErrorBoundary, Layout, MainLayout } from '@/components';
 import { MainPage, About, NotFound } from '@/pages';
 import { PATHS } from './constants';
 
-export const routes = [
+export const routesArr = [
   {
     element: <Layout />,
     children: [

@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { routes } from './Routes';
+import { routesArr } from './routesArr';
 import type { FC } from 'react';
 
 export const Router: FC = () => {
-  const router = createBrowserRouter(routes);
+  const router = createBrowserRouter(routesArr);
 
   return <RouterProvider router={router} />;
 };

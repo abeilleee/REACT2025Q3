@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { PATHS } from './constants';
-import { routes } from './Routes';
+import { routesArr } from './routesArr';
 
 describe('Router tests', () => {
   test('should render About page to the corresponding route', () => {
-    const router = createMemoryRouter(routes, {
+    const router = createMemoryRouter(routesArr, {
       initialEntries: [PATHS.ABOUT],
     });
 
@@ -15,7 +15,7 @@ describe('Router tests', () => {
   });
 
   test('should render Not found page to the corresponding route', () => {
-    const router = createMemoryRouter(routes, {
+    const router = createMemoryRouter(routesArr, {
       initialEntries: ['/bad-route'],
     });
 
