@@ -3,18 +3,20 @@
 .wrapper {
   @include mixins.flex-center;
 
-  max-width: 690px;
+  z-index: 1;
+
+  max-width: 90%;
 }
 
 .pagination {
   @include mixins.flex-center;
 
-  width: 90vw;
+  width: 100%;
   justify-content: space-between;
   margin: 24px 0;
   gap: 3px;
 
-  @media screen and (width <= 550px) {
+  @media screen and (width <= 720px) {
     & {
       gap: 2px;
     }
@@ -50,7 +52,7 @@
     }
   }
 
-  @media screen and (width <= 600px) {
+  @media screen and (width <= 720px) {
     & {
       min-width: 20px;
       min-height: 20px;

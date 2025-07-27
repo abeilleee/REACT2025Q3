@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { mockPokemonsData } from '@/__mocks__/mockData';
 import { INITIAL_PAGE, LIMIT, STATUS_CODE } from '@/services/api/constants';
 import { CardsList } from './CardsList';
-import { MemoryRouter } from 'react-router-dom';
 
 describe('Cards List test', () => {
   test('should render loading state when isLoading is true', () => {

@@ -1,6 +1,8 @@
 import { type FC } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import placeholder from '@/assets/images/no-img.png';
 import { Description } from '@/components/ui';
+import { PATHS } from '@/services/router/constants';
 import type { PokemonData } from '@/utils/types';
 import styles from './Card.module.scss';
 
@@ -9,8 +11,17 @@ type CardProps = {
 };
 
 export const Card: FC<CardProps> = ({ pokemon }) => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const onClick = () => {
+    const currentPage = searchParams.get('page') || '1';
+    const url = `${PATHS.DETAILS.replace(':name', pokemon.name)}`;
+    navigate(`${url}?page=${currentPage}`);
+  };
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onClick}>
       <div className={styles.content}>
         <div className={styles.name}>{pokemon.name}</div>
         <div className={styles['img-box']}>
