@@ -13,7 +13,7 @@ export const NotFound: FC = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid="not-found">
       <p className={styles.text}>Oops! Page not found...</p>
       <div className={styles['img-box']}>
         <img src={img} alt="pikachu" height="256px" />

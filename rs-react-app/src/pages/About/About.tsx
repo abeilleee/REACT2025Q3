@@ -41,7 +41,7 @@ export const About: FC = () => {
 
   return (
     <>
-      <div className={styles.card}>
+      <div className={styles.card} data-testid="about-page">
         {content}
         <Button onClick={onClick} textContent="Back to main"></Button>
       </div>
