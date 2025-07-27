@@ -8,7 +8,7 @@ import { Button } from '../Button';
 export const Header: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isMainPage = location.pathname === PATHS.ROOT;
+  const isAboutPage = location.pathname === PATHS.ABOUT;
 
   const onClick = () => {
     navigate(PATHS.ABOUT);
@@ -19,7 +19,7 @@ export const Header: FC = () => {
       <div className={styles.logo}>
         <img src={logo} alt="logo" />
       </div>
-      {isMainPage && <Button onClick={onClick} textContent="About"></Button>}
+      {!isAboutPage && <Button onClick={onClick} textContent="About"></Button>}
     </header>
   );
 };
