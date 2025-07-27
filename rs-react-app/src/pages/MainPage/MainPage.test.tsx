@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 import { mockApiResponseResults, TEST_ENDPOINT } from '@/__mocks__/mockData';
 import { getItemSpy } from '@/__mocks__/mockFunctions';
 import { pokeApi } from '@/services';
@@ -12,7 +13,11 @@ describe('Main Page test', () => {
   });
 
   test('should render Search component', () => {
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     expect(screen.getByRole('textbox')).toBeInTheDocument();
   });
@@ -20,7 +25,11 @@ describe('Main Page test', () => {
   test('should call api to get all pokemons when there is no value in LS', () => {
     const getPokemonResults = vi.spyOn(pokeApi, 'getPokemonResults');
 
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     expect(getPokemonResults).toHaveBeenCalledTimes(1);
   });
@@ -29,7 +38,11 @@ describe('Main Page test', () => {
     const getData = vi.spyOn(pokeApi, 'getPokemonData');
     getItemSpy.mockReturnValue('pikachu');
 
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     expect(getData).toHaveBeenCalledTimes(1);
   });
@@ -37,7 +50,11 @@ describe('Main Page test', () => {
   test('should handle search correctly', async () => {
     const getPokemonData = vi.spyOn(pokeApi, 'getPokemonData');
 
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     const searchInput = screen.getByRole('textbox');
     const searchButton = screen.getByRole('button', { name: 'Search' });
@@ -53,7 +70,11 @@ describe('Main Page test', () => {
       .spyOn(pokeApi, 'getPokemonResults')
       .mockResolvedValue(mockApiResponseResults);
 
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     const searchInput = screen.getByRole('textbox');
     const searchButton = screen.getByRole('button', { name: 'Search' });
@@ -69,7 +90,11 @@ describe('Main Page test', () => {
       new Error('API Error')
     );
 
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Please, try again')).toBeInTheDocument();

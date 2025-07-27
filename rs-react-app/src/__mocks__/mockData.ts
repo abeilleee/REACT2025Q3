@@ -14,6 +14,10 @@ export const cardData: PokemonData = {
     homefrontDefault:
       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/18.png',
   },
+  stats: {
+    name: ['stat', 'test'],
+    base: [10, 22],
+  },
 };
 
 export const mockPokemonsData: PokemonData[] = [
@@ -26,6 +30,10 @@ export const mockPokemonsData: PokemonData[] = [
       homefrontDefault:
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/18.png',
     },
+    stats: {
+      name: ['stat', 'test'],
+      base: [10, 22],
+    },
   },
   {
     name: 'pikachu',
@@ -36,6 +44,10 @@ export const mockPokemonsData: PokemonData[] = [
       homefrontDefault:
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/25.png',
     },
+    stats: {
+      name: ['stat', 'test'],
+      base: [10, 22],
+    },
   },
   {
     name: 'wartortle',
@@ -45,6 +57,10 @@ export const mockPokemonsData: PokemonData[] = [
     sprites: {
       homefrontDefault:
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/8.png',
+    },
+    stats: {
+      name: ['stat', 'test'],
+      base: [10, 22],
     },
   },
 ];
@@ -91,4 +107,14 @@ export const mockPokemonDataResponse: Pokemon = {
       },
     },
   },
+  stats: [
+    {
+      base_stat: 22,
+      effort: 22,
+      stat: {
+        name: 'stat',
+        url: 'url',
+      },
+    },
+  ],
 };
