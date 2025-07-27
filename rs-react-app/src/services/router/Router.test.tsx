@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { PATHS } from './constants';
+import { Router } from './Router';
 import { routesArr } from './routesArr';
 
 describe('Router tests', () => {
@@ -22,5 +23,14 @@ describe('Router tests', () => {
     render(<RouterProvider router={router} />);
 
     expect(screen.getByTestId('not-found')).toBeInTheDocument();
+  });
+
+  test('should render the RouterProvider without crashing', () => {
+    render(<Router />);
+
+    expect(
+      screen.getByPlaceholderText('Enter the full pokemon name')
+    ).toBeInTheDocument();
+    expect(screen.getByText('Search')).toBeInTheDocument();
   });
 });
