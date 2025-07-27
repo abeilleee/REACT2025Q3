@@ -5,4 +5,8 @@ export type PokemonData = Pick<Pokemon, 'name' | 'height' | 'weight'> & {
   sprites: {
     homefrontDefault?: string;
   };
+  stats: {
+    name: string[];
+    base: number[];
+  };
 };

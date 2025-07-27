@@ -23,10 +23,20 @@ export interface Pokemon {
       };
     };
   };
+  stats: Stats[];
 }
 
 export interface Ability {
   ability: Results;
   is_hidden: boolean;
   slot: number;
+}
+
+export interface Stats {
+  base_stat: number;
+  effort: number;
+  stat: {
+    name: string;
+    url: string;
+  };
 }

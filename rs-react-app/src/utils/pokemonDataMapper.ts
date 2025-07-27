@@ -10,5 +10,9 @@ export const mapDataToPokemonData = (data: Pokemon): PokemonData => {
     sprites: {
       homefrontDefault: data.sprites.other?.home.front_default,
     },
+    stats: {
+      name: data.stats.map((item) => item.stat.name),
+      base: data.stats.map((item) => item.base_stat),
+    },
   };
 };
