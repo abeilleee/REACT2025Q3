@@ -6,6 +6,10 @@
   width: 100%;
   grid-template-areas: 'search-box details';
   grid-template-columns: minmax(50%, 1fr) minmax(80px, 35%);
+
+  @media screen and (width <= 850px) {
+    grid-template-columns: 50% 50%;
+  }
 }
 
 .search-container {
