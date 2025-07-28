@@ -46,6 +46,7 @@ export default tseslint.config([
       ...react.configs['jsx-runtime'].rules,
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-misused-promises': 'off',
+      '@typescript-eslint/no-floating-promises': 'off',
       'import/order': [
         'error',
         {
@@ -58,6 +59,14 @@ export default tseslint.config([
             'type',
             'index',
           ],
+          pathGroups: [
+            {
+              pattern: '@/**',
+              group: 'internal',
+              position: 'before',
+            },
+          ],
+          pathGroupsExcludedImportTypes: ['builtin'],
           alphabetize: {
             order: 'asc',
             caseInsensitive: true,

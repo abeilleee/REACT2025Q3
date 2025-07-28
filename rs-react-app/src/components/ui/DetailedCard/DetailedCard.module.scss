@@ -1,0 +1,135 @@
+@use '@/styles/mixins.scss' as mixins;
+
+.card {
+  @include mixins.flex-column;
+
+  position: sticky;
+  top: 20px;
+  width: 90%;
+  height: 700px;
+  max-height: 70vh;
+  padding: 20px;
+  border-radius: var(--card-border-radius);
+  margin-top: 10vh;
+  animation: var(--fade-in-animation) 0.6s;
+  background: linear-gradient(135deg, #667fea3f 0%, #764ba265 100%);
+  box-shadow: var(--card-box-shadow);
+  color: var(--white);
+
+  @media screen and (width <= 600px) {
+    width: 95%;
+    padding: 15px;
+  }
+}
+
+.title {
+  @include mixins.flex-column;
+
+  width: 100%;
+}
+
+.name {
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.types {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.type {
+  padding: 6px 16px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px #0003;
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  text-shadow: 1px 1px 2px #0000004d;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.content {
+  @include mixins.flex-column;
+
+  width: 100%;
+  height: 100%;
+  gap: 15px;
+}
+
+.img-container {
+  @include mixins.flex-column;
+
+  width: 100%;
+  gap: 25px;
+}
+
+.img-box {
+  @include mixins.flex-center;
+
+  width: 150px;
+  height: 150px;
+  transition: transform 0.4s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.stats {
+  @include mixins.flex-column;
+
+  width: 100%;
+  max-width: 300px;
+  gap: 12px;
+}
+
+.stat {
+  @include mixins.flex-center;
+
+  width: 100%;
+  gap: 10px;
+}
+
+.stat-label {
+  min-width: 60px;
+  font-weight: 600;
+}
+
+.stat-bar {
+  overflow: hidden;
+  height: 8px;
+  flex: 1;
+  border-radius: 4px;
+  background: #fff3;
+}
+
+.stat-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #ff6b6b, #ffa500);
+}
+
+.stat-value {
+  min-width: 30px;
+}
+
+.bottom {
+  width: 100%;
+
+  @include mixins.flex-center;
+
+  margin-top: 10px;
+}

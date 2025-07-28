@@ -1,7 +1,5 @@
-import { Component } from 'react';
+import { type FC } from 'react';
 
-export class MockFallback extends Component {
-  render() {
-    return <p>There was an error</p>;
-  }
-}
+export const MockFallback: FC = () => {
+  return <p>There was an error</p>;
+};

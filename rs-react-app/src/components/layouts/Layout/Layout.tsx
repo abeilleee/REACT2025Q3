@@ -1,24 +1,27 @@
-import { Component, type ReactNode } from 'react';
-import styles from './Layout.module.scss';
+import { type FC } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import { ErrorBoundary } from '@/components/common/ErrorBoundary';
 import { Footer, Header } from '@/components/ui';
+import { PATHS } from '@/services/router/constants';
+import styles from './Layout.module.scss';
 
-type LayoutProps = {
-  children: ReactNode;
-};
+export const Layout: FC = () => {
+  const location = useLocation();
+  const isRoot = location.pathname === PATHS.ROOT;
 
-export class Layout extends Component<LayoutProps> {
-  constructor(props: LayoutProps) {
-    super(props);
-  }
-  render() {
-    return (
+  const mainStyle = isRoot
+    ? `${styles.content} ${styles['content-flex-start']}`
+    : styles.content;
+
+  return (
+    <ErrorBoundary>
       <div className={styles.container} data-testid={'layout-container'}>
         <Header />
-        <main className={styles.content} data-testid={'layout-main'}>
-          {this.props.children}
+        <main className={mainStyle} data-testid={'layout-main'}>
+          <Outlet />
         </main>
         <Footer />
       </div>
-    );
-  }
-}
+    </ErrorBoundary>
+  );
+};

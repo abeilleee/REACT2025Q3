@@ -1,6 +1,11 @@
 export { Card } from './ui/Card';
-export { CardsLayout } from './layouts/CardsLayout';
 export { Layout } from './layouts/Layout';
 export { ErrorBoundary } from './common/ErrorBoundary';
 export { SkeletonCard } from './ui/Card';
 export { Search } from './ui';
+export { DetailedCard } from './ui';
+export { CardsList } from './ui/CardsList/CardsList';
+export { MainLayout } from './layouts/MainLayout';
+export { Spinner } from './ui/Spinner';
+export { Button } from './ui';
+export { Error } from './ui';

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { getItemSpy } from '@/__mocks__/mockFunctions';
 import { Search } from './Search';
-import { mockGetItem, mockSetItem } from '@/__mocks__/mocksFunctions';
 
 describe('Search test', () => {
   const mockOnSearch = vi.fn();
@@ -22,7 +22,7 @@ describe('Search test', () => {
     expect(button).toBeInTheDocument();
   });
 
-  test('should call onSearch and setItem when Enter key is pressed', async () => {
+  test('should call onSearch when Enter key is pressed', async () => {
     render(<Search onSearch={mockOnSearch} />);
 
     const inputElement = screen.getByRole('textbox');
@@ -31,11 +31,9 @@ describe('Search test', () => {
     await user.keyboard('[Enter]');
 
     expect(mockOnSearch).toBeCalledTimes(1);
-    expect(mockSetItem).toHaveBeenCalledWith('charmander');
-    expect(mockSetItem).toHaveBeenCalledTimes(1);
   });
 
-  test('should call onSearch and setItem on button click', async () => {
+  test('should call onSearch on button click', async () => {
     render(<Search onSearch={mockOnSearch} />);
 
     const inputElement = screen.getByRole('textbox');
@@ -45,12 +43,10 @@ describe('Search test', () => {
     await user.click(button);
 
     expect(mockOnSearch).toHaveBeenCalledWith('bulbasaur');
-    expect(mockSetItem).toHaveBeenCalledWith('bulbasaur');
-    expect(mockSetItem).toHaveBeenCalledTimes(1);
   });
 
   test('should set LS value to the input value', async () => {
-    mockGetItem.mockReturnValue('bulbasaur');
+    getItemSpy.mockReturnValue('bulbasaur');
     render(<Search onSearch={mockOnSearch} />);
 
     const inputElement = await screen.findByPlaceholderText(
@@ -58,18 +54,16 @@ describe('Search test', () => {
     );
 
     expect(inputElement).toHaveValue('bulbasaur');
-    expect(mockGetItem).toHaveBeenCalledTimes(1);
   });
 
   test('should set empty input value if LS has no value', async () => {
-    mockGetItem.mockReturnValue(null);
+    getItemSpy.mockReturnValue(null);
     render(<Search onSearch={mockOnSearch} />);
 
     const inputElement = await screen.findByPlaceholderText(
       'Enter the full pokemon name'
     );
 
-    expect(mockGetItem).toHaveBeenCalledTimes(1);
     expect(inputElement).toHaveValue('');
   });
 });

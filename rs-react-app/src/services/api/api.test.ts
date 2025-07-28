@@ -1,18 +1,19 @@
 import { http, HttpResponse } from 'msw';
-import { pokeApi } from './api';
-import { BASE_ENDPOINT, BASE_URL } from './constants';
 import {
   MOCK_ENDPOINT,
+  mockApiResponse,
   mockApiResponseResults,
   mockPokemonDataResponse,
-  NOT_EXISTING_ENDPOINT,
-} from '@/__mocks__/mocksData';
+} from '@/__mocks__/mockData';
 import { server } from '@/__mocks__/msw/server';
+import { ONE } from '@/utils/constants';
 import { mapDataToPokemonData } from '@/utils/pokemonDataMapper';
+import { pokeApi } from './api';
+import { BASE_ENDPOINT, BASE_URL } from './constants';
 
 describe('API test', () => {
   test('should fetch and return correct data of all pokemons', async () => {
-    const result = await pokeApi.getPokemons();
+    const result = await pokeApi.getPokemonResults(ONE);
 
     expect(result).toEqual(mockApiResponseResults);
   });
@@ -21,12 +22,6 @@ describe('API test', () => {
     const result = await pokeApi.getPokemonData(MOCK_ENDPOINT);
 
     expect(result).toEqual(mapDataToPokemonData(mockPokemonDataResponse));
-  });
-
-  test('should fetch and return undefined with incorrect pokemon name', async () => {
-    const result = await pokeApi.getPokemonData(NOT_EXISTING_ENDPOINT);
-
-    expect(result).toEqual(undefined);
   });
 
   test('should fetch and throw an error', async () => {
@@ -41,7 +36,9 @@ describe('API test', () => {
       })
     );
 
-    await expect(pokeApi.getPokemons()).rejects.toThrowError(errorMessage);
+    await expect(pokeApi.getPokemonResults(ONE)).rejects.toThrowError(
+      errorMessage
+    );
   });
 
   test('should fetch and throw an error without error message', async () => {
@@ -53,6 +50,12 @@ describe('API test', () => {
       })
     );
 
-    await expect(pokeApi.getPokemons()).rejects.toThrowError();
+    await expect(pokeApi.getPokemonResults(ONE)).rejects.toThrowError();
+  });
+
+  test('should fetch and return correct pokemon count', async () => {
+    const result = await pokeApi.getPokemonCount();
+
+    expect(result).toEqual(mockApiResponse.count);
   });
 });

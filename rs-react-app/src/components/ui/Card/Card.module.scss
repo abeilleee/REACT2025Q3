@@ -6,14 +6,26 @@
   position: relative;
   overflow: hidden;
 
-  width: 200px;
-  height: 335px;
+  width: var(--card-width);
+  height: var(--card-height);
 
   justify-content: flex-start;
   padding: 15px;
-  border-radius: 16px;
+  border-radius: var(--card-border-radius);
   background-color: var(--white);
-  box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
+  box-shadow: var(--card-box-shadow);
+  cursor: pointer;
+  transition: transform 0.4s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  @media screen and (width <= 600px) {
+    & {
+      max-width: 90%;
+    }
+  }
 }
 
 .content {

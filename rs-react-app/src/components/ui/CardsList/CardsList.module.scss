@@ -1,0 +1,21 @@
+@use '@/styles/mixins.scss' as mixins;
+
+.wrapper {
+  @include mixins.flex-column;
+
+  width: 90%;
+  max-width: 1078px;
+  min-height: 85vh;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.container {
+  display: grid;
+  width: 90%;
+  max-width: 1290px;
+  padding: 40px 0;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  place-items: center;
+}

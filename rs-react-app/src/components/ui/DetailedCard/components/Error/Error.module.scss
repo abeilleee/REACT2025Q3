@@ -1,0 +1,9 @@
+@use '@/styles/mixins.scss' as mixins;
+
+.error {
+  @include mixins.flex-column;
+
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}

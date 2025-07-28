@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { type FC } from 'react';
 import styles from './Description.module.scss';
 
 type DescriptionProps = {
@@ -7,21 +7,23 @@ type DescriptionProps = {
   abilities: string[];
 };
 
-export class Description extends Component<DescriptionProps> {
-  render() {
-    return (
-      <div className={styles.box}>
-        <div className={styles.title}> Weight: {this.props.weight}</div>
-        <div className={styles.title}>Height: {this.props.height}</div>
-        <div className={styles.title}>
-          Abilities:
-          {this.props.abilities.map((ability, index) => (
-            <div key={index} className={styles.ability}>
-              {ability}
-            </div>
-          ))}
-        </div>
+export const Description: FC<DescriptionProps> = ({
+  weight,
+  height,
+  abilities,
+}) => {
+  return (
+    <div className={styles.box}>
+      <div className={styles.title}> Weight: {weight}</div>
+      <div className={styles.title}>Height: {height}</div>
+      <div className={styles.title}>
+        Abilities:
+        {abilities.map((ability, index) => (
+          <div key={index} className={styles.ability}>
+            {ability}
+          </div>
+        ))}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};

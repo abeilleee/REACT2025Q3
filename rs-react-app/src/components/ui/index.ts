@@ -5,3 +5,8 @@ export { Button } from './Button';
 export { Card } from './Card';
 export { SkeletonCard } from './Card';
 export { Description } from './Description';
+export { Pagination } from './Pagination';
+export { DetailedCard } from './DetailedCard';
+export { ErrorState } from './ErrorState';
+export { Spinner } from './Spinner';
+export { Error } from './DetailedCard';

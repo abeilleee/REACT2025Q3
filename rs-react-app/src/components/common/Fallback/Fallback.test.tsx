@@ -1,11 +1,27 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Fallback } from './Fallback';
-import { mockReload } from '@/__mocks__/mocksFunctions';
 
 describe('Fallback test', () => {
+  const mockReload = vi.fn();
+
   beforeEach(() => {
-    mockReload.mockClear();
+    Object.defineProperty(window, 'location', {
+      configurable: true,
+      value: {
+        ...window.location,
+        reload: mockReload,
+      },
+    });
+
+    afterAll(() => {
+      Object.defineProperty(window, 'location', {
+        configurable: true,
+        value: window.location,
+      });
+
+      mockReload.mockReset();
+    });
   });
 
   test('should render fallback correctly', () => {

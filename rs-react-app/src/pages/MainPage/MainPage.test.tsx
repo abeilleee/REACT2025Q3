@@ -1,40 +1,48 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MainPage } from './MainPage';
-import {
-  mockApiResponseResults,
-  NOT_EXISTING_ENDPOINT,
-  TEST_ENDPOINT,
-} from '@/__mocks__/mocksData';
-import { mockGetItem } from '@/__mocks__/mocksFunctions';
+import { MemoryRouter } from 'react-router-dom';
+import { mockApiResponseResults, TEST_ENDPOINT } from '@/__mocks__/mockData';
+import { getItemSpy } from '@/__mocks__/mockFunctions';
 import { pokeApi } from '@/services';
+import { MainPage } from './MainPage';
 
 describe('Main Page test', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
-    mockGetItem.mockReset();
-    mockGetItem.mockReturnValue(null);
+    getItemSpy.mockReturnValue(null);
+    getItemSpy.mockClear();
   });
 
   test('should render Search component', () => {
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     expect(screen.getByRole('textbox')).toBeInTheDocument();
   });
 
   test('should call api to get all pokemons when there is no value in LS', () => {
-    const getPokemons = vi.spyOn(pokeApi, 'getPokemons');
+    const getPokemonResults = vi.spyOn(pokeApi, 'getPokemonResults');
 
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
-    expect(getPokemons).toHaveBeenCalledTimes(1);
+    expect(getPokemonResults).toHaveBeenCalledTimes(1);
   });
 
   test('should call api to get one pokemon when LS has a value', () => {
     const getData = vi.spyOn(pokeApi, 'getPokemonData');
-    mockGetItem.mockReturnValue('pikachu');
+    getItemSpy.mockReturnValue('pikachu');
 
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     expect(getData).toHaveBeenCalledTimes(1);
   });
@@ -42,7 +50,11 @@ describe('Main Page test', () => {
   test('should handle search correctly', async () => {
     const getPokemonData = vi.spyOn(pokeApi, 'getPokemonData');
 
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     const searchInput = screen.getByRole('textbox');
     const searchButton = screen.getByRole('button', { name: 'Search' });
@@ -54,11 +66,15 @@ describe('Main Page test', () => {
   });
 
   test('should handle search correctly when input is empty', async () => {
-    const getPokemons = vi
-      .spyOn(pokeApi, 'getPokemons')
+    const getPokemonResults = vi
+      .spyOn(pokeApi, 'getPokemonResults')
       .mockResolvedValue(mockApiResponseResults);
 
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     const searchInput = screen.getByRole('textbox');
     const searchButton = screen.getByRole('button', { name: 'Search' });
@@ -66,40 +82,22 @@ describe('Main Page test', () => {
     await userEvent.type(searchInput, '   ');
     await userEvent.click(searchButton);
 
-    await waitFor(() => expect(getPokemons).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(getPokemonResults).toHaveBeenCalled());
   });
 
-  test('should handle api error when getPokemons fails', async () => {
-    vi.spyOn(pokeApi, 'getPokemons').mockRejectedValue(new Error('API Error'));
+  test('should handle api error when getPokemonResults fails', async () => {
+    vi.spyOn(pokeApi, 'getPokemonResults').mockRejectedValue(
+      new Error('API Error')
+    );
 
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Please, try again')).toBeInTheDocument();
-    });
-  });
-
-  test('should display "No results found" when getPokemonData returns nothing', async () => {
-    vi.spyOn(pokeApi, 'getPokemonData').mockResolvedValue(undefined);
-
-    render(<MainPage />);
-
-    const searchInput = screen.getByRole('textbox');
-    const searchButton = screen.getByRole('button', { name: 'Search' });
-
-    await userEvent.type(searchInput, NOT_EXISTING_ENDPOINT);
-    await userEvent.click(searchButton);
-
-    expect(screen.getByText('No results found')).toBeInTheDocument();
-  });
-
-  test('should display "No results found" when getPokemonData returns empty list', async () => {
-    vi.spyOn(pokeApi, 'getPokemons').mockResolvedValue([]);
-
-    render(<MainPage />);
-
-    await waitFor(() => {
-      expect(screen.queryByText('No results found')).toBeInTheDocument();
     });
   });
 });

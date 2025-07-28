@@ -1,33 +1,27 @@
-import {
-  BASE_ENDPOINT,
-  BASE_URL,
-  DEFAULT_ERROR,
-  STATUS_CODE,
-} from './constants';
-import type { ApiResponse, Pokemon } from './types';
+import { ONE } from '@/utils/constants';
 import { mapDataToPokemonData } from '@/utils/pokemonDataMapper';
+import { BASE_ENDPOINT, BASE_URL, LIMIT } from './constants';
+import type { ApiResponse, Pokemon } from './types';
 
 export class Api {
-  private async fetchData<T>(endpoint: string): Promise<T | undefined> {
-    try {
-      const response = await fetch(`${BASE_URL}/${endpoint}`);
+  private async fetchData<T>(endpoint: string) {
+    const response = await fetch(`${BASE_URL}/${endpoint}`);
 
-      if (!response.ok) {
-        if (response.status === STATUS_CODE.NOT_FOUND) {
-          return;
-        }
-        throw new Error(`${response.status} ${response.statusText}`);
-      }
-
-      const data = (await response.json()) as T;
-      return data;
-    } catch (error) {
-      throw new Error(error instanceof Error ? error.message : DEFAULT_ERROR);
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`${response.status} ${response.statusText} ${errorText}`);
     }
+
+    const data = (await response.json()) as T;
+    return data;
   }
 
-  public async getPokemons() {
-    const data = await this.fetchData<ApiResponse>(BASE_ENDPOINT);
+  public async getPokemonResults(page: number) {
+    const offset = (page - ONE) * LIMIT;
+
+    const data = await this.fetchData<ApiResponse>(
+      `${BASE_ENDPOINT}/?limit=${LIMIT}&offset=${offset}`
+    );
 
     if (data) {
       return data.results;
@@ -39,6 +33,14 @@ export class Api {
 
     if (data) {
       return mapDataToPokemonData(data);
+    }
+  }
+
+  public async getPokemonCount() {
+    const data = await this.fetchData<ApiResponse>(`${BASE_ENDPOINT}`);
+
+    if (data) {
+      return data.count;
     }
   }
 }

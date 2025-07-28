@@ -1,32 +1,42 @@
-import { Component } from 'react';
-import styles from './Card.module.scss';
-import type { PokemonData } from '@/utils/types';
+import { type FC } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import placeholder from '@/assets/images/no-img.png';
 import { Description } from '@/components/ui';
+import { PATHS } from '@/services/router/constants';
+import type { PokemonData } from '@/utils/types';
+import styles from './Card.module.scss';
 
 type CardProps = {
   pokemon: PokemonData;
 };
 
-export class Card extends Component<CardProps> {
-  render() {
-    return (
-      <div className={styles.card}>
-        <div className={styles.content}>
-          <div className={styles.name}>{this.props.pokemon.name}</div>
-          <div className={styles['img-box']}>
-            <img
-              src={this.props.pokemon.sprites?.homefrontDefault}
-              alt={this.props.pokemon.name}
-            />
-          </div>
+export const Card: FC<CardProps> = ({ pokemon }) => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
-          <Description
-            height={this.props.pokemon.height}
-            weight={this.props.pokemon.weight}
-            abilities={this.props.pokemon.abilities}
+  const onClick = () => {
+    const currentPage = searchParams.get('page') || '1';
+    const url = `${PATHS.DETAILS.replace(':name', pokemon.name)}`;
+    navigate(`${url}?page=${currentPage}`);
+  };
+
+  return (
+    <div className={styles.card} onClick={onClick}>
+      <div className={styles.content}>
+        <div className={styles.name}>{pokemon.name}</div>
+        <div className={styles['img-box']}>
+          <img
+            src={pokemon.sprites?.homefrontDefault || placeholder}
+            alt={pokemon.name}
           />
         </div>
+
+        <Description
+          height={pokemon.height}
+          weight={pokemon.weight}
+          abilities={pokemon.abilities}
+        />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};

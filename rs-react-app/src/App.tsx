@@ -1,15 +1,8 @@
-import { Component } from 'react';
-import { Layout } from '@/components';
-import { MainPage } from '@/pages/MainPage';
+import { type FC } from 'react';
+import { Router } from './services/router/Router';
 
-class App extends Component {
-  render() {
-    return (
-      <Layout>
-        <MainPage />
-      </Layout>
-    );
-  }
-}
+const App: FC = () => {
+  return <Router />;
+};
 
 export default App;
