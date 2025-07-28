@@ -1,7 +1,11 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes, useParams } from 'react-router-dom';
-import { cardData, mockPokemonsData } from '@/__mocks__/mockData';
+import {
+  cardData,
+  mockPokemonsData,
+  NOT_EXISTING_ENDPOINT,
+} from '@/__mocks__/mockData';
 import { navigateMock } from '@/__tests__/setupTests';
 import { PATHS } from '@/services/router/constants';
 import { DetailedCard } from './DetailedCard';
@@ -64,6 +68,20 @@ describe('Detailed card tests', () => {
     await waitFor(() => {
       expect(screen.getByTestId(cardData.name)).toBeInTheDocument();
       expect(screen.getByAltText(cardData.name)).toBeInTheDocument();
+    });
+  });
+
+  test('should render ErrorState when there is an error', async () => {
+    vi.mocked(useParams).mockReturnValue({ name: NOT_EXISTING_ENDPOINT });
+
+    render(
+      <MemoryRouter>
+        <DetailedCard />
+      </MemoryRouter>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('error-container')).toBeInTheDocument();
     });
   });
 });
