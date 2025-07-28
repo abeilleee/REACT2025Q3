@@ -1,5 +1,15 @@
 :root {
   --white: #fff;
+  --main-bg: linear-gradient(
+    45deg,
+    #bbe2fa,
+    #edf3ff,
+    #e0f6ff,
+    #f7ffff,
+    #ebffff,
+    #d7e1fc,
+    #d9fcf5
+  );
   --primary-color: #18d284;
   --hover-color: #1be993;
   --active-color: #15b170;

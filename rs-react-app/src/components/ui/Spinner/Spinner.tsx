@@ -5,7 +5,7 @@ export const Spinner: FC = () => {
   return (
     <div className={styles.loading}>
       <div className={styles.spinner} data-testid="spinner"></div>
-      <p>Loading Pokemon...</p>
+      <p>Loading...</p>
     </div>
   );
 };

@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react';
 import { ErrorBoundary } from './ErrorBoundary';
 
 describe('Error Boundary test', () => {
-  vi.mock('@/components/common/Fallback', () => ({
-    Fallback: () => <p>There was an error</p>,
+  vi.mock('@/components/common/ErrorFallback', () => ({
+    ErrorFallback: () => <p>There was an error</p>,
   }));
 
   vi.spyOn(console, 'error').mockImplementation(() => {});
@@ -20,7 +20,7 @@ describe('Error Boundary test', () => {
     expect(screen.getByText(childText)).toBeInTheDocument();
   });
 
-  test('should render fallback ui when there is an error', () => {
+  test('should render ErrorFallback ui when there is an error', () => {
     const errorMessage = 'Test Simulated error';
     const ComponentWithError = () => {
       throw new Error(errorMessage);
