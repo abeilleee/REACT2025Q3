@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { mockApiResponseResults, TEST_ENDPOINT } from '@/__mocks__/mockData';
 import { getItemSpy } from '@/__mocks__/mockFunctions';
 import { pokeApi } from '@/services';
-import { MainPage } from './MainPage';
+import MainPage from './MainPage';
 
 describe('Main Page test', () => {
   beforeEach(() => {

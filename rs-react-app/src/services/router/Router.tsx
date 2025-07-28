@@ -1,9 +1,14 @@
+import { Suspense, type FC } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { routesArr } from './routesArr';
-import type { FC } from 'react';
+import { Fallback } from '@/components/common';
+import { routesConfig } from './routesConfig';
 
 export const Router: FC = () => {
-  const router = createBrowserRouter(routesArr);
+  const router = createBrowserRouter(routesConfig);
 
-  return <RouterProvider router={router} />;
+  return (
+    <Suspense fallback={<Fallback />}>
+      <RouterProvider router={router} />
+    </Suspense>
+  );
 };

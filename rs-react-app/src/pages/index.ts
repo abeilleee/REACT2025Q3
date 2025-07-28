@@ -1,3 +1,3 @@
-export { About } from './About';
-export { MainPage } from './MainPage';
-export { NotFound } from './NotFound';
+export { default as About } from './About/About';
+export { default as MainPage } from './MainPage/MainPage';
+export { default as NotFound } from './NotFound/NotFound';

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui';
 import { PATHS } from '@/services/router/constants';
 import styles from './About.module.scss';
 
-export const About: FC = () => {
+const About: FC = () => {
   const navigate = useNavigate();
 
   const onClick = () => {
@@ -48,3 +48,5 @@ export const About: FC = () => {
     </>
   );
 };
+
+export default About;

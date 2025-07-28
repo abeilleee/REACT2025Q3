@@ -8,7 +8,7 @@ const getCurrentPage = (searchParams: URLSearchParams) => {
   return Number(searchParams.get('page') || INITIAL_PAGE);
 };
 
-export const MainPage: FC = () => {
+const MainPage: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState(() => getCurrentPage(searchParams));
   const { data, isLoading, error, setSearchTerm, total } = usePokemon(page);
@@ -43,3 +43,5 @@ export const MainPage: FC = () => {
     </>
   );
 };
+
+export default MainPage;

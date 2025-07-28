@@ -1,36 +1,45 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { PATHS } from './constants';
 import { Router } from './Router';
-import { routesArr } from './routesArr';
+import { routesConfig } from './routesConfig';
 
 describe('Router tests', () => {
-  test('should render About page to the corresponding route', () => {
-    const router = createMemoryRouter(routesArr, {
+  test('should render About page to the corresponding route', async () => {
+    const router = createMemoryRouter(routesConfig, {
       initialEntries: [PATHS.ABOUT],
     });
 
     render(<RouterProvider router={router} />);
 
-    expect(screen.getByTestId('about-page')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByTestId('about-page')).toBeInTheDocument();
+    });
   });
 
-  test('should render Not found page to the corresponding route', () => {
-    const router = createMemoryRouter(routesArr, {
+  test('should render Not found page to the corresponding route', async () => {
+    const router = createMemoryRouter(routesConfig, {
       initialEntries: ['/bad-route'],
     });
 
     render(<RouterProvider router={router} />);
 
-    expect(screen.getByTestId('not-found')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByTestId('not-found')).toBeInTheDocument();
+    });
   });
 
-  test('should render the RouterProvider without crashing', () => {
+  test('should render the RouterProvider without crashing', async () => {
     render(<Router />);
 
-    expect(
-      screen.getByPlaceholderText('Enter the full pokemon name')
-    ).toBeInTheDocument();
-    expect(screen.getByText('Search')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.getByPlaceholderText('Enter the full pokemon name')
+      ).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('Search')).toBeInTheDocument();
+    });
   });
 });

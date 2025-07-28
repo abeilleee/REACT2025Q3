@@ -5,7 +5,7 @@ import { PATHS } from '@/services/router/constants';
 import styles from './NotFound.module.scss';
 import type { FC } from 'react';
 
-export const NotFound: FC = () => {
+const NotFound: FC = () => {
   const navigate = useNavigate();
 
   const onClick = () => {
@@ -22,3 +22,5 @@ export const NotFound: FC = () => {
     </div>
   );
 };
+
+export default NotFound;
