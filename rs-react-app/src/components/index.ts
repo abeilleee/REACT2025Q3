@@ -8,4 +8,3 @@ export { CardsList } from './ui/CardsList/CardsList';
 export { MainLayout } from './layouts/MainLayout';
 export { Spinner } from './ui/Spinner';
 export { Button } from './ui';
-export { Error } from './ui';

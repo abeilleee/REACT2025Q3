@@ -1,7 +1,7 @@
 import { useEffect, type FC } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import placeholder from '@/assets/images/no-img.png';
-import { Button, Error, Spinner } from '@/components/ui';
+import { Button, ErrorState, Spinner } from '@/components/ui';
 import { useFetch } from '@/hooks';
 import { pokeApi } from '@/services';
 import { PATHS } from '@/services/router/constants';
@@ -50,7 +50,8 @@ export const DetailedCard: FC = () => {
   if (error) {
     return (
       <div className={styles.card} data-testid="error-container">
-        <Error error={error}></Error>
+        <ErrorState errorMessage={error}></ErrorState>
+        <Button onClick={onCLick} textContent="Close"></Button>
       </div>
     );
   }
