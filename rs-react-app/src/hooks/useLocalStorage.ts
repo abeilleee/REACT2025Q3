@@ -1,19 +1,26 @@
 import { useEffect, useState, type Dispatch, type SetStateAction } from 'react';
+import { STORAGE_PREFIX } from '@/utils/constants';
 
-export const STORAGE_KEY = 'abeilleee_searchTerm';
+type UseLocalStorageProps = {
+  key: string;
+  initialValue?: string;
+};
 
-export const useLocalStorage = (
-  storageKey = STORAGE_KEY,
-  initialValue = ''
-): [string | null, Dispatch<SetStateAction<string>>] => {
-  const [searchTerm, setSearchTerm] = useState(
+type UseLocalStorageResult = [string | null, Dispatch<SetStateAction<string>>];
+
+export const useLocalStorage = ({
+  key,
+  initialValue = '',
+}: UseLocalStorageProps): UseLocalStorageResult => {
+  const storageKey = `${STORAGE_PREFIX}__${key}`;
+  const [storedValue, setStoredValue] = useState(
     localStorage.getItem(storageKey) || initialValue
   );
 
   useEffect(() => {
-    const value = searchTerm;
+    const value = storedValue;
     localStorage.setItem(storageKey, value);
-  }, [searchTerm, storageKey]);
+  }, [storedValue, storageKey]);
 
-  return [searchTerm, setSearchTerm];
+  return [storedValue, setStoredValue];
 };
