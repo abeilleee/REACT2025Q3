@@ -6,4 +6,10 @@ export const STORAGE_PREFIX = 'abeilleee';
 
 export const enum STORAGE_KEY {
   SEARCH_TERM = 'searchTerm',
+  THEME = 'theme',
+}
+
+export const enum THEME {
+  LIGHT = 'light',
+  DARK = 'dark',
 }

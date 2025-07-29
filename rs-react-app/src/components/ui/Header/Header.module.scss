@@ -20,3 +20,9 @@
     height: 100%;
   }
 }
+
+.right-box {
+  @include mixins.flex-center;
+
+  gap: 10px;
+}

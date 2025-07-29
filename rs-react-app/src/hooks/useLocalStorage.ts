@@ -6,7 +6,7 @@ type UseLocalStorageProps = {
   initialValue?: string;
 };
 
-type UseLocalStorageResult = [string | null, Dispatch<SetStateAction<string>>];
+type UseLocalStorageResult = [string, Dispatch<SetStateAction<string>>];
 
 export const useLocalStorage = ({
   key,

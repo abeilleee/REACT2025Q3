@@ -7,9 +7,9 @@
   height: var(--card-height);
   justify-content: flex-start;
   padding: 10px;
-  border-radius: var(--border-radius);
+  border-radius: var(--card-border-radius);
   margin: 10px;
-  background-color: #f4f4f480;
+  background-color: var(--skeleton-bg-color);
 }
 
 .image {
@@ -35,7 +35,7 @@
 
 .pulsate {
   animation: skeleton-animation 2.25s ease infinite;
-  background: linear-gradient(-45deg, #ddd, #f0f0f0, #ddd, #f0f0f0);
+  background: var(--pulsate-bg-color);
   background-size: 400% 400%;
 }
 

@@ -34,9 +34,9 @@
   width: 56px;
   height: 46px;
   padding: 6px 14px;
-  border: 1px solid var(--primary-color);
+  border: var(--page-border);
   border-radius: var(--border-radius);
-  background: #e6ffe681;
+  background: var(--page-color);
   box-shadow: var(--btn-box-shadow);
   cursor: pointer;
 

@@ -4,6 +4,7 @@
   @include mixins.flex-column;
 
   height: 100vh;
+  background-color: var(--error-element-bg);
 
   img {
     margin-left: 45px;

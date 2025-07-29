@@ -1,5 +1,23 @@
 :root {
+  // colors
   --white: #fff;
+  --card-box-shadow: 0 4px 20px #0000001a;
+  --btn-box-shadow: inset 0 3px 5px #ffffff4d;
+
+  // sizes
+  --padding-base: 10px;
+  --border-radius: 8px;
+  --card-border-radius: 16px;
+  --card-width: 200px;
+  --card-height: 357px;
+
+  // animation
+  --fade-in-animation: fade-in;
+  --spin-animation: spin;
+}
+
+:root[data-theme='light'] {
+  // colors
   --main-bg: linear-gradient(
     45deg,
     #bbe2fa,
@@ -10,21 +28,50 @@
     #d7e1fc,
     #d9fcf5
   );
+  --text-color: #000;
   --primary-color: #18d284;
   --hover-color: #1be993;
   --active-color: #15b170;
-  --card-color: #abfedc;
   --link-hover: #ffe44c;
-  --link-active: #e3cc45;
-  --btn-box-shadow: inset 0 3px 5px #ffffff4d;
-  --card-box-shadow: 0 4px 20px #0000001a;
-  --padding-base: 10px;
-  --border-radius: 8px;
-  --card-border-radius: 16px;
-  --card-width: 200px;
-  --card-height: 357px;
-  --fade-in-animation: fade-in;
-  --spin-animation: spin;
+  --card-color: #fff;
+  --title-card-color: #363636;
+  --skeleton-bg-color: #f4f4f480;
+  --pulsate-bg-color: linear-gradient(-45deg, #ddd, #f0f0f0, #ddd, #f0f0f0);
+  --input-bg-color: #fff;
+  --about-card-color: #fff;
+  --error-element-bg: #fff;
+  --page-color: #e6ffe681;
+  --page-border: 1px solid var(--primary-color);
+}
+
+:root[data-theme='dark'] {
+  // colors
+  --main-bg:
+    radial-gradient(at 9% 100%, #36091d 0px, transparent 50%),
+    radial-gradient(at 68% 86%, #222421 0px, transparent 50%),
+    radial-gradient(at 51% 48%, #184720 0px, transparent 50%),
+    radial-gradient(at 0% 7%, #110740 0px, transparent 50%),
+    radial-gradient(at 100% 35%, #52021b 0px, transparent 50%) #000;
+  --text-color: var(--white);
+  --primary-color: #ff682c;
+  --hover-color: #d63612;
+  --active-color: #bb3912;
+  --link-hover: #ff9d24;
+  --card-color: #8f8f8f4a;
+  --title-card-color: #ffffffa2;
+  --skeleton-bg-color: #8a8a8a17;
+  --pulsate-bg-color: linear-gradient(
+    -45deg,
+    #2a2a2a,
+    #4d4d4d,
+    #5a5a5a,
+    #757575
+  );
+  --input-bg-color: #ffffff2e;
+  --about-card-color: #acacac63;
+  --error-element-bg: #444;
+  --page-color: #8f8f8f4a;
+  --page-border: none;
 }
 
 @keyframes fade-in {

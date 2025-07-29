@@ -1,9 +1,9 @@
 import { type FC } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '@/assets/images/logo.png';
+import { Button, ThemeSwitcher } from '@/components/ui';
 import { PATHS } from '@/services/router/constants';
 import styles from './Header.module.scss';
-import { Button } from '../Button';
 
 export const Header: FC = () => {
   const navigate = useNavigate();
@@ -19,7 +19,12 @@ export const Header: FC = () => {
       <div className={styles.logo}>
         <img src={logo} alt="logo" />
       </div>
-      {!isAboutPage && <Button onClick={onClick} textContent="About"></Button>}
+      <div className={styles['right-box']}>
+        <ThemeSwitcher />
+        {!isAboutPage && (
+          <Button onClick={onClick} textContent="About"></Button>
+        )}
+      </div>
     </header>
   );
 };
