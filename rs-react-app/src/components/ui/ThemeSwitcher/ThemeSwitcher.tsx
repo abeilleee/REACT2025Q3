@@ -22,6 +22,7 @@ export const ThemeSwitcher: FC = () => {
       className={styles.switcher}
       onClick={handleSwitchTheme}
       data-theme={theme}
+      data-testid="switcher"
     >
       <img src={img} alt="theme" width={35} height={35} />
     </div>
