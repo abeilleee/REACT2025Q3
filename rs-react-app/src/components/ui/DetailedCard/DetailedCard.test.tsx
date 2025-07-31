@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes, useParams } from 'react-router-dom';
 import {
   cardData,
@@ -8,6 +9,7 @@ import {
 } from '@/__mocks__/mockData';
 import { navigateMock } from '@/__tests__/setupTests';
 import { PATHS } from '@/services/router/constants';
+import { store } from '@/store';
 import { DetailedCard } from './DetailedCard';
 import { CardsList } from '../CardsList';
 
@@ -26,24 +28,26 @@ describe('Detailed card tests', () => {
 
   test('should open with the correct URL and render with the correct title', async () => {
     render(
-      <MemoryRouter initialEntries={[PATHS.ROOT]}>
-        <Routes>
-          <Route
-            path={PATHS.ROOT}
-            element={
-              <CardsList
-                pokemonsData={mockPokemonsData}
-                isLoading={false}
-                errorMessage={''}
-                currentPage={12}
-                total={120}
-                handlePageChange={navigateMock}
-              />
-            }
-          />
-          <Route path={path} element={<DetailedCard />} />
-        </Routes>
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={[PATHS.ROOT]}>
+          <Routes>
+            <Route
+              path={PATHS.ROOT}
+              element={
+                <CardsList
+                  pokemonsData={mockPokemonsData}
+                  isLoading={false}
+                  errorMessage={''}
+                  currentPage={12}
+                  total={120}
+                  handlePageChange={navigateMock}
+                />
+              }
+            />
+            <Route path={path} element={<DetailedCard />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
 
     const pokemonCard = screen.getByText(cardData.name);

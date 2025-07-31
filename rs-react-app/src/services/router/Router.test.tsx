@@ -1,5 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
+import { store } from '@/store';
 import { PATHS } from './constants';
 import { Router } from './Router';
 import { routesConfig } from './routesConfig';
@@ -30,7 +32,11 @@ describe('Router tests', () => {
   });
 
   test('should render the RouterProvider without crashing', async () => {
-    render(<Router />);
+    render(
+      <Provider store={store}>
+        <Router />
+      </Provider>
+    );
 
     await waitFor(() => {
       expect(

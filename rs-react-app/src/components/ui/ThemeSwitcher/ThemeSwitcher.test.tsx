@@ -6,7 +6,7 @@ import { ThemeSwitcher } from './ThemeSwitcher';
 const mockSetTheme = vi.fn();
 let mockTheme = THEME.LIGHT;
 
-vi.mock('@/hooks/useTheme', () => {
+vi.mock('@/hooks/ui/useTheme', () => {
   const mockUseTheme = () => ({
     theme: mockTheme,
     setTheme: mockSetTheme,
