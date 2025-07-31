@@ -31,20 +31,20 @@ describe('Router tests', () => {
     });
   });
 
-  test('should render the RouterProvider without crashing', async () => {
+  test('should render the RouterProvider without crashing', () => {
     render(
       <Provider store={store}>
         <Router />
       </Provider>
     );
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(
         screen.getByPlaceholderText('Enter the full pokemon name')
       ).toBeInTheDocument();
     });
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(screen.getByText('Search')).toBeInTheDocument();
     });
   });
