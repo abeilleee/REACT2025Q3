@@ -47,6 +47,7 @@ export default tseslint.config([
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-misused-promises': 'off',
       '@typescript-eslint/no-floating-promises': 'off',
+      '@typescript-eslint/ban-types': 'off',
       'import/order': [
         'error',
         {

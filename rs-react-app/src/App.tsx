@@ -1,12 +1,16 @@
 import { type FC } from 'react';
+import { Provider } from 'react-redux';
+import { Router } from '@/services';
 import { ThemeProvider } from '@/shared/providers';
-import { Router } from './services/router/Router';
+import { store } from '@/store';
 
 const App: FC = () => {
   return (
-    <ThemeProvider>
-      <Router />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <Router />
+      </ThemeProvider>
+    </Provider>
   );
 };
 

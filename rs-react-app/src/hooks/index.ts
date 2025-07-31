@@ -3,3 +3,4 @@ export { useLocalStorage } from './useLocalStorage';
 export { usePokemon } from './usePokemon';
 export { usePagination } from './usePagination';
 export { useTheme } from './useTheme';
+export { useAppDispatch, useAppSelector } from './reduxHooks';
