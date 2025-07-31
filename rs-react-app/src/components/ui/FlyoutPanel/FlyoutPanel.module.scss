@@ -1,0 +1,31 @@
+@use '@/styles/mixins.scss' as mixins;
+
+.flyout-box {
+  @include mixins.flex-center;
+
+  position: fixed;
+  z-index: 1;
+  bottom: 10px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  animation: var(--fade-in-animation) 0.3s;
+  background-color: var(--flyout-bg-color);
+  gap: 10px;
+
+  @media screen and (width <= 850px) {
+    & {
+      right: 0;
+      left: 0;
+      margin: 0 50px;
+    }
+  }
+}
+
+.btn-box {
+  @include mixins.flex-center;
+
+  flex-wrap: wrap;
+  gap: 5px;
+}

@@ -1,0 +1,22 @@
+.checkbox {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--checkbox-border-color);
+  border-radius: 3px;
+  appearance: none;
+  transition: all 0.3s;
+
+  &:checked {
+    background-color: var(--checkbox-bg-color);
+
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      color: var(--white);
+      content: '✔';
+      transform: translate(-50%, -50%);
+    }
+  }
+}

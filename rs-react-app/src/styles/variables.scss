@@ -9,7 +9,7 @@
   --border-radius: 8px;
   --card-border-radius: 16px;
   --card-width: 200px;
-  --card-height: 357px;
+  --card-height: 380px;
 
   // animation
   --fade-in-animation: fade-in;
@@ -42,6 +42,9 @@
   --error-element-bg: #fff;
   --page-color: #e6ffe681;
   --page-border: 1px solid var(--primary-color);
+  --checkbox-bg-color: var(--primary-color);
+  --checkbox-border-color: var(--primary-color);
+  --flyout-bg-color: #ffffffa3;
 }
 
 :root[data-theme='dark'] {
@@ -72,6 +75,9 @@
   --error-element-bg: #444;
   --page-color: #8f8f8f4a;
   --page-border: none;
+  --checkbox-bg-color: #18d284;
+  --checkbox-border-color: #18d284;
+  --flyout-bg-color: #545454b8;
 }
 
 @keyframes fade-in {

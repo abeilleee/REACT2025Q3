@@ -9,5 +9,6 @@ export default {
   rules: {
     'no-empty-source': undefined,
     'selector-pseudo-class-no-unknown': true,
+    'no-descending-specificity': null,
   },
 };
