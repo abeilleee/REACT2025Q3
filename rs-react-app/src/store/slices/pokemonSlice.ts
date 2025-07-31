@@ -1,9 +1,8 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { Pokemon } from '@/services/api/types';
 import type { PokemonData } from '@/utils/types';
 
-interface InitialState {
-  pokemons: Pokemon[];
+export interface InitialState {
+  pokemons: PokemonData[];
   selectedPokemons: PokemonData[];
 }
 
@@ -16,7 +15,7 @@ const pokemonSlice = createSlice({
   name: 'pokemon',
   initialState,
   reducers: {
-    setPokemons: (state, action: PayloadAction<Pokemon[]>) => {
+    setPokemons: (state, action: PayloadAction<PokemonData[]>) => {
       state.pokemons = action.payload;
     },
 
@@ -36,6 +35,10 @@ const pokemonSlice = createSlice({
   },
 });
 
-export const { selectPokemon, deselectPokemon, deselectAllPokemons } =
-  pokemonSlice.actions;
+export const {
+  setPokemons,
+  selectPokemon,
+  deselectPokemon,
+  deselectAllPokemons,
+} = pokemonSlice.actions;
 export const pokemonReducer = pokemonSlice.reducer;
