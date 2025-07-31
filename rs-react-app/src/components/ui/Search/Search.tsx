@@ -1,6 +1,6 @@
 import { useEffect, useState, type FC } from 'react';
 import { Button } from '@/components/ui';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useLocalStorage } from '@/hooks';
 import { STORAGE_KEY } from '@/utils/constants';
 import styles from './Search.module.scss';
 

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { pokeApi } from '@/services';
 import { STORAGE_KEY } from '@/utils/constants';
 import { useFetch } from './useFetch';
-import { useLocalStorage } from './useLocalStorage';
+import { useLocalStorage } from '../utils/useLocalStorage';
 
 export const usePokemon = (page: number) => {
   const [searchTerm, setSearchTerm] = useLocalStorage({
