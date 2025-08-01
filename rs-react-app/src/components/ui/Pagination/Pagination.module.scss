@@ -4,7 +4,7 @@
   @include mixins.flex-center;
 
   z-index: 1;
-
+  width: 634px;
   max-width: 90%;
 }
 
@@ -16,10 +16,8 @@
   margin: 24px 0;
   gap: 3px;
 
-  @media screen and (width <= 720px) {
-    & {
-      gap: 2px;
-    }
+  @include mixins.media-m {
+    gap: 2px;
   }
 }
 
@@ -39,6 +37,7 @@
   background: var(--page-color);
   box-shadow: var(--btn-box-shadow);
   cursor: pointer;
+  transition: all 0.3s;
 
   &:disabled {
     cursor: not-allowed;
@@ -52,12 +51,10 @@
     }
   }
 
-  @media screen and (width <= 720px) {
-    & {
-      min-width: 20px;
-      min-height: 20px;
-      font-size: 0.8rem;
-    }
+  @include mixins.media-m {
+    min-width: 20px;
+    min-height: 20px;
+    font-size: 0.8rem;
   }
 }
 

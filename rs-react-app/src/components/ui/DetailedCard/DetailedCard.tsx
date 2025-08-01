@@ -58,7 +58,7 @@ export const DetailedCard: FC = () => {
 
   if (pokemon)
     return (
-      <div className={styles.card} data-testid={name}>
+      <div className={styles.card}>
         <div className={styles.title} data-testid="title">
           <span className={styles.name}>{name}</span>
         </div>

@@ -10,3 +10,21 @@
   align-items: center;
   justify-content: center;
 }
+
+@mixin media-s {
+  @media screen and (width <= 600px) {
+    @content;
+  }
+}
+
+@mixin media-m {
+  @media screen and (width <= 720px) {
+    @content;
+  }
+}
+
+@mixin media-l {
+  @media screen and (width <= 850px) {
+    @content;
+  }
+}

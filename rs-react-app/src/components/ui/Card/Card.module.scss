@@ -21,10 +21,8 @@
     }
   }
 
-  @media screen and (width <= 600px) {
-    & {
-      max-width: 90%;
-    }
+  @include mixins.media-m {
+    max-width: 90%;
   }
 }
 

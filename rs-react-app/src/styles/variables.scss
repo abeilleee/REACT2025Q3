@@ -10,10 +10,12 @@
   --card-border-radius: 16px;
   --card-width: 200px;
   --card-height: 380px;
+  --skeleton-bg-size: 400% 400%;
 
   // animation
   --fade-in-animation: fade-in;
   --spin-animation: spin;
+  --skeleton-animation: skeleton-animation 2.25s ease infinite;
 }
 
 :root[data-theme='light'] {
@@ -99,5 +101,19 @@
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes skeleton-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
   }
 }

@@ -3,7 +3,7 @@
 .flyout-box {
   @include mixins.flex-center;
 
-  position: fixed;
+  position: sticky;
   z-index: 1;
   bottom: 10px;
   flex-wrap: wrap;
@@ -14,12 +14,8 @@
   background-color: var(--flyout-bg-color);
   gap: 10px;
 
-  @media screen and (width <= 850px) {
-    & {
-      right: 0;
-      left: 0;
-      margin: 0 50px;
-    }
+  @include mixins.media-l {
+    width: 95%;
   }
 }
 

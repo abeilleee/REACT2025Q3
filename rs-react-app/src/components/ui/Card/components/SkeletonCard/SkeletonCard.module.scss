@@ -8,7 +8,6 @@
   justify-content: flex-start;
   padding: 10px;
   border-radius: var(--card-border-radius);
-  margin: 10px;
   background-color: var(--skeleton-bg-color);
 }
 
@@ -34,21 +33,7 @@
 }
 
 .pulsate {
-  animation: skeleton-animation 2.25s ease infinite;
+  animation: var(--skeleton-animation);
   background: var(--pulsate-bg-color);
-  background-size: 400% 400%;
-}
-
-@keyframes skeleton-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+  background-size: var(--skeleton-bg-size);
 }

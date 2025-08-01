@@ -16,7 +16,7 @@
   background: linear-gradient(135deg, #667fea3f 0%, #764ba265 100%);
   box-shadow: var(--card-box-shadow);
 
-  @media screen and (width <= 600px) {
+  @include mixins.media-m {
     width: 95%;
     padding: 15px;
   }

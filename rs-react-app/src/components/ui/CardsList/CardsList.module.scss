@@ -8,6 +8,10 @@
   min-height: 85vh;
   justify-content: space-between;
   padding: 10px;
+
+  @include mixins.media-l {
+    padding: 0;
+  }
 }
 
 .container {
