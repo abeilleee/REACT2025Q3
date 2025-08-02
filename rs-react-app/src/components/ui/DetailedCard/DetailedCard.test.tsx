@@ -60,7 +60,7 @@ describe('Detailed card tests', () => {
     });
   });
 
-  test('should render card and image with correct pokemon', async () => {
+  test('should render card and image with correct pokemon', () => {
     vi.mocked(useParams).mockReturnValue({ name: cardData.name });
 
     render(
@@ -69,7 +69,7 @@ describe('Detailed card tests', () => {
       </MemoryRouter>
     );
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(screen.getByTestId(cardData.name)).toBeInTheDocument();
       expect(screen.getByAltText(cardData.name)).toBeInTheDocument();
     });

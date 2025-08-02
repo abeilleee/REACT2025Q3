@@ -20,6 +20,10 @@ export const FlyoutPanel: FC = () => {
   };
 
   const onDownLoad = (data: PokemonData[]) => {
+    if (!data) {
+      return;
+    }
+
     const blob = new Blob([convertToCSV(data)], { type: 'application/csv' });
     return URL.createObjectURL(blob);
   };
@@ -33,13 +37,15 @@ export const FlyoutPanel: FC = () => {
       <p>Selected pokemon: {selectedNumber}</p>
       <div className={styles['btn-box']}>
         <Button textContent="Unselect all" onClick={onDeselect} />
-        <a
-          className={styles.link}
-          href={onDownLoad(selectedPokemons)}
-          download={`${selectedNumber}_items.csv`}
-        >
-          Download
-        </a>
+        {selectedPokemons.length > 0 && (
+          <a
+            className={styles.link}
+            href={onDownLoad(selectedPokemons)}
+            download={`${selectedNumber}_items.csv`}
+          >
+            Download
+          </a>
+        )}
       </div>
     </div>
   );
