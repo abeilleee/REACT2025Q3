@@ -25,3 +25,27 @@
   flex-wrap: wrap;
   gap: 5px;
 }
+
+.link {
+  @include mixins.flex-center;
+
+  width: 120px;
+  padding: var(--padding-base);
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  box-shadow: var(--btn-box-shadow);
+  color: var(--white);
+  transition: all 0.3s;
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--hover-color);
+      cursor: pointer;
+    }
+  }
+}

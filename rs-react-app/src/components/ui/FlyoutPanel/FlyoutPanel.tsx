@@ -1,11 +1,13 @@
 import { useEffect, useState, type FC } from 'react';
 import { Button } from '@/components/ui';
-import { useAppDispatch, useSelectedPokemons } from '@/hooks';
-import { deselectAllPokemons } from '@/store/slices/pokemonSlice';
+import { useAppDispatch, useAppSelector, useSelectedPokemons } from '@/hooks';
+import { deselectAllPokemons, getSelectedPokemons } from '@/store';
+import { convertToCSV, type PokemonData } from '@/utils';
 import styles from './FlyoutPanel.module.scss';
 
 export const FlyoutPanel: FC = () => {
   const selectedNumber = useSelectedPokemons();
+  const selectedPokemons = useAppSelector(getSelectedPokemons);
   const dispatch = useAppDispatch();
   const [isVisible, setIsVisible] = useState(selectedNumber > 0);
 
@@ -17,8 +19,9 @@ export const FlyoutPanel: FC = () => {
     dispatch(deselectAllPokemons());
   };
 
-  const onDownLoad = () => {
-    console.log('DOWNLOAD');
+  const onDownLoad = (data: PokemonData[]) => {
+    const blob = new Blob([convertToCSV(data)], { type: 'application/csv' });
+    return URL.createObjectURL(blob);
   };
 
   if (!isVisible) {
@@ -30,7 +33,13 @@ export const FlyoutPanel: FC = () => {
       <p>Selected pokemon: {selectedNumber}</p>
       <div className={styles['btn-box']}>
         <Button textContent="Unselect all" onClick={onDeselect} />
-        <Button textContent="Download" onClick={onDownLoad} />
+        <a
+          className={styles.link}
+          href={onDownLoad(selectedPokemons)}
+          download={`${selectedNumber}_items.csv`}
+        >
+          Download
+        </a>
       </div>
     </div>
   );
