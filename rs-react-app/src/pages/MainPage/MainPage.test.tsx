@@ -94,7 +94,7 @@ describe('Main Page test', () => {
     await userEvent.type(searchInput, '   ');
     await userEvent.click(searchButton);
 
-    await waitFor(() => expect(getPokemonResults).toHaveBeenCalled());
+    waitFor(() => expect(getPokemonResults).toHaveBeenCalled());
   });
 
   test('should handle api error when getPokemonResults fails', async () => {
