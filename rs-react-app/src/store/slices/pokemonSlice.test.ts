@@ -5,7 +5,6 @@ import {
   deselectPokemon,
   pokemonReducer,
   selectPokemon,
-  setPokemons,
   type InitialState,
 } from './pokemonSlice';
 
@@ -42,14 +41,5 @@ describe('pokemonSlice tests', () => {
     const updatedState = pokemonReducer(initialState, deselectAllPokemons());
 
     expect(updatedState.selectedPokemons).toHaveLength(0);
-  });
-
-  test('should set pokemon to the state', () => {
-    const updatedState = pokemonReducer(
-      initialState,
-      setPokemons(mockPokemonsData)
-    );
-
-    expect(updatedState.pokemons).toHaveLength(mockPokemonsData.length);
   });
 });

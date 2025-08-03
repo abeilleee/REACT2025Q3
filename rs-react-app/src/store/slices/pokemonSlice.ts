@@ -15,10 +15,6 @@ const pokemonSlice = createSlice({
   name: 'pokemon',
   initialState,
   reducers: {
-    setPokemons: (state, action: PayloadAction<PokemonData[]>) => {
-      state.pokemons = action.payload;
-    },
-
     selectPokemon: (state, action: PayloadAction<PokemonData>) => {
       state.selectedPokemons = [...state.selectedPokemons, action.payload];
     },
@@ -35,10 +31,6 @@ const pokemonSlice = createSlice({
   },
 });
 
-export const {
-  setPokemons,
-  selectPokemon,
-  deselectPokemon,
-  deselectAllPokemons,
-} = pokemonSlice.actions;
+export const { selectPokemon, deselectPokemon, deselectAllPokemons } =
+  pokemonSlice.actions;
 export const pokemonReducer = pokemonSlice.reducer;
