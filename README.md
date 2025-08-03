@@ -1,12 +1,13 @@
 # REACT2025Q3
 
-The application is created as part of [REACT2025Q3](https://rs.school/courses/reactjs) course
+The application is created as a part of the [REACT2025Q3](https://rs.school/courses/reactjs) course
 
 ## 🛠️ Technologies
 
 [![React](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![Typescript](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![React Router](https://img.shields.io/badge/React%20Router-D32F2F?style=for-the-badge&logo=reactrouter&logoColor=white)](https://reactrouter.com/en/main)
 [![Sass](https://img.shields.io/badge/sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)](https://sass-lang.com/)
 [![Eslint](https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)](https://eslint.org/)
 [![Prettier](https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black)](https://prettier.io/)
@@ -17,6 +18,8 @@ The application is created as part of [REACT2025Q3](https://rs.school/courses/re
 [![Vitest](https://img.shields.io/badge/vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev/)
 [![MSW - Mock Service Worker](https://img.shields.io/badge/MSW-7B42F6?style=for-the-badge&logo=serviceworker&logoColor=white)](https://mswjs.io/)
 [![Testing Library](https://img.shields.io/badge/Testing%20Library-E33337?style=for-the-badge&logo=testing-library&logoColor=white)](https://testing-library.com/)
+[![Redux](https://img.shields.io/badge/Redux-673AB7?style=for-the-badge&logo=redux&logoColor=white)](https://redux.js.org/)
+[![Redux Toolkit](https://img.shields.io/badge/Redux%20Toolkit-673AB7?style=for-the-badge&logo=redux&logoColor=white)](https://redux-toolkit.js.org/)
 
 ## ☁️ API
 
