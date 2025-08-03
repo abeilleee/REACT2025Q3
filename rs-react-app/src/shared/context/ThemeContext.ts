@@ -6,7 +6,6 @@ interface ThemeContextProps {
   setTheme: (theme: THEME) => void;
 }
 
-export const ThemeContext = createContext<ThemeContextProps>({
-  theme: THEME.LIGHT,
-  setTheme: () => {},
-});
+export const ThemeContext = createContext<ThemeContextProps | undefined>(
+  undefined
+);
