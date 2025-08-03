@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { navigateMock } from '@/__tests__/setupTests';
 import { PATHS } from '@/services/router/constants';
+import { ThemeProvider } from '@/shared/providers';
 import { Header } from './Header';
 
 describe('Header test', () => {
@@ -18,7 +19,9 @@ describe('Header test', () => {
   test('should render Header logo and button', () => {
     render(
       <MemoryRouter>
-        <Header />
+        <ThemeProvider>
+          <Header />
+        </ThemeProvider>
       </MemoryRouter>
     );
 
@@ -32,7 +35,9 @@ describe('Header test', () => {
   test('should call onClick and navigate to about page when button clicked', async () => {
     render(
       <MemoryRouter>
-        <Header />
+        <ThemeProvider>
+          <Header />
+        </ThemeProvider>
       </MemoryRouter>
     );
 

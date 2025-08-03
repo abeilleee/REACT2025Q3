@@ -9,4 +9,6 @@ export { Pagination } from './Pagination';
 export { DetailedCard } from './DetailedCard';
 export { ErrorState } from './ErrorState';
 export { Spinner } from './Spinner';
-export { Error } from './DetailedCard';
+export { ThemeSwitcher } from './ThemeSwitcher';
+export { FlyoutPanel } from './FlyoutPanel';
+export { SkeletonPagination } from './Pagination';

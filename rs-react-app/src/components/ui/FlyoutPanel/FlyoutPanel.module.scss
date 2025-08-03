@@ -1,0 +1,51 @@
+@use '@/styles/mixins.scss' as mixins;
+
+.flyout-box {
+  @include mixins.flex-center;
+
+  position: sticky;
+  z-index: 1;
+  bottom: 10px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  animation: var(--fade-in-animation) 0.3s;
+  background-color: var(--flyout-bg-color);
+  gap: 10px;
+
+  @include mixins.media-l {
+    width: 95%;
+  }
+}
+
+.btn-box {
+  @include mixins.flex-center;
+
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.link {
+  @include mixins.flex-center;
+
+  width: 120px;
+  padding: var(--padding-base);
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  box-shadow: var(--btn-box-shadow);
+  color: var(--white);
+  transition: all 0.3s;
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--hover-color);
+      cursor: pointer;
+    }
+  }
+}

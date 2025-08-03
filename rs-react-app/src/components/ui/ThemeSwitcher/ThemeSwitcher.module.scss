@@ -1,0 +1,14 @@
+@use '@/styles/mixins.scss' as mixins;
+
+.switcher {
+  @include mixins.flex-center;
+
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: translate3d(0, 2px, 0);
+  }
+}

@@ -8,12 +8,15 @@
   min-height: 85vh;
   justify-content: space-between;
   padding: 10px;
+
+  @include mixins.media-l {
+    padding: 0;
+  }
 }
 
 .container {
   display: grid;
-  width: 90%;
-  max-width: 1290px;
+  width: 100%;
   padding: 40px 0;
   gap: 20px;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

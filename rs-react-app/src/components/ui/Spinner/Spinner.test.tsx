@@ -5,7 +5,7 @@ test('should render correctly', () => {
   render(<Spinner />);
 
   const spinner = screen.getByTestId('spinner');
-  const loadingText = screen.getByText('Loading Pokemon...');
+  const loadingText = screen.getByText('Loading...');
 
   expect(spinner).toBeInTheDocument();
   expect(loadingText).toBeInTheDocument();

@@ -1,7 +1,7 @@
 import { useEffect, type FC } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import placeholder from '@/assets/images/no-img.png';
-import { Button, Error, Spinner } from '@/components/ui';
+import { Button, ErrorState, Spinner } from '@/components/ui';
 import { useFetch } from '@/hooks';
 import { pokeApi } from '@/services';
 import { PATHS } from '@/services/router/constants';
@@ -50,26 +50,29 @@ export const DetailedCard: FC = () => {
   if (error) {
     return (
       <div className={styles.card} data-testid="error-container">
-        <Error error={error}></Error>
+        <ErrorState errorMessage={error}></ErrorState>
+        <Button onClick={onCLick} textContent="Close"></Button>
       </div>
     );
   }
 
   if (pokemon)
     return (
-      <div className={styles.card} data-testid={name}>
-        <div className={styles.title} data-testid="title">
-          <span className={styles.name}>{name}</span>
+      <div className={styles.card} data-testid="detailed-card">
+        <div className={styles.title}>
+          <span className={styles.name} data-testid="name">
+            {name}
+          </span>
         </div>
         <div className={styles.content}>
-          <div className={styles['img-container']} data-testid="img-container">
+          <div className={styles['img-container']}>
             <div className={styles['img-box']}>
               <img
                 src={pokemon.sprites?.homefrontDefault || placeholder}
                 alt={pokemon.name}
               />
             </div>
-            <div className={styles.stats} data-testid="stats-box">
+            <div className={styles.stats}>
               {pokemon.stats.name.map((stat, idx) => (
                 <div className={styles.stat} key={idx}>
                   <span className={styles['stat-label']}>{stat}</span>
@@ -81,10 +84,7 @@ export const DetailedCard: FC = () => {
                       }}
                     ></div>
                   </div>
-                  <span
-                    className={styles['stat-value']}
-                    data-testid="stat-value"
-                  >
+                  <span className={styles['stat-value']}>
                     {pokemon.stats.base[idx] || ZERO}
                   </span>
                 </div>

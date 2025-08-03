@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState, type FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { CardsList, Search } from '@/components';
+import { FlyoutPanel } from '@/components/ui';
 import { usePokemon } from '@/hooks';
 import { INITIAL_PAGE } from '@/services/api/constants';
 
@@ -8,7 +9,7 @@ const getCurrentPage = (searchParams: URLSearchParams) => {
   return Number(searchParams.get('page') || INITIAL_PAGE);
 };
 
-export const MainPage: FC = () => {
+const MainPage: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState(() => getCurrentPage(searchParams));
   const { data, isLoading, error, setSearchTerm, total } = usePokemon(page);
@@ -40,6 +41,9 @@ export const MainPage: FC = () => {
         handlePageChange={handlePageChange}
         total={total}
       ></CardsList>
+      <FlyoutPanel />
     </>
   );
 };
+
+export default MainPage;

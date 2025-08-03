@@ -3,7 +3,6 @@
 .card {
   @include mixins.flex-column;
 
-  position: relative;
   overflow: hidden;
 
   width: var(--card-width);
@@ -12,28 +11,33 @@
   justify-content: flex-start;
   padding: 15px;
   border-radius: var(--card-border-radius);
-  background-color: var(--white);
+  background-color: var(--card-color);
   box-shadow: var(--card-box-shadow);
   cursor: pointer;
-  transition: transform 0.4s ease-in-out;
 
   &:hover {
-    transform: scale(1.05);
+    .img-box {
+      transform: scale(1.15);
+    }
   }
 
-  @media screen and (width <= 600px) {
-    & {
-      max-width: 90%;
-    }
+  @include mixins.media-m {
+    max-width: 90%;
   }
 }
 
 .content {
   @include mixins.flex-column;
 
-  position: relative;
-  z-index: 1;
-  gap: 10px;
+  height: 100%;
+
+  justify-content: space-between;
+}
+
+.content-box {
+  @include mixins.flex-column;
+
+  gap: 15px;
 }
 
 .img-box {
@@ -41,6 +45,7 @@
 
   width: 120px;
   height: 120px;
+  transition: transform 0.4s ease-in-out;
 
   img {
     width: 100%;

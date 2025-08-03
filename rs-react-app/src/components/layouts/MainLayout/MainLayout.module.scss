@@ -1,24 +1,25 @@
 @use '@/styles/mixins.scss' as mixins;
 
 .wrapper {
-  position: relative;
   display: grid;
   width: 100%;
   grid-template-areas: 'search-box details';
   grid-template-columns: minmax(50%, 1fr) minmax(80px, 35%);
+
+  @include mixins.media-l {
+    grid-template-columns: 50% 50%;
+  }
 }
 
 .search-container {
   @include mixins.flex-column;
 
-  width: 90%;
   min-height: 90vh;
-
   justify-content: flex-start;
   grid-area: search-box;
 
-  @media screen and (width <= 850px) {
-    width: 80%;
+  @include mixins.media-l {
+    width: 100%;
   }
 }
 

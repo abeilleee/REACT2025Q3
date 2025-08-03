@@ -1,10 +1,12 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { mockApiResponseResults, TEST_ENDPOINT } from '@/__mocks__/mockData';
 import { getItemSpy } from '@/__mocks__/mockFunctions';
 import { pokeApi } from '@/services';
-import { MainPage } from './MainPage';
+import { store } from '@/store';
+import MainPage from './MainPage';
 
 describe('Main Page test', () => {
   beforeEach(() => {
@@ -14,9 +16,11 @@ describe('Main Page test', () => {
 
   test('should render Search component', () => {
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     expect(screen.getByRole('textbox')).toBeInTheDocument();
@@ -26,9 +30,11 @@ describe('Main Page test', () => {
     const getPokemonResults = vi.spyOn(pokeApi, 'getPokemonResults');
 
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     expect(getPokemonResults).toHaveBeenCalledTimes(1);
@@ -39,9 +45,11 @@ describe('Main Page test', () => {
     getItemSpy.mockReturnValue('pikachu');
 
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     expect(getData).toHaveBeenCalledTimes(1);
@@ -51,9 +59,11 @@ describe('Main Page test', () => {
     const getPokemonData = vi.spyOn(pokeApi, 'getPokemonData');
 
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     const searchInput = screen.getByRole('textbox');
@@ -71,9 +81,11 @@ describe('Main Page test', () => {
       .mockResolvedValue(mockApiResponseResults);
 
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     const searchInput = screen.getByRole('textbox');
@@ -82,7 +94,7 @@ describe('Main Page test', () => {
     await userEvent.type(searchInput, '   ');
     await userEvent.click(searchButton);
 
-    await waitFor(() => expect(getPokemonResults).toHaveBeenCalled());
+    waitFor(() => expect(getPokemonResults).toHaveBeenCalled());
   });
 
   test('should handle api error when getPokemonResults fails', async () => {
@@ -91,9 +103,11 @@ describe('Main Page test', () => {
     );
 
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     await waitFor(() => {

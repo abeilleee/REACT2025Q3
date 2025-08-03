@@ -1,0 +1,10 @@
+.skeleton {
+  width: 634px;
+  max-width: 90%;
+  height: 46px;
+  border-radius: var(--border-radius);
+  margin: 24px 0;
+  animation: var(--skeleton-animation);
+  background: var(--pulsate-bg-color);
+  background-size: var(--skeleton-bg-size);
+}

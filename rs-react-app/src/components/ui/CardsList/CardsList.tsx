@@ -1,5 +1,11 @@
 import { type FC } from 'react';
-import { Card, ErrorState, Pagination, SkeletonCard } from '@/components/ui';
+import {
+  Card,
+  ErrorState,
+  Pagination,
+  SkeletonCard,
+  SkeletonPagination,
+} from '@/components/ui';
 import { LIMIT } from '@/services/api/constants';
 import type { PokemonData } from '@/utils/types';
 import styles from './CardsList.module.scss';
@@ -23,10 +29,13 @@ export const CardsList: FC<CardsListProps> = ({
 }) => {
   const renderLoadingState = () => {
     return (
-      <div className={styles.container}>
-        {Array.from({ length: LIMIT }).map((_, index) => (
-          <SkeletonCard key={index} />
-        ))}
+      <div className={styles.wrapper}>
+        <div className={styles.container}>
+          {Array.from({ length: LIMIT }).map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
+        </div>
+        <SkeletonPagination />
       </div>
     );
   };

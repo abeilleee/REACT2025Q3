@@ -1,6 +1,7 @@
 import { useEffect, useState, type FC } from 'react';
 import { Button } from '@/components/ui';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useLocalStorage } from '@/hooks';
+import { STORAGE_KEY } from '@/utils/constants';
 import styles from './Search.module.scss';
 
 type SearchProps = {
@@ -9,7 +10,9 @@ type SearchProps = {
 
 export const Search: FC<SearchProps> = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [storageValue, setStorageValue] = useLocalStorage();
+  const [storageValue, setStorageValue] = useLocalStorage({
+    key: STORAGE_KEY.SEARCH_TERM,
+  });
 
   useEffect(() => {
     if (storageValue) setSearchTerm(storageValue);

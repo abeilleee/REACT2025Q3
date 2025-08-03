@@ -1,8 +1,17 @@
 import { type FC } from 'react';
-import { Router } from './services/router/Router';
+import { Provider } from 'react-redux';
+import { Router } from '@/services';
+import { ThemeProvider } from '@/shared/providers';
+import { store } from '@/store';
 
 const App: FC = () => {
-  return <Router />;
+  return (
+    <Provider store={store}>
+      <ThemeProvider>
+        <Router />
+      </ThemeProvider>
+    </Provider>
+  );
 };
 
 export default App;

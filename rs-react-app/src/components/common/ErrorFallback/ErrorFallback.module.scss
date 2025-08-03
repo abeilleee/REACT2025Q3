@@ -1,0 +1,21 @@
+@use '@/styles/mixins.scss' as mixins;
+
+.wrapper {
+  @include mixins.flex-column;
+
+  height: 100vh;
+  background-color: var(--error-element-bg);
+
+  img {
+    margin-left: 45px;
+  }
+}
+
+.title {
+  font-size: 2em;
+  text-align: center;
+}
+
+.text {
+  font-size: 1.2em;
+}

@@ -7,9 +7,8 @@
   height: var(--card-height);
   justify-content: flex-start;
   padding: 10px;
-  border-radius: var(--border-radius);
-  margin: 10px;
-  background-color: #f4f4f480;
+  border-radius: var(--card-border-radius);
+  background-color: var(--skeleton-bg-color);
 }
 
 .image {
@@ -34,21 +33,7 @@
 }
 
 .pulsate {
-  animation: skeleton-animation 2.25s ease infinite;
-  background: linear-gradient(-45deg, #ddd, #f0f0f0, #ddd, #f0f0f0);
-  background-size: 400% 400%;
-}
-
-@keyframes skeleton-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+  animation: var(--skeleton-animation);
+  background: var(--pulsate-bg-color);
+  background-size: var(--skeleton-bg-size);
 }

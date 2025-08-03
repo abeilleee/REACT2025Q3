@@ -1,20 +1,9 @@
 @use '@/styles/mixins.scss' as mixins;
 
 .wrapper {
-  @include mixins.flex-column;
+  @include mixins.flex-center;
 
   height: 100vh;
 
-  img {
-    margin-left: 45px;
-  }
-}
-
-.title {
-  font-size: 2em;
-  text-align: center;
-}
-
-.text {
-  font-size: 1.2em;
+  background: var(--main-bg);
 }
