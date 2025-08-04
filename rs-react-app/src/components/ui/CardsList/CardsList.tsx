@@ -5,9 +5,9 @@ import {
   Pagination,
   SkeletonCard,
   SkeletonPagination,
-} from '@/components/ui';
+} from '@/components';
 import { LIMIT } from '@/services/api/constants';
-import type { PokemonData } from '@/utils/types';
+import { cloneComponent, type PokemonData } from '@/utils';
 import styles from './CardsList.module.scss';
 
 type CardsListProps = {
@@ -27,46 +27,36 @@ export const CardsList: FC<CardsListProps> = ({
   handlePageChange,
   total,
 }) => {
-  const renderLoadingState = () => {
+  if (isLoading) {
     return (
       <div className={styles.wrapper}>
         <div className={styles.container}>
-          {Array.from({ length: LIMIT }).map((_, index) => (
-            <SkeletonCard key={index} />
-          ))}
+          {cloneComponent({ element: <SkeletonCard />, count: LIMIT })}
         </div>
         <SkeletonPagination />
       </div>
     );
-  };
-
-  const renderCards = () => {
-    return (
-      <div className={styles.wrapper}>
-        <div className={styles.container}>
-          {pokemonsData &&
-            pokemonsData.map((pokemon, index) => (
-              <Card key={index} pokemon={pokemon} />
-            ))}
-        </div>
-        {pokemonsData && pokemonsData?.length > 1 && (
-          <Pagination
-            currentPage={currentPage}
-            total={total}
-            handlePageChange={handlePageChange}
-          ></Pagination>
-        )}
-      </div>
-    );
-  };
-
-  if (isLoading) {
-    return renderLoadingState();
   }
 
   if (errorMessage) {
     return <ErrorState errorMessage={errorMessage} />;
   }
 
-  return renderCards();
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        {pokemonsData &&
+          pokemonsData.map((pokemon, index) => (
+            <Card key={index} pokemon={pokemon} />
+          ))}
+      </div>
+      {pokemonsData && pokemonsData?.length > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          total={total}
+          handlePageChange={handlePageChange}
+        />
+      )}
+    </div>
+  );
 };

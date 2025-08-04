@@ -1,10 +1,18 @@
-export { Card } from './ui/Card';
 export { Layout } from './layouts/Layout';
 export { ErrorBoundary } from './common/ErrorBoundary';
-export { SkeletonCard } from './ui/Card';
-export { Search } from './ui';
-export { DetailedCard } from './ui';
 export { CardsList } from './ui/CardsList/CardsList';
 export { MainLayout } from './layouts/MainLayout';
-export { Spinner } from './ui/Spinner';
-export { Button } from './ui';
+export { CheckBox } from './ui/Card/components';
+export {
+  Card,
+  Button,
+  Search,
+  DetailedCard,
+  ErrorState,
+  Pagination,
+  Skeleton,
+  SkeletonPagination,
+  SkeletonCard,
+  Description,
+  Spinner,
+} from './ui';

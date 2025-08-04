@@ -1,13 +1,12 @@
 import { type FC } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { placeholder } from '@/assets/images';
-import { Description } from '@/components/ui';
+import { CheckBox, Description } from '@/components';
 import { useAppDispatch, useIsPokemonSelected } from '@/hooks';
 import { PATHS } from '@/services/router/constants';
-import { deselectPokemon, selectPokemon } from '@/store/slices/pokemonSlice';
-import type { PokemonData } from '@/utils/types';
+import { deselectPokemon, selectPokemon } from '@/store';
+import type { PokemonData } from '@/utils';
 import styles from './Card.module.scss';
-import { CheckBox } from './components';
 
 type CardProps = {
   pokemon: PokemonData;
@@ -44,14 +43,12 @@ export const Card: FC<CardProps> = ({ pokemon }) => {
               alt={pokemon.name}
             />
           </div>
-
           <Description
             height={pokemon.height}
             weight={pokemon.weight}
             abilities={pokemon.abilities}
           />
         </div>
-
         <CheckBox onChange={onSelect} checked={isSelected} />
       </div>
     </div>

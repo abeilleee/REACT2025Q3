@@ -12,3 +12,4 @@ export { Spinner } from './Spinner';
 export { ThemeSwitcher } from './ThemeSwitcher';
 export { FlyoutPanel } from './FlyoutPanel';
 export { SkeletonPagination } from './Pagination';
+export { Skeleton } from './Skeleton';
