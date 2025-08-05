@@ -50,8 +50,8 @@ export const DetailedCard: FC = () => {
   if (error) {
     return (
       <div className={styles.card} data-testid="error-container">
-        <ErrorState errorMessage={error}></ErrorState>
-        <Button onClick={onCLick} textContent="Close"></Button>
+        <ErrorState errorMessage={error} />
+        <Button onClick={onCLick} textContent="Close" />
       </div>
     );
   }
@@ -82,7 +82,7 @@ export const DetailedCard: FC = () => {
                       style={{
                         width: `${(pokemon.stats.base[idx] / MAX_VALUE) * 100}%`,
                       }}
-                    ></div>
+                    />
                   </div>
                   <span className={styles['stat-value']}>
                     {pokemon.stats.base[idx] || ZERO}
@@ -93,7 +93,7 @@ export const DetailedCard: FC = () => {
           </div>
         </div>
         <div className={styles.bottom}>
-          <Button onClick={onCLick} textContent="Close"></Button>
+          <Button onClick={onCLick} textContent="Close" />
         </div>
       </div>
     );

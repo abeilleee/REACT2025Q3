@@ -21,9 +21,7 @@ export const Header: FC = () => {
       </div>
       <div className={styles['right-box']}>
         <ThemeSwitcher />
-        {!isAboutPage && (
-          <Button onClick={onClick} textContent="About"></Button>
-        )}
+        {!isAboutPage && <Button onClick={onClick} textContent="About" />}
       </div>
     </header>
   );

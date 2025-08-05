@@ -1,6 +1,6 @@
+import { type FC } from 'react';
 import { Spinner } from '@/components/ui';
 import styles from './Fallback.module.scss';
-import type { FC } from 'react';
 
 export const Fallback: FC = () => {
   return (

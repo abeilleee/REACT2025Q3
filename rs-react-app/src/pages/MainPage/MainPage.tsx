@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState, type FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { CardsList, Search } from '@/components';
-import { FlyoutPanel } from '@/components/ui';
+import { CardsList, Search, FlyoutPanel } from '@/components';
 import { usePokemon } from '@/hooks';
 import { INITIAL_PAGE } from '@/services/api/constants';
 
@@ -40,7 +39,7 @@ const MainPage: FC = () => {
         currentPage={page}
         handlePageChange={handlePageChange}
         total={total}
-      ></CardsList>
+      />
       <FlyoutPanel />
     </>
   );

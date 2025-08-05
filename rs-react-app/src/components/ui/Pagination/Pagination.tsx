@@ -1,8 +1,8 @@
+import { type FC } from 'react';
 import { Button } from '@/components/ui';
 import { usePagination } from '@/hooks';
 import { ONE } from '@/utils/constants';
 import styles from './Pagination.module.scss';
-import type { FC } from 'react';
 
 type PaginationProps = {
   currentPage: number;
@@ -38,7 +38,7 @@ export const Pagination: FC<PaginationProps> = ({
           textContent="&lt;"
           onClick={handlePrevClick}
           disabled={currentPage === 1}
-        ></Button>
+        />
 
         {paginationArray?.map((page, index) => (
           <button
@@ -62,7 +62,7 @@ export const Pagination: FC<PaginationProps> = ({
           textContent="&gt;"
           onClick={handleNextClick}
           disabled={currentPage === lastPage}
-        ></Button>
+        />
       </nav>
     </div>
   );

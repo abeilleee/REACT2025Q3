@@ -1,7 +1,7 @@
+import { type FC } from 'react';
 import pic from '@/assets/images/egg.png';
 import { STATUS_CODE } from '@/services/api/constants';
 import styles from './ErrorState.module.scss';
-import type { FC } from 'react';
 
 type ErrorStateProps = {
   errorMessage: string;

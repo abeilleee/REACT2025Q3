@@ -1,9 +1,9 @@
+import { type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import img from '@/assets/images/not-found.png';
 import { Button } from '@/components/ui';
 import { PATHS } from '@/services/router/constants';
 import styles from './NotFound.module.scss';
-import type { FC } from 'react';
 
 const NotFound: FC = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const NotFound: FC = () => {
       <div className={styles['img-box']}>
         <img src={img} alt="pikachu" height="256px" />
       </div>
-      <Button onClick={onClick} textContent="Back to main"></Button>
+      <Button onClick={onClick} textContent="Back to main" />
     </div>
   );
 };

@@ -15,4 +15,5 @@ export {
   SkeletonCard,
   Description,
   Spinner,
+  FlyoutPanel,
 } from './ui';
