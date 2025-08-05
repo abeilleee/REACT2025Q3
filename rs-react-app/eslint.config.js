@@ -42,6 +42,7 @@ export default tseslint.config([
         { allowConstantExport: true },
       ],
       'react-compiler/react-compiler': 'error',
+      'react/self-closing-comp': 'error',
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       '@typescript-eslint/no-empty-object-type': 'off',
