@@ -5,7 +5,8 @@ import { CheckBox, Description } from '@/components';
 import { useAppDispatch, useIsPokemonSelected } from '@/hooks';
 import { PATHS } from '@/services/router/constants';
 import { deselectPokemon, selectPokemon } from '@/store';
-import type { PokemonData } from '@/utils';
+import type { PokemonData } from '@/store/slices/api/types';
+import { getCurrentPage } from '@/utils';
 import styles from './Card.module.scss';
 
 type CardProps = {
@@ -19,7 +20,7 @@ export const Card: FC<CardProps> = ({ pokemon }) => {
   const [searchParams] = useSearchParams();
 
   const onClick = () => {
-    const currentPage = searchParams.get('page') || '1';
+    const currentPage = getCurrentPage(searchParams);
     const url = `${PATHS.DETAILS.replace(':name', pokemon.name)}`;
     navigate(`${url}?page=${currentPage}`);
   };
@@ -38,10 +39,7 @@ export const Card: FC<CardProps> = ({ pokemon }) => {
         <div className={styles.name}>{pokemon.name}</div>
         <div className={styles['content-box']}>
           <div className={styles['img-box']}>
-            <img
-              src={pokemon.sprites?.homefrontDefault || placeholder}
-              alt={pokemon.name}
-            />
+            <img src={pokemon.sprites || placeholder} alt={pokemon.name} />
           </div>
           <Description
             height={pokemon.height}

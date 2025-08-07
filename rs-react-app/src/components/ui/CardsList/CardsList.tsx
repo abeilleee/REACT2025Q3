@@ -1,3 +1,5 @@
+import { type SerializedError } from '@reduxjs/toolkit';
+import { type FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { type FC } from 'react';
 import {
   Card,
@@ -6,27 +8,29 @@ import {
   SkeletonCard,
   SkeletonPagination,
 } from '@/components';
-import { LIMIT } from '@/services/api/constants';
-import { cloneComponent, type PokemonData } from '@/utils';
+import { useGetPokemonCountQuery } from '@/store/slices/api/pokemonApi';
+import type { PokemonData } from '@/store/slices/api/types';
+import { cloneComponent } from '@/utils';
+import { INITIAL_PAGE, LIMIT } from '@/utils/constants';
 import styles from './CardsList.module.scss';
 
 type CardsListProps = {
-  pokemonsData: PokemonData[] | null;
+  pokemonsData: PokemonData[] | undefined;
   isLoading: boolean;
-  errorMessage: string | null;
+  error: FetchBaseQueryError | SerializedError | undefined;
   currentPage: number;
   handlePageChange: (page: number) => void;
-  total: number;
 };
 
 export const CardsList: FC<CardsListProps> = ({
   pokemonsData,
   isLoading,
-  errorMessage,
+  error,
   currentPage,
   handlePageChange,
-  total,
 }) => {
+  const { data: total } = useGetPokemonCountQuery();
+
   if (isLoading) {
     return (
       <div className={styles.wrapper}>
@@ -38,8 +42,8 @@ export const CardsList: FC<CardsListProps> = ({
     );
   }
 
-  if (errorMessage) {
-    return <ErrorState errorMessage={errorMessage} />;
+  if (error) {
+    return <ErrorState errorMessage={error} />;
   }
 
   return (
@@ -53,7 +57,7 @@ export const CardsList: FC<CardsListProps> = ({
       {pokemonsData && pokemonsData?.length > 1 && (
         <Pagination
           currentPage={currentPage}
-          total={total}
+          total={total || INITIAL_PAGE}
           handlePageChange={handlePageChange}
         />
       )}

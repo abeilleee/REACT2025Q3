@@ -1,5 +1,4 @@
-import type { Pokemon } from '@/services/api/types';
-import type { PokemonData } from '@/utils/types';
+import type { Pokemon, PokemonData } from '@/store/slices/api/types';
 
 export const MOCK_ENDPOINT = 'pidgeot';
 export const NOT_EXISTING_ENDPOINT = 'abc';

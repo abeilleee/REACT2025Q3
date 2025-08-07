@@ -1,6 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { PokemonData } from '@/utils/types';
-
+import type { PokemonData } from './api/types';
 export interface InitialState {
   pokemons: PokemonData[];
   selectedPokemons: PokemonData[];
@@ -18,13 +17,11 @@ const pokemonSlice = createSlice({
     selectPokemon: (state, action: PayloadAction<PokemonData>) => {
       state.selectedPokemons = [...state.selectedPokemons, action.payload];
     },
-
     deselectPokemon: (state, action: PayloadAction<PokemonData>) => {
       state.selectedPokemons = state.selectedPokemons.filter(
         (pokemon) => pokemon.name !== action.payload.name
       );
     },
-
     deselectAllPokemons: (state) => {
       state.selectedPokemons = [];
     },

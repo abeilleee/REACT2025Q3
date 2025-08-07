@@ -40,3 +40,12 @@ export interface Stats {
     url: string;
   };
 }
+
+export type PokemonData = Pick<Pokemon, 'name' | 'height' | 'weight'> & {
+  abilities: string[];
+  sprites: string;
+  stats: {
+    name: string[];
+    base: number[];
+  };
+};

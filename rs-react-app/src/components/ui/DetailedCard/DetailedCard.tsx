@@ -1,42 +1,30 @@
-import { useEffect, type FC } from 'react';
+import { type FC } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import placeholder from '@/assets/images/no-img.png';
+import { placeholder } from '@/assets/images';
 import { Button, ErrorState, Spinner } from '@/components/ui';
-import { useFetch } from '@/hooks';
-import { pokeApi } from '@/services';
 import { PATHS } from '@/services/router/constants';
+import { useGetPokemonDataQuery } from '@/store/slices/api/pokemonApi';
+import { getCurrentPage } from '@/utils';
 import { ZERO } from '@/utils/constants';
 import styles from './DetailedCard.module.scss';
 
 const MAX_VALUE = 200;
 
-const fetchFn = async (name: string) => {
-  const result = await pokeApi.getPokemonData(name);
-  return result;
-};
-
 export const DetailedCard: FC = () => {
   const { name } = useParams();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentPage = searchParams.get('page') || '1';
-
   const {
     data: pokemon,
-    isLoading,
+    isFetching: isLoading,
     error,
-    request,
-  } = useFetch({
-    fetchFn,
-  });
-
-  useEffect(() => {
-    if (name) request(name);
-  }, [name, request]);
+    refetch,
+  } = useGetPokemonDataQuery(name || '');
+  const currentPage = getCurrentPage(searchParams);
 
   const onCLick = () => {
     navigate(PATHS.ROOT);
-    setSearchParams({ page: currentPage });
+    setSearchParams({ page: String(currentPage) });
   };
 
   if (isLoading) {
@@ -67,10 +55,7 @@ export const DetailedCard: FC = () => {
         <div className={styles.content}>
           <div className={styles['img-container']}>
             <div className={styles['img-box']}>
-              <img
-                src={pokemon.sprites?.homefrontDefault || placeholder}
-                alt={pokemon.name}
-              />
+              <img src={pokemon.sprites || placeholder} alt={pokemon.name} />
             </div>
             <div className={styles.stats}>
               {pokemon.stats.name.map((stat, idx) => (
@@ -94,6 +79,7 @@ export const DetailedCard: FC = () => {
         </div>
         <div className={styles.bottom}>
           <Button onClick={onCLick} textContent="Close" />
+          <Button onClick={refetch} textContent="Refetch" />
         </div>
       </div>
     );
