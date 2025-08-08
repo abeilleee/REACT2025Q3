@@ -1,40 +1,49 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { getItemSpy } from '@/__mocks__/mockFunctions';
+import { cardData } from '@/__mocks__/mockData';
 import { Search } from './Search';
 
 describe('Search test', () => {
-  const mockOnSearch = vi.fn();
+  const mockSetSearchTerm = vi.fn();
   const user = userEvent.setup();
 
-  beforeEach(() => {
+  afterEach(() => {
     vi.clearAllMocks();
-    localStorage.clear();
+    mockSetSearchTerm.mockClear();
   });
 
-  test('should render Search component correctly', () => {
-    render(<Search onSearch={mockOnSearch} />);
+  test('should render Search component without crashing and with correct value', () => {
+    const mockSearch = cardData.name;
+
+    render(
+      <Search searchTerm={mockSearch} setSearchTerm={mockSetSearchTerm} />
+    );
 
     const inputElement = screen.getByRole('textbox');
     const button = screen.getByText('Search');
 
     expect(inputElement).toBeInTheDocument();
     expect(button).toBeInTheDocument();
+    expect(inputElement).toHaveValue(cardData.name);
   });
 
-  test('should call onSearch when Enter key is pressed', async () => {
-    render(<Search onSearch={mockOnSearch} />);
+  test('should set SearchTerm when Enter key is pressed', async () => {
+    const mockSearch = cardData.name;
+
+    render(
+      <Search searchTerm={mockSearch} setSearchTerm={mockSetSearchTerm} />
+    );
 
     const inputElement = screen.getByRole('textbox');
 
     await user.type(inputElement, 'charmander');
     await user.keyboard('[Enter]');
 
-    expect(mockOnSearch).toBeCalledTimes(1);
+    expect(mockSetSearchTerm).toBeCalledTimes(1);
   });
 
-  test('should call onSearch on button click', async () => {
-    render(<Search onSearch={mockOnSearch} />);
+  test('should set SearchTerm on button click', async () => {
+    render(<Search searchTerm={''} setSearchTerm={mockSetSearchTerm} />);
 
     const inputElement = screen.getByRole('textbox');
     const button = screen.getByText('Search');
@@ -42,28 +51,6 @@ describe('Search test', () => {
     await user.type(inputElement, 'bulbasaur');
     await user.click(button);
 
-    expect(mockOnSearch).toHaveBeenCalledWith('bulbasaur');
-  });
-
-  test('should set LS value to the input value', async () => {
-    getItemSpy.mockReturnValue('bulbasaur');
-    render(<Search onSearch={mockOnSearch} />);
-
-    const inputElement = await screen.findByPlaceholderText(
-      'Enter the full pokemon name'
-    );
-
-    expect(inputElement).toHaveValue('bulbasaur');
-  });
-
-  test('should set empty input value if LS has no value', async () => {
-    getItemSpy.mockReturnValue(null);
-    render(<Search onSearch={mockOnSearch} />);
-
-    const inputElement = await screen.findByPlaceholderText(
-      'Enter the full pokemon name'
-    );
-
-    expect(inputElement).toHaveValue('');
+    expect(mockSetSearchTerm).toHaveBeenCalledWith('bulbasaur');
   });
 });
