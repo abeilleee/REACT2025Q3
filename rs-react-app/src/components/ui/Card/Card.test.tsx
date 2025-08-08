@@ -19,11 +19,11 @@ describe('Card test', () => {
     expect(screen.getByAltText(cardData.name)).toBeInTheDocument();
 
     const cardImg = screen.getByAltText(cardData.name);
-    expect(cardImg).toHaveAttribute('src', cardData.sprites.homefrontDefault);
+    expect(cardImg).toHaveAttribute('src', cardData.sprites);
   });
 
   test('should display placeholder if there is not a sprite', () => {
-    const data = { ...cardData, sprites: { homefrontDefault: undefined } };
+    const data = { ...cardData, sprites: '' };
     const src = '/src/assets/images/no-img.png';
 
     render(
