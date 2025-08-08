@@ -7,8 +7,7 @@ import {
   NOT_EXISTING_ENDPOINT,
   TEST_ENDPOINT,
 } from '@/__mocks__/mockData';
-import { BASE_ENDPOINT, BASE_URL } from '@/services/api/constants';
-import { ONE } from '@/utils/constants';
+import { BASE_ENDPOINT, BASE_URL, ONE } from '@/utils/constants';
 
 export const handlers = [
   http.get(`${BASE_URL}/${BASE_ENDPOINT}`, () => {

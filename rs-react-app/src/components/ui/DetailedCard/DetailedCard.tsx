@@ -5,7 +5,6 @@ import { Button, ErrorState, Spinner } from '@/components/ui';
 import { PATHS } from '@/services/router/constants';
 import { useGetPokemonDataQuery } from '@/store/slices/api/pokemonApi';
 import { getCurrentPage } from '@/utils';
-import { ZERO } from '@/utils/constants';
 import styles from './DetailedCard.module.scss';
 
 const MAX_VALUE = 200;
@@ -48,9 +47,7 @@ export const DetailedCard: FC = () => {
     return (
       <div className={styles.card} data-testid="detailed-card">
         <div className={styles.title}>
-          <span className={styles.name} data-testid="name">
-            {name}
-          </span>
+          <span className={styles.name}>{name}</span>
         </div>
         <div className={styles.content}>
           <div className={styles['img-container']}>
@@ -70,7 +67,7 @@ export const DetailedCard: FC = () => {
                     />
                   </div>
                   <span className={styles['stat-value']}>
-                    {pokemon.stats.base[idx] || ZERO}
+                    {pokemon.stats.base[idx]}
                   </span>
                 </div>
               ))}
