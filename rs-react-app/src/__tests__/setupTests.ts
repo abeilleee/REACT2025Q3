@@ -1,7 +1,5 @@
-import { server } from '@/__mocks__/msw/server';
+import { server } from '@/__tests__/msw/server';
 import '@testing-library/jest-dom';
-
-export const navigateMock = vi.fn();
 
 beforeAll(() => {
   server.listen();

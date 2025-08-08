@@ -1,4 +1,4 @@
-import { mockPokemonsData } from '@/__mocks__/mockData';
+import { mockPokemonsData } from '@/__tests__/mocks/mockData';
 import {
   deselectAllPokemons,
   deselectPokemon,

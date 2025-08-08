@@ -24,3 +24,5 @@ export function renderWithProvider(
     ...render(ui, { wrapper: providerWrapper, ...renderOptions }),
   };
 }
+
+export const navigateMock = vi.fn();

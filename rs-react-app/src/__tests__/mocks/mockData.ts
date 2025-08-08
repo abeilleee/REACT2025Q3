@@ -1,8 +1,4 @@
-import type { Pokemon, PokemonData } from '@/store/slices/api/types';
-
-export const MOCK_ENDPOINT = 'pidgeot';
-export const NOT_EXISTING_ENDPOINT = 'abc';
-export const TEST_ENDPOINT = 'test';
+import type { PokemonData } from '@/store/slices/api/types';
 
 export const cardData: PokemonData = {
   name: 'pidgeot',
@@ -66,46 +62,4 @@ export const mockApiResponse = {
   next: '2',
   previous: null,
   results: mockApiResponseResults,
-};
-
-export const mockPokemonDataResponse: Pokemon = {
-  name: 'pidgeot',
-  height: 15,
-  weight: 395,
-  abilities: [
-    {
-      ability: {
-        name: 'keen-eye',
-        url: 'https://pokeapi.co/api/v2/ability/51/',
-      },
-      is_hidden: false,
-      slot: 1,
-    },
-    {
-      ability: {
-        name: 'tangled-feet',
-        url: 'https://pokeapi.co/api/v2/ability/77/',
-      },
-      is_hidden: false,
-      slot: 2,
-    },
-  ],
-  sprites: {
-    other: {
-      home: {
-        front_default:
-          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/18.png',
-      },
-    },
-  },
-  stats: [
-    {
-      base_stat: 22,
-      effort: 22,
-      stat: {
-        name: 'stat',
-        url: 'url',
-      },
-    },
-  ],
 };

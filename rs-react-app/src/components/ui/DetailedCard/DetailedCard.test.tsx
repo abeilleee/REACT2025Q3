@@ -1,9 +1,8 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
-import { cardData } from '@/__mocks__/mockData';
-import { navigateMock } from '@/__tests__/setupTests';
-import { renderWithProvider } from '@/__tests__/utils';
+import { cardData } from '@/__tests__/mocks/mockData';
+import { navigateMock, renderWithProvider } from '@/__tests__/utils';
 import { PATHS } from '@/services/router/constants';
 import * as hooks from '@/store/slices/api/pokemonApi';
 import { DetailedCard } from './DetailedCard';

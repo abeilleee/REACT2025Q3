@@ -1,7 +1,7 @@
 import { type FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { mockPokemonsData } from '@/__mocks__/mockData';
+import { mockPokemonsData } from '@/__tests__/mocks/mockData';
 import { renderWithProvider } from '@/__tests__/utils';
 import { INITIAL_PAGE, LIMIT } from '@/utils/constants';
 import { CardsList } from './CardsList';

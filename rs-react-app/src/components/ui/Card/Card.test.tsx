@@ -1,18 +1,15 @@
-import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
+import { screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { cardData } from '@/__mocks__/mockData';
-import { store } from '@/store';
+import { cardData } from '@/__tests__/mocks/mockData';
+import { renderWithProvider } from '@/__tests__/utils';
 import { Card } from './Card';
 
 describe('Card test', () => {
   test('should render Card with correct data', () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Card pokemon={cardData} />
-        </MemoryRouter>
-      </Provider>
+    renderWithProvider(
+      <MemoryRouter>
+        <Card pokemon={cardData} />
+      </MemoryRouter>
     );
 
     expect(screen.getByText(cardData.name)).toBeInTheDocument();
@@ -26,12 +23,10 @@ describe('Card test', () => {
     const data = { ...cardData, sprites: '' };
     const src = '/src/assets/images/no-img.png';
 
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Card pokemon={data} />
-        </MemoryRouter>
-      </Provider>
+    renderWithProvider(
+      <MemoryRouter>
+        <Card pokemon={data} />
+      </MemoryRouter>
     );
 
     const cardImg = screen.getByRole('img');
