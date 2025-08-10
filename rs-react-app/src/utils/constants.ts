@@ -35,5 +35,4 @@ export const CUSTOM_ERROR: FetchBaseQueryError = {
 export const enum ERROR {
   SERVER_ERROR = 'Server error',
   NOT_FOUND = 'Not found',
-  VALIDATION = 'Validation error',
 }
