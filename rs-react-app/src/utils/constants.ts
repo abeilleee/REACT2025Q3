@@ -40,3 +40,7 @@ export const enum ERROR {
   SERVER_ERROR = 'Server error',
   NOT_FOUND = 'Not found',
 }
+
+export enum TAGS {
+  POKEMON_DATA = 'pokemonData',
+}
