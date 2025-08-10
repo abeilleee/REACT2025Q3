@@ -1,46 +1,84 @@
-import { type FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { getOffset, mapDataToPokemonData } from '@/utils';
-import { BASE_ENDPOINT, LIMIT } from '@/utils/constants';
-import { fetchData } from './helpers';
-import type { ApiResponse, Pokemon } from './types';
+import {
+  type BaseQueryApi,
+  type BaseQueryFn,
+  type FetchArgs,
+  type FetchBaseQueryError,
+  type FetchBaseQueryMeta,
+  type QueryReturnValue,
+} from '@reduxjs/toolkit/query';
+import { getOffset } from '@/utils';
+import { BASE_ENDPOINT, CUSTOM_ERROR, LIMIT } from '@/utils/constants';
+import { pokemonApi } from './pokemonApi';
+import { ApiResponseSchema } from './schema';
+import type { PokemonData, Results } from './types';
 
 export type customQueryFnArgs = {
   page: number;
   searchTerm?: string;
 };
 
-export const customQueryFn = async ({
-  page,
-  searchTerm,
-}: customQueryFnArgs) => {
-  try {
-    if (!searchTerm) {
-      const offset = getOffset(page);
-      const pokemonList = await fetchData<ApiResponse>(
-        `${BASE_ENDPOINT}/?limit=${LIMIT}&offset=${offset}`
-      );
+export const fetchPokemonDetails = async (
+  api: BaseQueryApi,
+  results: Results[]
+): Promise<PokemonData[] | null> => {
+  const pokemonData = await Promise.all(
+    results.map(async (pokemon) => {
+      const result = await api
+        .dispatch(pokemonApi.endpoints.getPokemonData.initiate(pokemon.name))
+        .unwrap();
 
-      const pokemonData = await Promise.all(
-        pokemonList.results.map(async (pokemon: { name: string }) => {
-          const data = await fetchData<Pokemon>(
-            `${BASE_ENDPOINT}/${pokemon.name}`
-          );
+      return result;
+    })
+  );
 
-          return mapDataToPokemonData(data);
-        })
-      );
-      return { data: pokemonData };
-    } else {
-      const data = await fetchData<Pokemon>(`${BASE_ENDPOINT}/${searchTerm}`);
-      const singlePokemonData = mapDataToPokemonData(data);
+  if (pokemonData.every((pokemon) => pokemon !== undefined)) {
+    return pokemonData;
+  }
 
-      return { data: [singlePokemonData] };
+  return null;
+};
+
+export const customQueryFn = async (
+  args: customQueryFnArgs,
+  api: BaseQueryApi,
+  _extraOptions: unknown,
+  baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>
+): Promise<
+  QueryReturnValue<PokemonData[], FetchBaseQueryError, FetchBaseQueryMeta>
+> => {
+  const { page, searchTerm } = args;
+  const offset = getOffset(page);
+
+  if (searchTerm) {
+    const result = await api.dispatch(
+      pokemonApi.endpoints.getPokemonData.initiate(searchTerm)
+    );
+
+    if (result.data) {
+      return { data: [result.data] };
     }
-  } catch (e) {
+  }
+
+  const response = await baseQuery(
+    `${BASE_ENDPOINT}/?limit=${LIMIT}&offset=${offset}`,
+    api,
+    {}
+  );
+
+  if (response.error) {
     return {
-      error: {
-        error: e,
-      } as FetchBaseQueryError,
+      error: response.error,
     };
   }
+
+  const apiResponse = ApiResponseSchema.parse(response.data);
+  const pokemonData = await fetchPokemonDetails(api, apiResponse.results);
+
+  if (!pokemonData) {
+    return {
+      error: CUSTOM_ERROR,
+    };
+  }
+
+  return { data: pokemonData };
 };

@@ -1,8 +1,8 @@
 import { render, type RenderOptions } from '@testing-library/react';
+import { type PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import type { AppStore, RootState } from '@/store/store';
 import * as setup from '@/store/store';
-import type { PropsWithChildren } from 'react';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: Partial<RootState>;
