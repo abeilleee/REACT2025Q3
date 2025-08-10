@@ -3,7 +3,7 @@ import { mapDataToPokemonData } from '@/utils';
 import { BASE_ENDPOINT, BASE_URL, TAGS } from '@/utils/constants';
 import { customQueryFn, type customQueryFnArgs } from './pokemonQueries';
 import { ApiResponseSchema, PokemonSchema } from './schema';
-import type { ApiResponse, PokemonData } from './types';
+import type { ApiResponse, Pokemon, PokemonData } from './types';
 
 export const pokemonApi = createApi({
   reducerPath: 'pokemonApi',
@@ -13,7 +13,7 @@ export const pokemonApi = createApi({
     getPokemonData: build.query<PokemonData, string>({
       query: (name) => `${BASE_ENDPOINT}/${name}`,
       rawResponseSchema: PokemonSchema,
-      transformResponse: mapDataToPokemonData,
+      transformResponse: (response: Pokemon) => mapDataToPokemonData(response),
       providesTags: [TAGS.POKEMON_DATA],
     }),
     getPokemonCount: build.query<number, void>({

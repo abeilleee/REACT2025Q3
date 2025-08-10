@@ -1,3 +1,4 @@
+import { skipToken } from '@reduxjs/toolkit/query';
 import { type FC } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { placeholder } from '@/assets/images';
@@ -18,7 +19,7 @@ export const DetailedCard: FC = () => {
     isFetching: isLoading,
     error,
     refetch,
-  } = useGetPokemonDataQuery(name || '');
+  } = useGetPokemonDataQuery(name ?? skipToken);
   const currentPage = getCurrentPage(searchParams);
 
   const onCLick = () => {

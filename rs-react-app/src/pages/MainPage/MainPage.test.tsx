@@ -12,8 +12,11 @@ describe('Main Page test', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Refresh' })).toBeInTheDocument();
+    const input = screen.getByRole('textbox');
+    const button = screen.getByRole('button', { name: 'Refresh' });
+
+    expect(input).toBeInTheDocument();
+    expect(button).toBeInTheDocument();
   });
 
   test('should call api to get all pokemons data', () => {

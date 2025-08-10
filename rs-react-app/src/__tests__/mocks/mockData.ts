@@ -1,4 +1,4 @@
-import type { PokemonData } from '@/store/slices/api/types';
+import type { Pokemon, PokemonData } from '@/store/slices/api/types';
 
 export const cardData: PokemonData = {
   name: 'pidgeot',
@@ -62,4 +62,47 @@ export const mockApiResponse = {
   next: '2',
   previous: null,
   results: mockApiResponseResults,
+};
+
+export const mockPokemonResponse: Pokemon = {
+  id: 1,
+  name: 'Pikachu',
+  height: 4,
+  weight: 60,
+  abilities: [
+    {
+      ability: {
+        name: 'Static',
+        url: 'https://pokeapi.co/api/v2/ability/9/',
+      },
+      is_hidden: false,
+      slot: 1,
+    },
+  ],
+  sprites: {
+    other: {
+      home: {
+        front_default:
+          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/25.png',
+      },
+    },
+  },
+  stats: [
+    {
+      base_stat: 35,
+      effort: 0,
+      stat: {
+        name: 'hp',
+        url: 'https://pokeapi.co/api/v2/stat/1/',
+      },
+    },
+    {
+      base_stat: 55,
+      effort: 0,
+      stat: {
+        name: 'attack',
+        url: 'https://pokeapi.co/api/v2/stat/2/',
+      },
+    },
+  ],
 };

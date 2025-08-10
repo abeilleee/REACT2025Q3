@@ -5,6 +5,7 @@ import { cardData } from '@/__tests__/mocks/mockData';
 import { navigateMock, renderWithProvider } from '@/__tests__/utils';
 import { PATHS } from '@/services/router/constants';
 import * as hooks from '@/store/slices/api/pokemonApi';
+import { CUSTOM_ERROR } from '@/utils/constants';
 import { DetailedCard } from './DetailedCard';
 
 vi.mock('react-router-dom', async () => {
@@ -15,7 +16,20 @@ vi.mock('react-router-dom', async () => {
 });
 
 describe('Detailed card tests', () => {
+  afterEach(() => {
+    mockGetPokemonData.mockClear();
+  });
+
+  const mockGetPokemonData = vi.spyOn(hooks, 'useGetPokemonDataQuery');
+
   test('should display loading state while fetching data', () => {
+    mockGetPokemonData.mockReturnValue({
+      data: cardData,
+      isFetching: true,
+      error: undefined,
+      refetch: vi.fn(),
+    });
+
     renderWithProvider(
       <MemoryRouter>
         <DetailedCard />
@@ -27,6 +41,13 @@ describe('Detailed card tests', () => {
   });
 
   test('should display error state if an error occurs while fetching data', async () => {
+    mockGetPokemonData.mockReturnValue({
+      data: cardData,
+      isFetching: false,
+      error: CUSTOM_ERROR,
+      refetch: vi.fn(),
+    });
+
     renderWithProvider(
       <MemoryRouter>
         <DetailedCard />
@@ -39,7 +60,6 @@ describe('Detailed card tests', () => {
   });
 
   test('should render correct pokemon data', () => {
-    const mockGetPokemonData = vi.spyOn(hooks, 'useGetPokemonDataQuery');
     mockGetPokemonData.mockReturnValue({
       data: cardData,
       isFetching: false,
@@ -71,7 +91,6 @@ describe('Detailed card tests', () => {
 
   test('should navigate to ROOT path when Close button is clicked', async () => {
     const user = userEvent.setup();
-    const mockGetPokemonData = vi.spyOn(hooks, 'useGetPokemonDataQuery');
     mockGetPokemonData.mockReturnValue({
       data: cardData,
       isFetching: false,
@@ -93,7 +112,6 @@ describe('Detailed card tests', () => {
   });
 
   test('should display img placeholder if there is no sprite', () => {
-    const mockGetPokemonData = vi.spyOn(hooks, 'useGetPokemonDataQuery');
     mockGetPokemonData.mockReturnValue({
       data: { ...cardData, sprites: null },
       isFetching: false,

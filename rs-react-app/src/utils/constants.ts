@@ -10,6 +10,9 @@ export const enum THEME {
   DARK = 'dark',
 }
 
+// tests
+export const TEST_ENDPOINT = 'test';
+
 // pagination
 export const LIMIT = 12;
 export const INITIAL_PAGE = 1;
