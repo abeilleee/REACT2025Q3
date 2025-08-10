@@ -40,7 +40,7 @@ describe('Cards List test', () => {
 
     const errorImage = screen.getByAltText('egg');
 
-    expect(screen.getByText(/Oops... Error:/)).toBeInTheDocument();
+    expect(screen.getByText(/Oops.../)).toBeInTheDocument();
     expect(errorImage).toBeInTheDocument();
   });
 

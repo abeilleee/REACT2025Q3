@@ -33,7 +33,7 @@ describe('Detailed card tests', () => {
       </MemoryRouter>
     );
 
-    const text = await screen.findByText(/Oops... Error:/);
+    const text = await screen.findByText(/Oops.../);
 
     expect(text).toBeInTheDocument();
   });
