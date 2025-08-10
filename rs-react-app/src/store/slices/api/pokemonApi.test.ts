@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { server } from '@/__tests__/msw/server';
 import { pokemonApi } from './pokemonApi';
 
 const store = configureStore({
@@ -12,6 +13,8 @@ const store = configureStore({
 const fetchSpy = vi.spyOn(global, 'fetch');
 
 test('should fetch and cache data', async () => {
+  server.close();
+
   const firstRequest = await store.dispatch(
     pokemonApi.endpoints.getPokemonData.initiate('pikachu')
   );
