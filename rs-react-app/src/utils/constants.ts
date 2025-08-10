@@ -28,10 +28,14 @@ export const BASE_ENDPOINT = 'pokemon';
 export const STATUS_CODE = {
   NOT_FOUND: 404,
 };
+
+export const ERROR_STATUS = ['FETCH_ERROR', 'PARSING_ERROR', 'CUSTOM_ERROR'];
+
 export const CUSTOM_ERROR: FetchBaseQueryError = {
   status: 'CUSTOM_ERROR',
   error: 'No results found',
 };
+
 export const enum ERROR {
   SERVER_ERROR = 'Server error',
   NOT_FOUND = 'Not found',

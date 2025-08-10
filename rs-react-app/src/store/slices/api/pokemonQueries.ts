@@ -8,6 +8,7 @@ import {
 } from '@reduxjs/toolkit/query';
 import { getOffset } from '@/utils';
 import { BASE_ENDPOINT, CUSTOM_ERROR, LIMIT } from '@/utils/constants';
+import { normalizeError } from './helpers';
 import { pokemonApi } from './pokemonApi';
 import { ApiResponseSchema } from './schema';
 import type { PokemonData, Results } from './types';
@@ -53,6 +54,12 @@ export const customQueryFn = async (
     const result = await api.dispatch(
       pokemonApi.endpoints.getPokemonData.initiate(searchTerm)
     );
+
+    if (result.error) {
+      return {
+        error: normalizeError(result.error),
+      };
+    }
 
     if (result.data) {
       return { data: [result.data] };

@@ -11,7 +11,7 @@ type ErrorStateProps = {
 
 export const ErrorState: FC<ErrorStateProps> = ({ errorMessage }) => {
   const messageToDisplay = buildErrorMessage(errorMessage);
-  const isNotFoundError = /Not found|404/.test(messageToDisplay);
+  const isNotFoundError = /Not found|404/i.test(messageToDisplay);
 
   return (
     <>
