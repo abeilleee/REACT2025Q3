@@ -1,27 +1,17 @@
-import { useEffect, useState, type FC } from 'react';
+import { useState, type FC } from 'react';
 import { Button } from '@/components/ui';
-import { useLocalStorage } from '@/hooks';
-import { STORAGE_KEY } from '@/utils/constants';
 import styles from './Search.module.scss';
 
 type SearchProps = {
-  onSearch: (searchTerm: string) => void;
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const Search: FC<SearchProps> = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [storageValue, setStorageValue] = useLocalStorage({
-    key: STORAGE_KEY.SEARCH_TERM,
-  });
-
-  useEffect(() => {
-    if (storageValue) setSearchTerm(storageValue);
-  }, [storageValue]);
+export const Search: FC<SearchProps> = ({ searchTerm, setSearchTerm }) => {
+  const [value, setCurrentValue] = useState(searchTerm);
 
   const onClick = () => {
-    onSearch(searchTerm.trim());
-    setSearchTerm(searchTerm.trim());
-    setStorageValue(searchTerm.trim());
+    setSearchTerm(value);
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -30,7 +20,7 @@ export const Search: FC<SearchProps> = ({ onSearch }) => {
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setSearchTerm(value);
+    setCurrentValue(value);
   };
 
   return (
@@ -40,7 +30,7 @@ export const Search: FC<SearchProps> = ({ onSearch }) => {
         placeholder="Enter the full pokemon name"
         onChange={onChange}
         onKeyDown={onKeyDown}
-        value={searchTerm}
+        value={value}
       />
       <Button onClick={onClick} textContent="Search" />
     </div>

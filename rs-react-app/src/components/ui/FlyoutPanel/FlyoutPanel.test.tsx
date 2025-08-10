@@ -1,9 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import { mockPokemonsData } from '@/__mocks__/mockData';
+import { mockPokemonsData } from '@/__tests__/mocks/mockData';
+import { renderWithProvider } from '@/__tests__/utils';
 import * as hooks from '@/hooks';
-import { store } from '@/store';
 import { FlyoutPanel } from './FlyoutPanel';
 
 describe('Flyout Panel tests', () => {
@@ -21,11 +20,7 @@ describe('Flyout Panel tests', () => {
   test('should render correctly and show correct selected pokemons number', () => {
     const total = mockPokemonsData.length;
 
-    render(
-      <Provider store={store}>
-        <FlyoutPanel />
-      </Provider>
-    );
+    renderWithProvider(<FlyoutPanel />);
 
     expect(screen.getByTestId('flyout')).toBeInTheDocument();
     expect(screen.getByText(`Selected pokemon: ${total}`)).toBeInTheDocument();
@@ -34,14 +29,9 @@ describe('Flyout Panel tests', () => {
   test('should call dispatch when unselect button is clicked', async () => {
     const user = userEvent.setup();
     const dispatchMock = vi.fn();
-
     useAppDispatchMock.mockReturnValue(dispatchMock);
 
-    render(
-      <Provider store={store}>
-        <FlyoutPanel />
-      </Provider>
-    );
+    renderWithProvider(<FlyoutPanel />);
 
     const button = screen.getByText('Unselect all');
 
@@ -53,11 +43,7 @@ describe('Flyout Panel tests', () => {
   test('should not render when there are no selected items', () => {
     selectedPokemons.mockReturnValue(0);
 
-    render(
-      <Provider store={store}>
-        <FlyoutPanel />
-      </Provider>
-    );
+    renderWithProvider(<FlyoutPanel />);
 
     const flyout = screen.queryByTestId('flyout');
 

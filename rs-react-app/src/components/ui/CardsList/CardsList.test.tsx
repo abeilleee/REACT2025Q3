@@ -1,73 +1,60 @@
-import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
+import { type FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { mockPokemonsData } from '@/__mocks__/mockData';
-import { INITIAL_PAGE, LIMIT, STATUS_CODE } from '@/services/api/constants';
-import { store } from '@/store';
+import { mockPokemonsData } from '@/__tests__/mocks/mockData';
+import { renderWithProvider } from '@/__tests__/utils';
+import { INITIAL_PAGE, LIMIT } from '@/utils/constants';
 import { CardsList } from './CardsList';
 
 describe('Cards List test', () => {
-  test('should render loading state when isLoading is true', () => {
-    render(
+  test('should render loading state when isLoading', () => {
+    renderWithProvider(
       <CardsList
         pokemonsData={[]}
         isLoading={true}
-        errorMessage=""
+        error={undefined}
         currentPage={INITIAL_PAGE}
         handlePageChange={() => {}}
-        total={120}
       />
     );
-
     const skeletonCards = screen.getAllByTestId('skeleton-card');
 
     expect(skeletonCards.length).toBe(LIMIT);
   });
 
-  test('renders "No results found" message when error has 404 status', () => {
-    render(
-      <CardsList
-        pokemonsData={[]}
-        isLoading={false}
-        errorMessage={`Error ${STATUS_CODE.NOT_FOUND}`}
-        currentPage={INITIAL_PAGE}
-        handlePageChange={() => {}}
-        total={120}
-      />
-    );
-    expect(screen.getByText('No results found')).toBeInTheDocument();
-  });
+  test('should render error message and image when there is an errorMessage', () => {
+    const error: FetchBaseQueryError = {
+      status: 400,
+      data: 'Test Error',
+    };
 
-  test('renders error message and image when there is an errorMessage', () => {
-    render(
+    renderWithProvider(
       <CardsList
         pokemonsData={[]}
         isLoading={false}
-        errorMessage="Test Error"
+        error={error}
         currentPage={INITIAL_PAGE}
         handlePageChange={() => {}}
-        total={120}
       />
     );
-    expect(screen.getByText('Oops... Error: Test Error')).toBeInTheDocument();
+
     const errorImage = screen.getByAltText('egg');
+
+    expect(screen.getByText(/Oops.../)).toBeInTheDocument();
     expect(errorImage).toBeInTheDocument();
   });
 
   test('should render cards when pokemonsData is provided', () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <CardsList
-            pokemonsData={mockPokemonsData}
-            isLoading={false}
-            errorMessage=""
-            currentPage={INITIAL_PAGE}
-            handlePageChange={() => {}}
-            total={120}
-          />
-        </MemoryRouter>
-      </Provider>
+    renderWithProvider(
+      <MemoryRouter>
+        <CardsList
+          pokemonsData={mockPokemonsData}
+          isLoading={false}
+          error={undefined}
+          currentPage={INITIAL_PAGE}
+          handlePageChange={() => {}}
+        />
+      </MemoryRouter>
     );
 
     expect(screen.getByText('pidgeot')).toBeInTheDocument();

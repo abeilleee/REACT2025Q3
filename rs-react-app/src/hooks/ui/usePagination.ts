@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
-import { LIMIT } from '@/services/api/constants';
-import { DOTS, ONE, TWO } from '@/utils/constants';
+import { DOTS, LIMIT, ONE, TWO } from '@/utils/constants';
 
 /**
  * the number of pages are displayed before and after the selected page

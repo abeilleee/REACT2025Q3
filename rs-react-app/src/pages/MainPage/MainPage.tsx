@@ -1,47 +1,48 @@
-import { useCallback, useEffect, useState, type FC } from 'react';
+import { useState, type FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { CardsList, Search } from '@/components';
-import { FlyoutPanel } from '@/components/ui';
-import { usePokemon } from '@/hooks';
-import { INITIAL_PAGE } from '@/services/api/constants';
-
-const getCurrentPage = (searchParams: URLSearchParams) => {
-  return Number(searchParams.get('page') || INITIAL_PAGE);
-};
+import { CardsList, Search, FlyoutPanel, Button } from '@/components';
+import { useAppDispatch, useLocalStorage } from '@/hooks';
+import {
+  pokemonApi,
+  useGetAllPokemonDataQuery,
+} from '@/store/slices/api/pokemonApi';
+import { getCurrentPage } from '@/utils';
+import { STORAGE_KEY, TAGS } from '@/utils/constants';
 
 const MainPage: FC = () => {
+  const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [searchTerm, setSearchTerm] = useLocalStorage({
+    key: STORAGE_KEY.SEARCH_TERM,
+  });
   const [page, setPage] = useState(() => getCurrentPage(searchParams));
-  const { data, isLoading, error, setSearchTerm, total } = usePokemon(page);
-
-  useEffect(() => {
-    setPage(getCurrentPage(searchParams));
-  }, [searchParams]);
-
-  const handleSearch = useCallback(
-    (searchTerm: string) => {
-      setSearchTerm(searchTerm);
-    },
-    [setSearchTerm]
-  );
+  const {
+    data: pokemonData,
+    isFetching: isLoading,
+    error,
+  } = useGetAllPokemonDataQuery({ page: page, searchTerm: searchTerm.trim() });
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
     setSearchParams({ page: String(newPage) });
   };
 
+  const invalidateCache = () => {
+    dispatch(pokemonApi.util.invalidateTags([{ type: TAGS.POKEMON_DATA }]));
+  };
+
   return (
     <>
-      <Search onSearch={handleSearch} />
+      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <CardsList
-        pokemonsData={data}
+        pokemonsData={pokemonData}
         isLoading={isLoading}
-        errorMessage={error}
+        error={error}
         currentPage={page}
         handlePageChange={handlePageChange}
-        total={total}
-      ></CardsList>
+      />
       <FlyoutPanel />
+      <Button textContent="Refresh" onClick={invalidateCache} />
     </>
   );
 };

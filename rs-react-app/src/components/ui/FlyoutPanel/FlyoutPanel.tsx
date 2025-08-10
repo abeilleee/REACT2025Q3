@@ -2,13 +2,14 @@ import { useEffect, useState, type FC } from 'react';
 import { Button } from '@/components/ui';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { deselectAllPokemons, getSelectedPokemons } from '@/store';
-import { convertToCSV, type PokemonData } from '@/utils';
+import { type PokemonData } from '@/store/slices/api/types';
+import { convertToCSV } from '@/utils';
 import styles from './FlyoutPanel.module.scss';
 
 export const FlyoutPanel: FC = () => {
   const selectedPokemons = useAppSelector(getSelectedPokemons);
-  const selectedNumber = selectedPokemons.length;
   const dispatch = useAppDispatch();
+  const selectedNumber = selectedPokemons.length;
   const [isVisible, setIsVisible] = useState(selectedNumber > 0);
 
   useEffect(() => {

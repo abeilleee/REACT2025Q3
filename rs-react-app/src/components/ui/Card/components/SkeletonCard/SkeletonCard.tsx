@@ -1,20 +1,21 @@
 import { type FC } from 'react';
+import { Skeleton } from '@/components';
+import { cloneComponent } from '@/utils';
 import styles from './SkeletonCard.module.scss';
 
 export const SkeletonCard: FC = () => {
   return (
     <div className={styles.card} data-testid="skeleton-card">
-      <div className={`${styles.pulsate} ${styles.text}`}></div>
-      <div className={`${styles.pulsate} ${styles.image}`}></div>
-      {Array.from({ length: 3 }, (_, index) => (
-        <div key={index} className={`${styles.pulsate} ${styles.text}`}></div>
-      ))}
-      {Array.from({ length: 2 }, (_, index) => (
-        <div
-          key={index}
-          className={`${styles.pulsate} ${styles.ability}`}
-        ></div>
-      ))}
+      <Skeleton className={styles.text} />
+      <Skeleton className={styles.image} />
+      {cloneComponent({
+        element: <Skeleton className={styles.text} />,
+        count: 3,
+      })}
+      {cloneComponent({
+        element: <Skeleton className={styles.ability} />,
+        count: 3,
+      })}
     </div>
   );
 };

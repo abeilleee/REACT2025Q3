@@ -1,125 +1,105 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import { MemoryRouter, Route, Routes, useParams } from 'react-router-dom';
-import { cardData, mockPokemonsData } from '@/__mocks__/mockData';
-import { navigateMock } from '@/__tests__/setupTests';
-import { CardsList } from '@/components';
-import * as hooks from '@/hooks';
+import { MemoryRouter } from 'react-router-dom';
+import { cardData } from '@/__tests__/mocks/mockData';
+import { navigateMock, renderWithProvider } from '@/__tests__/utils';
 import { PATHS } from '@/services/router/constants';
-import { store } from '@/store';
+import * as hooks from '@/store/slices/api/pokemonApi';
+import { CUSTOM_ERROR } from '@/utils/constants';
 import { DetailedCard } from './DetailedCard';
 
+vi.mock('react-router-dom', async () => {
+  return {
+    ...(await vi.importActual('react-router-dom')),
+    useNavigate: () => navigateMock,
+  };
+});
+
 describe('Detailed card tests', () => {
-  const useFetchMock = vi.spyOn(hooks, 'useFetch');
-  const user = userEvent.setup();
-
-  vi.mock('react-router-dom', async () => {
-    return {
-      ...(await vi.importActual('react-router-dom')),
-      useParams: vi.fn(() => {}),
-      useNavigate: () => navigateMock,
-    };
+  afterEach(() => {
+    mockGetPokemonData.mockClear();
   });
 
-  test('should render pokemon data correctly', () => {
-    vi.mocked(useParams).mockReturnValue({ name: cardData.name });
-    useFetchMock.mockReturnValue({
-      data: {
-        name: cardData.name,
-        sprites: cardData.sprites,
-        stats: {
-          name: cardData.stats.name,
-          base: cardData.stats.base,
-        },
-      },
-      isLoading: false,
-      error: null,
-      request: vi.fn(),
+  const mockGetPokemonData = vi.spyOn(hooks, 'useGetPokemonDataQuery');
+
+  test('should display loading state while fetching data', () => {
+    mockGetPokemonData.mockReturnValue({
+      data: cardData,
+      isFetching: true,
+      error: undefined,
+      refetch: vi.fn(),
     });
 
-    render(
+    renderWithProvider(
       <MemoryRouter>
         <DetailedCard />
       </MemoryRouter>
     );
 
-    expect(screen.getByTestId('detailed-card')).toBeInTheDocument();
-    expect(screen.getByTestId('name')).toHaveTextContent(cardData.name);
-    expect(screen.getByAltText(cardData.name));
-    expect(screen.getByAltText(cardData.name)).toHaveAttribute(
-      'src',
-      cardData.sprites.homefrontDefault
-    );
+    expect(screen.getByTestId('spinner')).toBeInTheDocument();
+    expect(screen.getByText(/Loading/));
   });
 
-  test('should open with the correct URL', async () => {
-    const path = `/pokemon/${cardData.name}?page=1`;
-
-    render(
-      <Provider store={store}>
-        <MemoryRouter initialEntries={[PATHS.ROOT]}>
-          <Routes>
-            <Route
-              path={PATHS.ROOT}
-              element={
-                <CardsList
-                  pokemonsData={mockPokemonsData}
-                  isLoading={false}
-                  errorMessage={''}
-                  currentPage={12}
-                  total={120}
-                  handlePageChange={navigateMock}
-                />
-              }
-            />
-            <Route path={path} element={<DetailedCard />} />
-          </Routes>
-        </MemoryRouter>
-      </Provider>
-    );
-
-    const pokemonCard = screen.getByText(cardData.name);
-    await user.click(pokemonCard);
-
-    expect(navigateMock).toHaveBeenCalledWith(path);
-  });
-
-  test('should render ErrorState when there is an error', () => {
-    useFetchMock.mockReturnValue({
-      data: null,
-      isLoading: false,
-      error: 'error',
-      request: vi.fn(),
+  test('should display error state if an error occurs while fetching data', async () => {
+    mockGetPokemonData.mockReturnValue({
+      data: cardData,
+      isFetching: false,
+      error: CUSTOM_ERROR,
+      refetch: vi.fn(),
     });
 
-    render(
+    renderWithProvider(
       <MemoryRouter>
         <DetailedCard />
       </MemoryRouter>
     );
 
-    expect(screen.getByTestId('error-container')).toBeInTheDocument();
+    const text = await screen.findByText(/Oops.../);
+
+    expect(text).toBeInTheDocument();
+  });
+
+  test('should render correct pokemon data', () => {
+    mockGetPokemonData.mockReturnValue({
+      data: cardData,
+      isFetching: false,
+      error: undefined,
+      refetch: vi.fn(),
+    });
+
+    renderWithProvider(
+      <MemoryRouter initialEntries={[`/pokemon/${cardData.name}`]}>
+        <DetailedCard />
+      </MemoryRouter>
+    );
+
+    const card = screen.getByTestId('detailed-card');
+    const img = screen.getByAltText(cardData.name);
+
+    expect(card).toBeInTheDocument();
+    expect(img).toBeInTheDocument();
+    expect(img).toHaveAttribute('src', cardData.sprites);
+    cardData.stats.name.forEach((stat) => {
+      const statName = screen.getByText(stat);
+      expect(statName).toBeInTheDocument();
+    });
+    cardData.stats.base.forEach((base) => {
+      const statName = screen.getByText(base);
+      expect(statName).toBeInTheDocument();
+    });
   });
 
   test('should navigate to ROOT path when Close button is clicked', async () => {
-    vi.mocked(useParams).mockReturnValue({ name: cardData.name });
-    useFetchMock.mockReturnValue({
-      data: {
-        name: cardData.name,
-        sprites: cardData.sprites,
-        stats: {
-          name: cardData.stats.name,
-          base: cardData.stats.base,
-        },
-      },
-      isLoading: false,
-      error: null,
-      request: vi.fn(),
+    const user = userEvent.setup();
+    mockGetPokemonData.mockReturnValue({
+      data: cardData,
+      isFetching: false,
+      error: undefined,
+      refetch: vi.fn(),
     });
 
-    render(
-      <MemoryRouter>
+    renderWithProvider(
+      <MemoryRouter initialEntries={[`/pokemon/${cardData.name}`]}>
         <DetailedCard />
       </MemoryRouter>
     );
@@ -127,23 +107,27 @@ describe('Detailed card tests', () => {
     const closeButton = screen.getByText('Close');
     await user.click(closeButton);
 
+    expect(navigateMock).toHaveBeenCalledOnce();
     expect(navigateMock).toHaveBeenCalledWith(PATHS.ROOT);
   });
 
-  test('should show loading state when is loading', () => {
-    useFetchMock.mockReturnValue({
-      data: null,
-      isLoading: true,
-      error: null,
-      request: vi.fn(),
+  test('should display img placeholder if there is no sprite', () => {
+    mockGetPokemonData.mockReturnValue({
+      data: { ...cardData, sprites: null },
+      isFetching: false,
+      error: undefined,
+      refetch: vi.fn(),
     });
 
-    render(
-      <MemoryRouter>
+    renderWithProvider(
+      <MemoryRouter initialEntries={[`/pokemon/${cardData.name}`]}>
         <DetailedCard />
       </MemoryRouter>
     );
 
-    expect(screen.getByText(/Loading/)).toBeInTheDocument();
+    const img = screen.getByAltText(cardData.name);
+
+    expect(img).toBeInTheDocument();
+    expect(img).toHaveAttribute('src', '/src/assets/images/no-img.png');
   });
 });

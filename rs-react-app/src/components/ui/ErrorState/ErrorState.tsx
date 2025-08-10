@@ -1,14 +1,17 @@
-import pic from '@/assets/images/egg.png';
-import { STATUS_CODE } from '@/services/api/constants';
+import { type SerializedError } from '@reduxjs/toolkit';
+import { type FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { type FC } from 'react';
+import { egg } from '@/assets/images';
+import { buildErrorMessage } from '@/utils';
 import styles from './ErrorState.module.scss';
-import type { FC } from 'react';
 
 type ErrorStateProps = {
-  errorMessage: string;
+  errorMessage: FetchBaseQueryError | SerializedError;
 };
 
 export const ErrorState: FC<ErrorStateProps> = ({ errorMessage }) => {
-  const isNotFoundError = errorMessage?.includes(String(STATUS_CODE.NOT_FOUND));
+  const messageToDisplay = buildErrorMessage(errorMessage);
+  const isNotFoundError = /Not found|404/i.test(messageToDisplay);
 
   return (
     <>
@@ -16,8 +19,8 @@ export const ErrorState: FC<ErrorStateProps> = ({ errorMessage }) => {
         <div className={styles['not-found']}>No results found</div>
       ) : (
         <div className={styles['error']}>
-          <p className={styles.text}>Oops... Error: {errorMessage}</p>
-          <img src={pic} alt="egg" height="170px" />
+          <p className={styles.text}>Oops... {messageToDisplay}</p>
+          <img src={egg} alt="egg" height="170px" />
           <p className={styles.text}>Please, try again</p>
         </div>
       )}

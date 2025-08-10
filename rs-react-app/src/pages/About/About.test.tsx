@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
-import { navigateMock } from '@/__tests__/setupTests';
+import { navigateMock } from '@/__tests__/utils';
 import About from './About';
 
 describe('About page tests', () => {

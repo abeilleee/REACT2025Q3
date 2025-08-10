@@ -1,7 +1,7 @@
+import { type FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import { MainPage } from '@/pages';
 import styles from './MainLayout.module.scss';
-import type { FC } from 'react';
 
 export const MainLayout: FC = () => {
   return (

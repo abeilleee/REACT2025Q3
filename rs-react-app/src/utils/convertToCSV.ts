@@ -1,4 +1,4 @@
-import type { PokemonData } from './types';
+import type { PokemonData } from '@/store/slices/api/types';
 
 export const convertToCSV = (data: PokemonData[]) => {
   const titles = Object.keys(data[0]).join(',');
@@ -11,7 +11,7 @@ export const convertToCSV = (data: PokemonData[]) => {
   const rows = data.map((pokemon) => {
     const { name, height, weight } = pokemon;
     const abilities = pokemon.abilities.join(';');
-    const sprite = pokemon.sprites.homefrontDefault;
+    const sprite = pokemon.sprites;
     const stats = formatStats(pokemon.stats.name, pokemon.stats.base);
 
     return [name, height, weight, abilities, sprite, stats].join(',');

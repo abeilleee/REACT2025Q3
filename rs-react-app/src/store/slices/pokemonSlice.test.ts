@@ -1,5 +1,4 @@
-import { mockPokemonsData } from '@/__mocks__/mockData';
-import type { PokemonData } from '@/utils/types';
+import { mockPokemonsData } from '@/__tests__/mocks/mockData';
 import {
   deselectAllPokemons,
   deselectPokemon,
@@ -7,6 +6,7 @@ import {
   selectPokemon,
   type InitialState,
 } from './pokemonSlice';
+import type { PokemonData } from './api/types';
 
 describe('pokemonSlice tests', () => {
   const mockPokemon: PokemonData = mockPokemonsData[0];

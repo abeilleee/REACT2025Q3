@@ -1,5 +1,5 @@
+import { type FC } from 'react';
 import styles from './CheckBox.module.scss';
-import type { FC } from 'react';
 
 type CheckBoxProps = {
   onChange: () => void;

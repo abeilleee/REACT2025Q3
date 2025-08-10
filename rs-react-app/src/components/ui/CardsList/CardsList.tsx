@@ -1,3 +1,5 @@
+import { type SerializedError } from '@reduxjs/toolkit';
+import { type FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { type FC } from 'react';
 import {
   Card,
@@ -5,68 +7,60 @@ import {
   Pagination,
   SkeletonCard,
   SkeletonPagination,
-} from '@/components/ui';
-import { LIMIT } from '@/services/api/constants';
-import type { PokemonData } from '@/utils/types';
+} from '@/components';
+import { useGetPokemonCountQuery } from '@/store/slices/api/pokemonApi';
+import type { PokemonData } from '@/store/slices/api/types';
+import { cloneComponent } from '@/utils';
+import { INITIAL_PAGE, LIMIT } from '@/utils/constants';
 import styles from './CardsList.module.scss';
 
 type CardsListProps = {
-  pokemonsData: PokemonData[] | null;
+  pokemonsData: PokemonData[] | undefined;
   isLoading: boolean;
-  errorMessage: string | null;
+  error: FetchBaseQueryError | SerializedError | undefined;
   currentPage: number;
   handlePageChange: (page: number) => void;
-  total: number;
 };
 
 export const CardsList: FC<CardsListProps> = ({
   pokemonsData,
   isLoading,
-  errorMessage,
+  error,
   currentPage,
   handlePageChange,
-  total,
 }) => {
-  const renderLoadingState = () => {
+  const { data: total } = useGetPokemonCountQuery();
+
+  if (isLoading) {
     return (
       <div className={styles.wrapper}>
         <div className={styles.container}>
-          {Array.from({ length: LIMIT }).map((_, index) => (
-            <SkeletonCard key={index} />
-          ))}
+          {cloneComponent({ element: <SkeletonCard />, count: LIMIT })}
         </div>
         <SkeletonPagination />
       </div>
     );
-  };
+  }
 
-  const renderCards = () => {
-    return (
-      <div className={styles.wrapper}>
-        <div className={styles.container}>
-          {pokemonsData &&
-            pokemonsData.map((pokemon, index) => (
-              <Card key={index} pokemon={pokemon} />
-            ))}
-        </div>
-        {pokemonsData && pokemonsData?.length > 1 && (
-          <Pagination
-            currentPage={currentPage}
-            total={total}
-            handlePageChange={handlePageChange}
-          ></Pagination>
-        )}
+  if (error) {
+    return <ErrorState errorMessage={error} />;
+  }
+
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        {pokemonsData &&
+          pokemonsData.map((pokemon, index) => (
+            <Card key={index} pokemon={pokemon} />
+          ))}
       </div>
-    );
-  };
-
-  if (isLoading) {
-    return renderLoadingState();
-  }
-
-  if (errorMessage) {
-    return <ErrorState errorMessage={errorMessage} />;
-  }
-
-  return renderCards();
+      {pokemonsData && pokemonsData?.length > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          total={total || INITIAL_PAGE}
+          handlePageChange={handlePageChange}
+        />
+      )}
+    </div>
+  );
 };
