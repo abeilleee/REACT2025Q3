@@ -13,7 +13,7 @@ describe('Main Page test', () => {
     );
 
     expect(screen.getByRole('textbox')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Refetch' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Refresh' })).toBeInTheDocument();
   });
 
   test('should call api to get all pokemons data', () => {
