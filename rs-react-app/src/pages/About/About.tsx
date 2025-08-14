@@ -41,7 +41,7 @@ const About: FC = () => {
 
   return (
     <>
-      <div className={styles.card} data-testid="about-page">
+      <div className={styles.card}>
         {content}
         <Button onClick={onClick} textContent="Back to main" />
       </div>

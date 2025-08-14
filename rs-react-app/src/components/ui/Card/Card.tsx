@@ -1,6 +1,7 @@
+import Image from 'next/image';
 import { type FC } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { placeholder } from '@/assets/images';
+import { placeholder } from '@/assets';
 import { CheckBox, Description } from '@/components';
 import { useAppDispatch, useIsPokemonSelected } from '@/hooks';
 import { PATHS } from '@/services/router/constants';
@@ -39,7 +40,13 @@ export const Card: FC<CardProps> = ({ pokemon }) => {
         <div className={styles.name}>{pokemon.name}</div>
         <div className={styles['content-box']}>
           <div className={styles['img-box']}>
-            <img src={pokemon.sprites || placeholder} alt={pokemon.name} />
+            <Image
+              src={pokemon.sprites || placeholder}
+              alt={pokemon.name}
+              width={120}
+              height={120}
+              priority
+            />
           </div>
           <Description
             height={pokemon.height}

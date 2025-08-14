@@ -5,7 +5,7 @@ import styles from './SkeletonCard.module.scss';
 
 export const SkeletonCard: FC = () => {
   return (
-    <div className={styles.card} data-testid="skeleton-card">
+    <div className={styles.card}>
       <Skeleton className={styles.text} />
       <Skeleton className={styles.image} />
       {cloneComponent({

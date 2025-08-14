@@ -1,7 +1,8 @@
 import { skipToken } from '@reduxjs/toolkit/query';
+import Image from 'next/image';
 import { type FC } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { placeholder } from '@/assets/images';
+import { placeholder } from '@/assets';
 import { Button, ErrorState, Spinner } from '@/components/ui';
 import { PATHS } from '@/services/router/constants';
 import { useGetPokemonDataQuery } from '@/store/slices/api/pokemonApi';
@@ -37,7 +38,7 @@ export const DetailedCard: FC = () => {
 
   if (error) {
     return (
-      <div className={styles.card} data-testid="error-container">
+      <div className={styles.card}>
         <ErrorState errorMessage={error} />
         <Button onClick={onCLick} textContent="Close" />
       </div>
@@ -46,14 +47,19 @@ export const DetailedCard: FC = () => {
 
   if (pokemon)
     return (
-      <div className={styles.card} data-testid="detailed-card">
+      <div className={styles.card}>
         <div className={styles.title}>
           <span className={styles.name}>{name}</span>
         </div>
         <div className={styles.content}>
           <div className={styles['img-container']}>
             <div className={styles['img-box']}>
-              <img src={pokemon.sprites || placeholder} alt={pokemon.name} />
+              <Image
+                src={pokemon.sprites || placeholder}
+                alt={pokemon.name}
+                width="150"
+                height="150"
+              />
             </div>
             <div className={styles.stats}>
               {pokemon.stats.name.map((stat, idx) => (

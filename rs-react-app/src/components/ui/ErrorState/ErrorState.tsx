@@ -1,7 +1,8 @@
 import { type SerializedError } from '@reduxjs/toolkit';
 import { type FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import Image from 'next/image';
 import { type FC } from 'react';
-import { egg } from '@/assets/images';
+import { egg } from '@/assets';
 import { buildErrorMessage } from '@/utils';
 import styles from './ErrorState.module.scss';
 
@@ -20,7 +21,7 @@ export const ErrorState: FC<ErrorStateProps> = ({ errorMessage }) => {
       ) : (
         <div className={styles['error']}>
           <p className={styles.text}>Oops... {messageToDisplay}</p>
-          <img src={egg} alt="egg" height="170px" />
+          <Image src={egg} alt="egg" height="170" />
           <p className={styles.text}>Please, try again</p>
         </div>
       )}

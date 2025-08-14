@@ -4,7 +4,7 @@ import styles from './Fallback.module.scss';
 
 export const Fallback: FC = () => {
   return (
-    <div className={styles.wrapper} data-testid={'fallback'}>
+    <div className={styles.wrapper}>
       <Spinner />
     </div>
   );

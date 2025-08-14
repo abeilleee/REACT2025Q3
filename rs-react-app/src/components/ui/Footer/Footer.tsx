@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { type FC } from 'react';
 import gh from '@/assets/images/gh.svg';
 import rs from '@/assets/images/rs.svg';
@@ -12,7 +13,7 @@ export const Footer: FC = () => {
         className={styles.icon}
         rel="noreferrer"
       >
-        <img src={rs} alt="icon" />
+        <Image src={rs} alt="icon" />
       </a>
       <div>2025</div>
       <a
@@ -21,7 +22,7 @@ export const Footer: FC = () => {
         className={styles.icon}
         rel="noreferrer"
       >
-        <img src={gh} alt="github" />
+        <Image src={gh} alt="github" />
       </a>
     </footer>
   );

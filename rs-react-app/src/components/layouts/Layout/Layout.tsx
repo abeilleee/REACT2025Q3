@@ -13,9 +13,9 @@ export const Layout: FC = () => {
     : styles.content;
 
   return (
-    <div className={styles.container} data-testid={'layout-container'}>
+    <div className={styles.container}>
       <Header />
-      <main className={mainStyle} data-testid={'layout-main'}>
+      <main className={mainStyle}>
         <Outlet />
       </main>
       <Footer />

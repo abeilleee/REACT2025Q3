@@ -1,5 +1,6 @@
+import Image from 'next/image';
 import { type FC } from 'react';
-import { sun, moon } from '@/assets/images';
+import { sun, moon } from '@/assets';
 import { useTheme } from '@/hooks';
 import { THEME } from '@/utils/constants';
 import styles from './ThemeSwitcher.module.scss';
@@ -22,9 +23,8 @@ export const ThemeSwitcher: FC = () => {
       className={styles.switcher}
       onClick={handleSwitchTheme}
       data-theme={theme}
-      data-testid="switcher"
     >
-      <img src={img} alt="theme" width={35} height={35} />
+      <Image src={img} alt="theme" width="35" height="35" />
     </div>
   );
 };

@@ -30,7 +30,7 @@ export const FlyoutPanel: FC = () => {
   }
 
   return (
-    <div className={styles['flyout-box']} data-testid={'flyout'}>
+    <div className={styles['flyout-box']}>
       <p>Selected pokemon: {selectedNumber}</p>
       <div className={styles['btn-box']}>
         <Button textContent="Unselect all" onClick={onDeselect} />

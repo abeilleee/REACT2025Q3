@@ -1,6 +1,7 @@
+import Image from 'next/image';
 import { type FC } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import logo from '@/assets/images/logo.png';
+import { logo } from '@/assets';
 import { Button, ThemeSwitcher } from '@/components/ui';
 import { PATHS } from '@/services/router/constants';
 import styles from './Header.module.scss';
@@ -17,7 +18,7 @@ export const Header: FC = () => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <img src={logo} alt="logo" />
+        <Image src={logo} alt="logo" priority />
       </div>
       <div className={styles['right-box']}>
         <ThemeSwitcher />
