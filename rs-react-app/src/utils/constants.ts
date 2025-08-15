@@ -10,6 +10,14 @@ export const enum THEME {
   DARK = 'dark',
 }
 
+export const PATHS = {
+  ROOT: '/',
+  ABOUT: '/about',
+  PAGE: '/page',
+  DETAILS: '/pokemon/:name',
+  NOT_FOUND: '*',
+};
+
 // pagination
 export const LIMIT = 12;
 export const INITIAL_PAGE = 1;

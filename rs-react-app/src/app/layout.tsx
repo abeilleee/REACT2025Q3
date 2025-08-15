@@ -1,5 +1,9 @@
 import { Metadata } from 'next';
 import { Mulish } from 'next/font/google';
+import '@/index.scss';
+import 'normalize.css';
+import { Layout } from '@/components';
+import { StoreProvider, ThemeProvider } from '@/shared/providers';
 
 export const metadata: Metadata = {
   title: 'Pokemon',
@@ -18,7 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={mulish.className}>
       <body>
-        <div id="root">{children}</div>
+        <StoreProvider>
+          <ThemeProvider>
+            <Layout>{children}</Layout>
+          </ThemeProvider>
+        </StoreProvider>
       </body>
     </html>
   );

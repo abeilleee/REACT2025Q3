@@ -1,14 +1,15 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { type FC } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui';
-import { PATHS } from '@/services/router/constants';
 import styles from './About.module.scss';
 
 const About: FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const onClick = () => {
-    navigate(PATHS.ROOT);
+    router.back();
   };
 
   const content = (
@@ -40,12 +41,10 @@ const About: FC = () => {
   );
 
   return (
-    <>
-      <div className={styles.card}>
-        {content}
-        <Button onClick={onClick} textContent="Back to main" />
-      </div>
-    </>
+    <div className={styles.card}>
+      {content}
+      <Button onClick={onClick} textContent="Back to main" />
+    </div>
   );
 };
 

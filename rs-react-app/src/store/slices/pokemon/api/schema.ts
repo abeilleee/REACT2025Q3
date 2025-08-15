@@ -7,7 +7,7 @@ const ResultsSchema = z.object({
 
 export const ApiResponseSchema = z.object({
   count: z.number(),
-  next: z.string(),
+  next: z.nullable(z.string()).optional(),
   previous: z.nullable(z.string()).optional(),
   results: z.array(ResultsSchema),
 });

@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState, type Dispatch, type SetStateAction } from 'react';
 import { STORAGE_PREFIX } from '@/utils/constants';
 

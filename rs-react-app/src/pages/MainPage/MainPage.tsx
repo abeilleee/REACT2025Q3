@@ -1,21 +1,22 @@
+'use client';
+
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useState, type FC } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { CardsList, Search, FlyoutPanel, Button } from '@/components';
 import { useAppDispatch, useLocalStorage } from '@/hooks';
-import {
-  pokemonApi,
-  useGetAllPokemonDataQuery,
-} from '@/store/slices/api/pokemonApi';
-import { getCurrentPage } from '@/utils';
-import { STORAGE_KEY, TAGS } from '@/utils/constants';
+import { pokemonApi, useGetAllPokemonDataQuery } from '@/store/slices/pokemon';
+import { INITIAL_PAGE, STORAGE_KEY, TAGS } from '@/utils/constants';
 
-const MainPage: FC = () => {
+export const MainPage: FC = () => {
   const dispatch = useAppDispatch();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useLocalStorage({
     key: STORAGE_KEY.SEARCH_TERM,
   });
-  const [page, setPage] = useState(() => getCurrentPage(searchParams));
+  const [page, setPage] = useState(() =>
+    Number(searchParams?.get('page') ?? INITIAL_PAGE)
+  );
   const {
     data: pokemonData,
     isFetching: isLoading,
@@ -23,8 +24,11 @@ const MainPage: FC = () => {
   } = useGetAllPokemonDataQuery({ page: page, searchTerm: searchTerm.trim() });
 
   const handlePageChange = (newPage: number) => {
+    const params = new URLSearchParams(searchParams?.toString());
+    params.set('page', String(newPage));
+    const newUrl = `?${params.toString()}`;
+    router.push(newUrl);
     setPage(newPage);
-    setSearchParams({ page: String(newPage) });
   };
 
   const invalidateCache = () => {

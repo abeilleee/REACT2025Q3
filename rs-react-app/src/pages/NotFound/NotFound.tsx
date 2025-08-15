@@ -1,25 +1,21 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { type FC } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { notFound } from '@/assets';
 import { Button } from '@/components/ui';
-import { PATHS } from '@/services/router/constants';
+import { PATHS } from '@/utils/constants';
 import styles from './NotFound.module.scss';
 
 const NotFound: FC = () => {
-  const navigate = useNavigate();
-
-  const onClick = () => {
-    navigate(PATHS.ROOT);
-  };
-
   return (
     <div className={styles.wrapper}>
       <p className={styles.text}>Oops! Page not found...</p>
       <div className={styles['img-box']}>
-        <Image src={notFound} alt="pikachu" height="256" />
+        <Image src={notFound} alt="pikachu" width={540} height={256} priority />
       </div>
-      <Button onClick={onClick} textContent="Back to main" />
+      <Link href={PATHS.ROOT}>
+        <Button textContent="Back to main" />
+      </Link>
     </div>
   );
 };

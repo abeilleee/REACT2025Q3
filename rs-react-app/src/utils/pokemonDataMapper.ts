@@ -1,4 +1,4 @@
-import type { Pokemon, PokemonData } from '@/store/slices/api/types';
+import { Pokemon, PokemonData } from '@/store/slices/pokemon';
 
 export const mapDataToPokemonData = (data: Pokemon): PokemonData => {
   const abilities = data.abilities

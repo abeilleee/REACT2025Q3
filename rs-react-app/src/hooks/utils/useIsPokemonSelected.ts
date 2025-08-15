@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
+import { useAppSelector } from '@/store/hooks';
 import { getSelectedPokemons } from '@/store/selectors/pokemonSelector';
-import { useAppSelector } from './reduxHooks';
 
 export const useIsPokemonSelected = (name: string) => {
   const selectedPokemons = useAppSelector(getSelectedPokemons);

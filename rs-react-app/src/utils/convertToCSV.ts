@@ -1,4 +1,4 @@
-import type { PokemonData } from '@/store/slices/api/types';
+import { PokemonData } from '@/store/slices/pokemon';
 
 export const convertToCSV = (data: PokemonData[]) => {
   const titles = Object.keys(data[0]).join(',');

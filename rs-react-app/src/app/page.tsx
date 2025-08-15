@@ -1,11 +1,7 @@
-import '@/index.scss';
-import 'normalize.css';
-import { ClientOnly } from './client';
+import dynamic from 'next/dynamic';
 
-export function generateStaticParams() {
-  return [{ slug: ['./'] }];
-}
+const MainPage = dynamic(() => import('@/pages/MainPage/MainPage'));
 
 export default function Page() {
-  return <ClientOnly />;
+  return <MainPage />;
 }
