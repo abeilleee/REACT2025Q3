@@ -13,7 +13,7 @@ export const Footer: FC = () => {
         className={styles.icon}
         rel="noreferrer"
       >
-        <Image src={rs} alt="icon" />
+        <Image src={rs} alt="icon" priority />
       </a>
       <div>2025</div>
       <a
@@ -22,7 +22,7 @@ export const Footer: FC = () => {
         className={styles.icon}
         rel="noreferrer"
       >
-        <Image src={gh} alt="github" />
+        <Image src={gh} alt="github" priority />
       </a>
     </footer>
   );

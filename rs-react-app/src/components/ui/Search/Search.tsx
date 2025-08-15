@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, type FC } from 'react';
 import { Button } from '@/components/ui';
 import styles from './Search.module.scss';

@@ -24,7 +24,7 @@ export const ThemeSwitcher: FC = () => {
       onClick={handleSwitchTheme}
       data-theme={theme}
     >
-      <Image src={img} alt="theme" width="35" height="35" />
+      <Image src={img} alt="theme" width={35} height={35} />
     </div>
   );
 };

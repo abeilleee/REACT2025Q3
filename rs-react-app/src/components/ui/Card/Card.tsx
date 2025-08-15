@@ -1,13 +1,18 @@
+'use client';
+
 import Image from 'next/image';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { type FC } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 import { placeholder } from '@/assets';
 import { CheckBox, Description } from '@/components';
 import { useAppDispatch, useIsPokemonSelected } from '@/hooks';
-import { PATHS } from '@/services/router/constants';
-import { deselectPokemon, selectPokemon } from '@/store';
-import type { PokemonData } from '@/store/slices/api/types';
-import { getCurrentPage } from '@/utils';
+import { PokemonData } from '@/store/slices/pokemon';
+import {
+  deselectPokemon,
+  selectPokemon,
+} from '@/store/slices/pokemon/pokemonSlice';
+import { INITIAL_PAGE } from '@/utils/constants';
 import styles from './Card.module.scss';
 
 type CardProps = {
@@ -15,16 +20,10 @@ type CardProps = {
 };
 
 export const Card: FC<CardProps> = ({ pokemon }) => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const isSelected = useIsPokemonSelected(pokemon.name);
-  const [searchParams] = useSearchParams();
-
-  const onClick = () => {
-    const currentPage = getCurrentPage(searchParams);
-    const url = `${PATHS.DETAILS.replace(':name', pokemon.name)}`;
-    navigate(`${url}?page=${currentPage}`);
-  };
+  const searchParams = useSearchParams();
+  const currentPage = searchParams?.get('page') ?? INITIAL_PAGE;
 
   const onSelect = () => {
     if (isSelected) {
@@ -35,27 +34,34 @@ export const Card: FC<CardProps> = ({ pokemon }) => {
   };
 
   return (
-    <div className={styles.card} onClick={onClick}>
-      <div className={styles.content}>
-        <div className={styles.name}>{pokemon.name}</div>
-        <div className={styles['content-box']}>
-          <div className={styles['img-box']}>
-            <Image
-              src={pokemon.sprites || placeholder}
-              alt={pokemon.name}
-              width={120}
-              height={120}
-              priority
+    <Link
+      href={{
+        pathname: `/pokemon/${pokemon.name}`,
+        query: { page: currentPage },
+      }}
+    >
+      <div className={styles.card}>
+        <div className={styles.content}>
+          <div className={styles.name}>{pokemon.name}</div>
+          <div className={styles['content-box']}>
+            <div className={styles['img-box']}>
+              <Image
+                src={pokemon.sprites || placeholder}
+                alt={pokemon.name}
+                width={120}
+                height={120}
+                priority
+              />
+            </div>
+            <Description
+              height={pokemon.height}
+              weight={pokemon.weight}
+              abilities={pokemon.abilities}
             />
           </div>
-          <Description
-            height={pokemon.height}
-            weight={pokemon.weight}
-            abilities={pokemon.abilities}
-          />
+          <CheckBox onChange={onSelect} checked={isSelected} />
         </div>
-        <CheckBox onChange={onSelect} checked={isSelected} />
       </div>
-    </div>
+    </Link>
   );
 };

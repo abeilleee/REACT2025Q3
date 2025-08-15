@@ -1,8 +1,10 @@
+'use client';
+
 import { useEffect, useState, type FC } from 'react';
 import { Button } from '@/components/ui';
 import { useAppDispatch, useAppSelector } from '@/hooks';
-import { deselectAllPokemons, getSelectedPokemons } from '@/store';
-import { type PokemonData } from '@/store/slices/api/types';
+import { getSelectedPokemons } from '@/store/selectors/pokemonSelector';
+import { deselectAllPokemons, PokemonData } from '@/store/slices/pokemon';
 import { convertToCSV } from '@/utils';
 import styles from './FlyoutPanel.module.scss';
 

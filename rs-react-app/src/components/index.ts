@@ -16,3 +16,4 @@ export {
   Spinner,
   FlyoutPanel,
 } from './ui';
+export { ErrorFallback, Fallback } from './common';

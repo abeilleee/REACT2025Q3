@@ -1,12 +1,18 @@
-import { type FC } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+'use client';
+
+import { usePathname } from 'next/navigation';
+import { ReactNode, type FC } from 'react';
 import { Footer, Header } from '@/components/ui';
-import { PATHS } from '@/services/router/constants';
+import { PATHS } from '@/utils/constants';
 import styles from './Layout.module.scss';
 
-export const Layout: FC = () => {
-  const location = useLocation();
-  const isRoot = location.pathname === PATHS.ROOT;
+interface LayoutProps {
+  children: ReactNode;
+}
+
+export const Layout: FC<LayoutProps> = ({ children }) => {
+  const path = usePathname();
+  const isRoot = path === PATHS.ROOT;
 
   const mainStyle = isRoot
     ? `${styles.content} ${styles['content-flex-start']}`
@@ -15,9 +21,7 @@ export const Layout: FC = () => {
   return (
     <div className={styles.container}>
       <Header />
-      <main className={mainStyle}>
-        <Outlet />
-      </main>
+      <main className={mainStyle}>{children}</main>
       <Footer />
     </div>
   );

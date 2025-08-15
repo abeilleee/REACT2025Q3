@@ -1,5 +1,5 @@
-import { type SerializedError } from '@reduxjs/toolkit';
-import { type FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { type FC } from 'react';
 import {
   Card,
@@ -8,8 +8,7 @@ import {
   SkeletonCard,
   SkeletonPagination,
 } from '@/components';
-import { useGetPokemonCountQuery } from '@/store/slices/api/pokemonApi';
-import type { PokemonData } from '@/store/slices/api/types';
+import { PokemonData, useGetPokemonCountQuery } from '@/store/slices/pokemon';
 import { cloneComponent } from '@/utils';
 import { INITIAL_PAGE, LIMIT } from '@/utils/constants';
 import styles from './CardsList.module.scss';
@@ -50,8 +49,8 @@ export const CardsList: FC<CardsListProps> = ({
     <div className={styles.wrapper}>
       <div className={styles.container}>
         {pokemonsData &&
-          pokemonsData.map((pokemon, index) => (
-            <Card key={index} pokemon={pokemon} />
+          pokemonsData.map((pokemonsData, index) => (
+            <Card key={index} pokemon={pokemonsData} />
           ))}
       </div>
       {pokemonsData && pokemonsData?.length > 1 && (

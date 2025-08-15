@@ -12,7 +12,7 @@ export const ErrorFallback: FC = () => {
   return (
     <div className={styles.wrapper}>
       <p className={styles.title}>Oops! It seems there was an error...</p>
-      <Image src={pikachu} alt="pikachu" height="256" priority />
+      <Image src={pikachu} alt="pikachu" height={256} priority />
       <p className={styles.text}>Try to reload the page</p>
       <Button onClick={onClick} textContent="Reload" />
     </div>

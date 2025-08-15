@@ -21,7 +21,7 @@ export const ErrorState: FC<ErrorStateProps> = ({ errorMessage }) => {
       ) : (
         <div className={styles['error']}>
           <p className={styles.text}>Oops... {messageToDisplay}</p>
-          <Image src={egg} alt="egg" height="170" />
+          <Image src={egg} alt="egg" height={170} priority />
           <p className={styles.text}>Please, try again</p>
         </div>
       )}

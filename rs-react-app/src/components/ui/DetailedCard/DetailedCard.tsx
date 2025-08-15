@@ -1,31 +1,39 @@
+'use client';
+
 import { skipToken } from '@reduxjs/toolkit/query';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useParams, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { type FC } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { placeholder } from '@/assets';
 import { Button, ErrorState, Spinner } from '@/components/ui';
-import { PATHS } from '@/services/router/constants';
-import { useGetPokemonDataQuery } from '@/store/slices/api/pokemonApi';
-import { getCurrentPage } from '@/utils';
+import { useGetPokemonDataQuery } from '@/store/slices/pokemon';
+import { PATHS } from '@/utils/constants';
 import styles from './DetailedCard.module.scss';
 
 const MAX_VALUE = 200;
 
 export const DetailedCard: FC = () => {
-  const { name } = useParams();
-  const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const router = useRouter();
+  const params = useParams();
+  const searchParams = useSearchParams();
+  const name = params?.name as string;
+
   const {
     data: pokemon,
     isFetching: isLoading,
     error,
     refetch,
   } = useGetPokemonDataQuery(name ?? skipToken);
-  const currentPage = getCurrentPage(searchParams);
 
-  const onCLick = () => {
-    navigate(PATHS.ROOT);
-    setSearchParams({ page: String(currentPage) });
+  const onClick = () => {
+    const page = searchParams?.get('page');
+    let returnUrl = '/pokemon';
+    if (page) {
+      returnUrl = `/?page=${page}`;
+    }
+    router.push(returnUrl);
   };
 
   if (isLoading) {
@@ -40,7 +48,9 @@ export const DetailedCard: FC = () => {
     return (
       <div className={styles.card}>
         <ErrorState errorMessage={error} />
-        <Button onClick={onCLick} textContent="Close" />
+        <Link href={PATHS.ROOT}>
+          <Button textContent="Close" />
+        </Link>
       </div>
     );
   }
@@ -57,8 +67,9 @@ export const DetailedCard: FC = () => {
               <Image
                 src={pokemon.sprites || placeholder}
                 alt={pokemon.name}
-                width="150"
-                height="150"
+                width={150}
+                height={150}
+                priority
               />
             </div>
             <div className={styles.stats}>
@@ -82,7 +93,7 @@ export const DetailedCard: FC = () => {
           </div>
         </div>
         <div className={styles.bottom}>
-          <Button onClick={onCLick} textContent="Close" />
+          <Button onClick={onClick} textContent="Close" />
           <Button onClick={refetch} textContent="Refetch" />
         </div>
       </div>
