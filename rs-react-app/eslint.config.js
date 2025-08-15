@@ -41,7 +41,7 @@ export default tseslint.config([
         'warn',
         {
           allowConstantExport: true,
-          allowExportNames: ['metadata', 'generateStaticParams'],
+          allowExportNames: ['metadata'],
         },
       ],
       'react-compiler/react-compiler': 'error',
