@@ -1,3 +1,5 @@
+'use client';
+
 import { useMemo } from 'react';
 import { useAppSelector } from '@/store/hooks';
 import { getSelectedPokemons } from '@/store/selectors/pokemonSelector';

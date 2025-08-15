@@ -3,15 +3,15 @@
 import '@/index.scss';
 import 'normalize.css';
 import { ErrorFallback } from '@/components';
-import { ThemeProvider } from '@/shared/providers';
+import { Providers } from './Providers';
 
 export default function GlobalError() {
   return (
     <html>
       <body>
-        <ThemeProvider>
+        <Providers>
           <ErrorFallback />
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
