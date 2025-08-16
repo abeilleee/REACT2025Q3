@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { type FC } from 'react';
 import { Button } from '@/components/ui';
+import { Link } from '@/i18n/navigation';
 import { PATHS } from '@/utils/constants';
 import styles from './About.module.scss';
 
@@ -19,25 +20,25 @@ const About: FC = () => {
     <p className={styles.text}>
       {t('firstLine')}
       <br />
-      <a
+      <Link
         href="https://github.com/abeilleee"
         className={styles.link}
         target="_blank"
         rel="noopener noreferrer"
       >
         abeilleee
-      </a>
+      </Link>
       <br />
       {t('secondLine')}
       <br />
-      <a
+      <Link
         href="https://rs.school/courses/reactjs"
         className={styles.link}
         target="_blank"
         rel="noopener noreferrer"
       >
         REACT2025Q3
-      </a>
+      </Link>
       <br />
       {t('thirdLine')}
     </p>

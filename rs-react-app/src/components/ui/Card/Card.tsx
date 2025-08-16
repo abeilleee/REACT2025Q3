@@ -1,12 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+
 import { useSearchParams } from 'next/navigation';
 import { type FC } from 'react';
 import { placeholder } from '@/assets';
 import { CheckBox, Description } from '@/components';
 import { useAppDispatch, useIsPokemonSelected } from '@/hooks';
+import { Link } from '@/i18n/navigation';
 import { PokemonData } from '@/store/slices/pokemon';
 import {
   deselectPokemon,

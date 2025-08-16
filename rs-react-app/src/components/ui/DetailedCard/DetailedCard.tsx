@@ -2,25 +2,23 @@
 
 import { skipToken } from '@reduxjs/toolkit/query';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useParams, useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { type FC } from 'react';
 import { placeholder } from '@/assets';
 import { Button, ErrorState, Spinner } from '@/components/ui';
+import { Link } from '@/i18n/navigation';
 import { useGetPokemonDataQuery } from '@/store/slices/pokemon';
-import { PATHS } from '@/utils/constants';
 import styles from './DetailedCard.module.scss';
 
 const MAX_VALUE = 200;
 
 export const DetailedCard: FC = () => {
-  const router = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();
   const t = useTranslations('DetailedCard');
   const name = params?.name as string;
+  const page = searchParams.get('page');
 
   const {
     data: pokemon,
@@ -28,15 +26,6 @@ export const DetailedCard: FC = () => {
     error,
     refetch,
   } = useGetPokemonDataQuery(name ?? skipToken);
-
-  const onClick = () => {
-    const page = searchParams?.get('page');
-    let returnUrl = '/pokemon';
-    if (page) {
-      returnUrl = `/?page=${page}`;
-    }
-    router.push(returnUrl);
-  };
 
   if (isLoading) {
     return (
@@ -50,8 +39,8 @@ export const DetailedCard: FC = () => {
     return (
       <div className={styles.card}>
         <ErrorState errorMessage={error} />
-        <Link href={PATHS.ROOT}>
-          <Button textContent={t('close')} />
+        <Link href={`/?page=${page}`} className="link">
+          {t('close')}
         </Link>
       </div>
     );
@@ -95,7 +84,9 @@ export const DetailedCard: FC = () => {
           </div>
         </div>
         <div className={styles.bottom}>
-          <Button onClick={onClick} textContent={t('close')} />
+          <Link href={`/?page=${page}`} className="link">
+            {t('close')}
+          </Link>
           <Button onClick={refetch} textContent={t('refetch')} />
         </div>
       </div>
