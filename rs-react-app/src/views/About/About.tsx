@@ -1,20 +1,23 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { type FC } from 'react';
 import { Button } from '@/components/ui';
+import { PATHS } from '@/utils/constants';
 import styles from './About.module.scss';
 
 const About: FC = () => {
   const router = useRouter();
+  const t = useTranslations('AboutPage');
 
   const onClick = () => {
-    router.back();
+    router.push(PATHS.ROOT);
   };
 
   const content = (
     <p className={styles.text}>
-      The application was made by
+      {t('firstLine')}
       <br />
       <a
         href="https://github.com/abeilleee"
@@ -25,7 +28,7 @@ const About: FC = () => {
         abeilleee
       </a>
       <br />
-      as part of the
+      {t('secondLine')}
       <br />
       <a
         href="https://rs.school/courses/reactjs"
@@ -36,14 +39,14 @@ const About: FC = () => {
         REACT2025Q3
       </a>
       <br />
-      course
+      {t('thirdLine')}
     </p>
   );
 
   return (
     <div className={styles.card}>
       {content}
-      <Button onClick={onClick} textContent="Back to main" />
+      <Button onClick={onClick} textContent={t('button')} />
     </div>
   );
 };

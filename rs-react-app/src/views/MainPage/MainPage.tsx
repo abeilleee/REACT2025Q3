@@ -1,6 +1,7 @@
 'use client';
 
 import { useSearchParams, useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useState, type FC } from 'react';
 import { CardsList, Search, FlyoutPanel, Button } from '@/components';
 import { useAppDispatch, useLocalStorage } from '@/hooks';
@@ -11,6 +12,7 @@ export const MainPage: FC = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const t = useTranslations('MainPage');
   const [searchTerm, setSearchTerm] = useLocalStorage({
     key: STORAGE_KEY.SEARCH_TERM,
   });
@@ -46,7 +48,7 @@ export const MainPage: FC = () => {
         handlePageChange={handlePageChange}
       />
       <FlyoutPanel />
-      <Button textContent="Refresh" onClick={invalidateCache} />
+      <Button textContent={t('refresh')} onClick={invalidateCache} />
     </>
   );
 };

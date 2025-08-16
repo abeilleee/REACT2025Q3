@@ -3,15 +3,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { type FC } from 'react';
 import { logo } from '@/assets';
-import { Button, ThemeSwitcher } from '@/components/ui';
+import { Button, ThemeSwitcher, LangSwitcher } from '@/components';
 import { PATHS } from '@/utils/constants';
 import styles from './Header.module.scss';
 
 export const Header: FC = () => {
   const path = usePathname();
-  const isAboutPage = path === PATHS.ABOUT;
+  const t = useTranslations('Header');
+  const isAboutPage = path.includes(PATHS.ABOUT);
 
   return (
     <header className={styles.header}>
@@ -19,10 +21,11 @@ export const Header: FC = () => {
         <Image src={logo} alt="logo" priority />
       </div>
       <div className={styles['right-box']}>
+        <LangSwitcher />
         <ThemeSwitcher />
         {!isAboutPage && (
           <Link href={PATHS.ABOUT}>
-            <Button textContent="About" />
+            <Button textContent={t('button')} />
           </Link>
         )}
       </div>

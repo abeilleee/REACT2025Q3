@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { type FC } from 'react';
 import { placeholder } from '@/assets';
 import { Button, ErrorState, Spinner } from '@/components/ui';
@@ -18,6 +19,7 @@ export const DetailedCard: FC = () => {
   const router = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();
+  const t = useTranslations('DetailedCard');
   const name = params?.name as string;
 
   const {
@@ -49,7 +51,7 @@ export const DetailedCard: FC = () => {
       <div className={styles.card}>
         <ErrorState errorMessage={error} />
         <Link href={PATHS.ROOT}>
-          <Button textContent="Close" />
+          <Button textContent={t('close')} />
         </Link>
       </div>
     );
@@ -93,8 +95,8 @@ export const DetailedCard: FC = () => {
           </div>
         </div>
         <div className={styles.bottom}>
-          <Button onClick={onClick} textContent="Close" />
-          <Button onClick={refetch} textContent="Refetch" />
+          <Button onClick={onClick} textContent={t('close')} />
+          <Button onClick={refetch} textContent={t('refetch')} />
         </div>
       </div>
     );

@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useEffect, useState, type FC } from 'react';
 import { Button } from '@/components/ui';
 import { useAppDispatch, useAppSelector } from '@/hooks';
@@ -13,6 +14,7 @@ export const FlyoutPanel: FC = () => {
   const dispatch = useAppDispatch();
   const selectedNumber = selectedPokemons.length;
   const [isVisible, setIsVisible] = useState(selectedNumber > 0);
+  const t = useTranslations('Flyout');
 
   useEffect(() => {
     setIsVisible(selectedNumber > 0);
@@ -35,14 +37,14 @@ export const FlyoutPanel: FC = () => {
     <div className={styles['flyout-box']}>
       <p>Selected pokemon: {selectedNumber}</p>
       <div className={styles['btn-box']}>
-        <Button textContent="Unselect all" onClick={onDeselect} />
+        <Button textContent={t('unselect')} onClick={onDeselect} />
         {selectedNumber > 0 && (
           <a
             className={styles.link}
             href={onDownLoad(selectedPokemons)}
             download={`${selectedNumber}_items.csv`}
           >
-            Download
+            {t('download')}
           </a>
         )}
       </div>

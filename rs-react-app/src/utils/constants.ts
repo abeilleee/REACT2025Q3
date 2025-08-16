@@ -10,6 +10,11 @@ export const enum THEME {
   DARK = 'dark',
 }
 
+export const enum LANGUAGE {
+  EN = 'en',
+  DE = 'de',
+}
+
 export const PATHS = {
   ROOT: '/',
   ABOUT: '/about',

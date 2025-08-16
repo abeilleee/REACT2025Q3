@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useState, type FC } from 'react';
 import { Button } from '@/components/ui';
 import styles from './Search.module.scss';
@@ -11,6 +12,7 @@ type SearchProps = {
 
 export const Search: FC<SearchProps> = ({ searchTerm, setSearchTerm }) => {
   const [value, setCurrentValue] = useState(searchTerm);
+  const t = useTranslations('Search');
 
   const onClick = () => {
     setSearchTerm(value);
@@ -29,12 +31,12 @@ export const Search: FC<SearchProps> = ({ searchTerm, setSearchTerm }) => {
     <div className={styles['search-box']}>
       <input
         type="text"
-        placeholder="Enter the full pokemon name"
+        placeholder={t('placeholder')}
         onChange={onChange}
         onKeyDown={onKeyDown}
         value={value}
       />
-      <Button onClick={onClick} textContent="Search" />
+      <Button onClick={onClick} textContent={t('search')} />
     </div>
   );
 };
