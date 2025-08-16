@@ -16,7 +16,9 @@ export const useLocalStorage = ({
 }: UseLocalStorageProps): UseLocalStorageResult => {
   const storageKey = `${STORAGE_PREFIX}__${key}`;
   const [storedValue, setStoredValue] = useState(
-    localStorage.getItem(storageKey) || initialValue
+    typeof window === 'undefined'
+      ? initialValue
+      : localStorage.getItem(storageKey) || initialValue
   );
 
   useEffect(() => {

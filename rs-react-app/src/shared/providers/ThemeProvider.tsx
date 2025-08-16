@@ -22,7 +22,7 @@ export const ThemeProvider = (props: Props) => {
   return (
     <ThemeContext.Provider
       value={{
-        theme: currentTheme,
+        theme: currentTheme === String(THEME.LIGHT) ? THEME.LIGHT : THEME.DARK,
         setTheme: setCurrentTheme,
       }}
     >
