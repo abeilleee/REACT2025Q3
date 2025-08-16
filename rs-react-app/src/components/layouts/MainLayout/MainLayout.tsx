@@ -1,5 +1,5 @@
 import { ReactNode, type FC } from 'react';
-import MainPage from '@/pages/MainPage/MainPage';
+import MainPage from '@/views/MainPage/MainPage';
 import styles from './MainLayout.module.scss';
 interface MainLayoutProps {
   children: ReactNode;
