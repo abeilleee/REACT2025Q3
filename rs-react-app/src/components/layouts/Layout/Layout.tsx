@@ -12,7 +12,7 @@ interface LayoutProps {
 
 export const Layout: FC<LayoutProps> = ({ children }) => {
   const path = usePathname();
-  const isRoot = path.includes(PATHS.ROOT);
+  const isRoot = !path.includes(PATHS.ABOUT);
 
   const mainStyle = isRoot
     ? `${styles.content} ${styles['content-flex-start']}`
