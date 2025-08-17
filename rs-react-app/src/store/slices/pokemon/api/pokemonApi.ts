@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { mapDataToPokemonData } from '@/utils';
 import { BASE_ENDPOINT, BASE_URL, TAGS } from '@/utils/constants';
-import { customQueryFn, type customQueryFnArgs } from './pokemonQueries';
 import { ApiResponseSchema, PokemonSchema } from './schema';
 import type { ApiResponse, Pokemon, PokemonData } from './types';
 
@@ -22,15 +21,7 @@ export const pokemonApi = createApi({
       transformResponse: (response: ApiResponse) => response.count,
       providesTags: [TAGS.POKEMON_DATA],
     }),
-    getAllPokemonData: build.query<PokemonData[], customQueryFnArgs>({
-      queryFn: customQueryFn,
-      providesTags: [TAGS.POKEMON_DATA],
-    }),
   }),
 });
 
-export const {
-  useGetPokemonDataQuery,
-  useGetPokemonCountQuery,
-  useGetAllPokemonDataQuery,
-} = pokemonApi;
+export const { useGetPokemonDataQuery, useGetPokemonCountQuery } = pokemonApi;

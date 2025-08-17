@@ -2,14 +2,10 @@
   "Header": {
     "button": "About"
   },
-  "MainPage": {
-    "search": "Search",
-    "refresh": "Refresh",
-    "close": "Close"
-  },
   "DetailedCard": {
     "refetch": "Refetch",
-    "close": "Close"
+    "close": "Close",
+    "refresh": "Refresh"
   },
   "AboutPage": {
     "firstLine": "The application was made by",
@@ -40,5 +36,8 @@
   "Search": {
     "placeholder": "Enter the full pokemon name",
     "search": "Search"
+  },
+  "CardList": {
+    "refresh": "Refresh"
   }
 }

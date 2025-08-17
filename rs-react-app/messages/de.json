@@ -2,13 +2,10 @@
   "Header": {
     "button": "Über die App"
   },
-  "MainPage": {
-    "search": "Suchen",
-    "refresh": "Aktualisieren"
-  },
   "DetailedCard": {
     "refetch": "Neu laden",
-    "close": "Schließen"
+    "close": "Schließen",
+    "refresh": "Refresh"
   },
   "AboutPage": {
     "firstLine": "Die Anwendung wurde erstellt von",
@@ -39,5 +36,8 @@
   "Search": {
     "placeholder": "Pokémon-Namen vollständig eingeben",
     "search": "Suchen"
+  },
+  "CardList": {
+    "refresh": "Aktualisieren"
   }
 }

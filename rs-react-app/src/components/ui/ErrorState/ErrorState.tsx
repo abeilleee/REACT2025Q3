@@ -8,7 +8,7 @@ import { buildErrorMessage } from '@/utils';
 import styles from './ErrorState.module.scss';
 
 type ErrorStateProps = {
-  errorMessage: FetchBaseQueryError | SerializedError;
+  errorMessage: FetchBaseQueryError | SerializedError | string;
 };
 
 export const ErrorState: FC<ErrorStateProps> = ({ errorMessage }) => {

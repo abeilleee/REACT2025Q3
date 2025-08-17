@@ -1,56 +1,24 @@
-'use client';
+import { ReturnData } from '@/app/api/fetchData';
+import { CardsList, Search, FlyoutPanel } from '@/components';
 
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
-import { useState, type FC } from 'react';
-import { CardsList, Search, FlyoutPanel, Button } from '@/components';
-import { useAppDispatch, useLocalStorage } from '@/hooks';
-import { pokemonApi, useGetAllPokemonDataQuery } from '@/store/slices/pokemon';
-import { INITIAL_PAGE, STORAGE_KEY, TAGS } from '@/utils/constants';
+type MainPageProps = {
+  searchTerm: string;
+  currentPage: number;
+  fetchData: ReturnData;
+};
 
-export const MainPage: FC = () => {
-  const dispatch = useAppDispatch();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const t = useTranslations('MainPage');
-  const [searchTerm, setSearchTerm] = useLocalStorage({
-    key: STORAGE_KEY.SEARCH_TERM,
-  });
-  const [page, setPage] = useState(() =>
-    Number(searchParams?.get('page') ?? INITIAL_PAGE)
-  );
-  const {
-    data: pokemonData,
-    isFetching: isLoading,
-    error,
-  } = useGetAllPokemonDataQuery({ page: page, searchTerm: searchTerm.trim() });
-
-  const handlePageChange = (newPage: number) => {
-    const params = new URLSearchParams(searchParams?.toString());
-    params.set('page', String(newPage));
-    const newUrl = `?${params.toString()}`;
-    router.push(newUrl);
-    setPage(newPage);
-  };
-
-  const invalidateCache = () => {
-    dispatch(pokemonApi.util.invalidateTags([{ type: TAGS.POKEMON_DATA }]));
-  };
-
+export function MainPage({
+  searchTerm,
+  currentPage,
+  fetchData,
+}: MainPageProps) {
   return (
     <>
-      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <CardsList
-        pokemonsData={pokemonData}
-        isLoading={isLoading}
-        error={error}
-        currentPage={page}
-        handlePageChange={handlePageChange}
-      />
+      <Search searchTerm={searchTerm} />
+      <CardsList fetchData={fetchData} currentPage={currentPage} />
       <FlyoutPanel />
-      <Button textContent={t('refresh')} onClick={invalidateCache} />
     </>
   );
-};
+}
 
 export default MainPage;
