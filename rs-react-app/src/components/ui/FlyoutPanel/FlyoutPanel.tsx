@@ -5,8 +5,8 @@ import { useEffect, useState, type FC } from 'react';
 import { Button } from '@/components/ui';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { getSelectedPokemons } from '@/store/selectors/pokemonSelector';
-import { deselectAllPokemons, PokemonData } from '@/store/slices/pokemon';
-import { convertToCSV } from '@/utils';
+import { deselectAllPokemons } from '@/store/slices/pokemon';
+import { downloadFile } from '@/utils/downloadFile';
 import styles from './FlyoutPanel.module.scss';
 
 export const FlyoutPanel: FC = () => {
@@ -24,11 +24,6 @@ export const FlyoutPanel: FC = () => {
     dispatch(deselectAllPokemons());
   };
 
-  const onDownLoad = (data: PokemonData[]) => {
-    const blob = new Blob([convertToCSV(data)], { type: 'application/csv' });
-    return URL.createObjectURL(blob);
-  };
-
   if (!isVisible) {
     return;
   }
@@ -39,13 +34,10 @@ export const FlyoutPanel: FC = () => {
       <div className={styles['btn-box']}>
         <Button textContent={t('unselect')} onClick={onDeselect} />
         {selectedNumber > 0 && (
-          <a
-            className={styles.link}
-            href={onDownLoad(selectedPokemons)}
-            download={`${selectedNumber}_items.csv`}
-          >
-            {t('download')}
-          </a>
+          <Button
+            textContent={t('download')}
+            onClick={() => downloadFile(selectedPokemons)}
+          />
         )}
       </div>
     </div>
