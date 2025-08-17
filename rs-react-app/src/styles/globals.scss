@@ -15,3 +15,30 @@ input {
 a {
   text-decoration-line: none;
 }
+
+.link {
+  width: 120px;
+  padding: var(--padding-base);
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  box-shadow: var(--btn-box-shadow);
+  color: var(--white);
+  text-align: center;
+  transition: all 0.3s;
+
+  &:active {
+    background-color: var(--active-color);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--hover-color);
+      cursor: pointer;
+    }
+  }
+}

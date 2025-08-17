@@ -1,0 +1,43 @@
+{
+  "Header": {
+    "button": "About"
+  },
+  "DetailedCard": {
+    "refetch": "Refetch",
+    "close": "Close",
+    "refresh": "Refresh"
+  },
+  "AboutPage": {
+    "firstLine": "The application was made by",
+    "secondLine": "as part of the",
+    "thirdLine": "course",
+    "button": "Back to main"
+  },
+  "NotFoundPage": {
+    "notFound": "Page not found...",
+    "back": "Back to main"
+  },
+  "ErrorState": {
+    "noResults": "No results found",
+    "msg": "Please, try again"
+  },
+  "ErrorFallback": {
+    "title": "Oops! It seems there was an error...",
+    "paragraph": "Try to reload the page",
+    "reload": "Reload"
+  },
+  "Common": {
+    "loading": "Loading..."
+  },
+  "Flyout": {
+    "unselect": "Unselect",
+    "download": "Download"
+  },
+  "Search": {
+    "placeholder": "Enter the full pokemon name",
+    "search": "Search"
+  },
+  "CardList": {
+    "refresh": "Refresh"
+  }
+}

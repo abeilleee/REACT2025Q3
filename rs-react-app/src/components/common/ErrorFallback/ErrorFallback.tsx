@@ -1,19 +1,23 @@
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { type FC } from 'react';
-import img from '@/assets/images/pikachu.png';
+import { pikachu } from '@/assets';
 import { Button } from '@/components/ui';
 import styles from './ErrorFallback.module.scss';
 
 export const ErrorFallback: FC = () => {
+  const t = useTranslations('ErrorFallback');
+
   const onClick = () => {
     window.location.reload();
   };
 
   return (
     <div className={styles.wrapper}>
-      <p className={styles.title}>Oops! It seems there was an error...</p>
-      <img src={img} alt="pikachu" height="256px" />
-      <p className={styles.text}>Try to reload the page</p>
-      <Button onClick={onClick} textContent="Reload" />
+      <p className={styles.title}>{t('title')}</p>
+      <Image src={pikachu} alt="pikachu" height={256} priority />
+      <p className={styles.text}>{t('paragraph')}</p>
+      <Button onClick={onClick} textContent={t('reload')} />
     </div>
   );
 };

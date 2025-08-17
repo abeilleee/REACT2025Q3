@@ -3,8 +3,11 @@ import { type FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { DEFAULT_ERROR, ERROR, ERROR_STATUS, STATUS_CODE } from './constants';
 
 export const buildErrorMessage = (
-  error: FetchBaseQueryError | SerializedError
+  error: FetchBaseQueryError | SerializedError | string
 ) => {
+  if (typeof error === 'string') {
+    return error;
+  }
   if ('status' in error) {
     if (typeof error.status === 'string')
       if (ERROR_STATUS.includes(error.status)) return error.error;

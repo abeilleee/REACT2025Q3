@@ -1,6 +1,9 @@
-import type { PokemonData } from '@/store/slices/api/types';
+'use server';
 
-export const convertToCSV = (data: PokemonData[]) => {
+import { PokemonData } from '@/store/slices/pokemon';
+
+/* eslint-disable @typescript-eslint/require-await */
+export const convertToCSV = async (data: PokemonData[]) => {
   const titles = Object.keys(data[0]).join(',');
 
   const formatStats = (name: string[], base: number[]) => {

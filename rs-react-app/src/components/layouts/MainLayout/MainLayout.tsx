@@ -1,20 +1,31 @@
-import { type FC } from 'react';
-import { Outlet } from 'react-router-dom';
-import { MainPage } from '@/pages';
+import { ReactNode, type FC } from 'react';
+import { ReturnedData } from '@/app/api/fetchData';
+import MainPage from '@/views/MainPage/MainPage';
 import styles from './MainLayout.module.scss';
 
-export const MainLayout: FC = () => {
+interface MainLayoutProps {
+  children: ReactNode;
+  searchTerm: string;
+  currentPage: number;
+  fetchData: ReturnedData;
+}
+
+export const MainLayout: FC<MainLayoutProps> = ({
+  children,
+  searchTerm,
+  fetchData,
+  currentPage,
+}) => {
   return (
     <div className={styles.wrapper}>
-      <div
-        className={styles['search-container']}
-        data-testid="search-container"
-      >
-        <MainPage />
+      <div className={styles['search-container']}>
+        <MainPage
+          searchTerm={searchTerm}
+          fetchData={fetchData}
+          currentPage={currentPage}
+        />
       </div>
-      <section className={styles.details} data-testid="section">
-        <Outlet />
-      </section>
+      <section className={styles.details}>{children}</section>
     </div>
   );
 };

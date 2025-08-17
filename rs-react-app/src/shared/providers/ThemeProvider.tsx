@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, type ReactNode } from 'react';
 import { useLocalStorage } from '@/hooks';
 import { ThemeContext } from '@/shared/context';
@@ -20,7 +22,7 @@ export const ThemeProvider = (props: Props) => {
   return (
     <ThemeContext.Provider
       value={{
-        theme: currentTheme,
+        theme: currentTheme === String(THEME.LIGHT) ? THEME.LIGHT : THEME.DARK,
         setTheme: setCurrentTheme,
       }}
     >

@@ -1,8 +1,10 @@
+'use client';
+
 import { createContext } from 'react';
 import { THEME } from '@/utils/constants';
 
 interface ThemeContextProps {
-  theme: string;
+  theme: THEME;
   setTheme: (theme: THEME) => void;
 }
 

@@ -16,3 +16,6 @@ export {
   Spinner,
   FlyoutPanel,
 } from './ui';
+export { ErrorFallback, Fallback } from './common';
+export { LangSwitcher } from './ui/LangSwitcher';
+export { ThemeSwitcher } from './ui';

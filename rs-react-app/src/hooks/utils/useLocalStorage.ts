@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState, type Dispatch, type SetStateAction } from 'react';
 import { STORAGE_PREFIX } from '@/utils/constants';
 
@@ -14,7 +16,9 @@ export const useLocalStorage = ({
 }: UseLocalStorageProps): UseLocalStorageResult => {
   const storageKey = `${STORAGE_PREFIX}__${key}`;
   const [storedValue, setStoredValue] = useState(
-    localStorage.getItem(storageKey) || initialValue
+    typeof window === 'undefined'
+      ? initialValue
+      : localStorage.getItem(storageKey) || initialValue
   );
 
   useEffect(() => {

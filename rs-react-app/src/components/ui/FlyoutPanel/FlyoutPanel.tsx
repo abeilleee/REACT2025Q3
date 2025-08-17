@@ -1,9 +1,12 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import { useEffect, useState, type FC } from 'react';
 import { Button } from '@/components/ui';
 import { useAppDispatch, useAppSelector } from '@/hooks';
-import { deselectAllPokemons, getSelectedPokemons } from '@/store';
-import { type PokemonData } from '@/store/slices/api/types';
-import { convertToCSV } from '@/utils';
+import { getSelectedPokemons } from '@/store/selectors/pokemonSelector';
+import { deselectAllPokemons } from '@/store/slices/pokemon';
+import { downloadFile } from '@/utils/downloadFile';
 import styles from './FlyoutPanel.module.scss';
 
 export const FlyoutPanel: FC = () => {
@@ -11,6 +14,7 @@ export const FlyoutPanel: FC = () => {
   const dispatch = useAppDispatch();
   const selectedNumber = selectedPokemons.length;
   const [isVisible, setIsVisible] = useState(selectedNumber > 0);
+  const t = useTranslations('Flyout');
 
   useEffect(() => {
     setIsVisible(selectedNumber > 0);
@@ -20,28 +24,20 @@ export const FlyoutPanel: FC = () => {
     dispatch(deselectAllPokemons());
   };
 
-  const onDownLoad = (data: PokemonData[]) => {
-    const blob = new Blob([convertToCSV(data)], { type: 'application/csv' });
-    return URL.createObjectURL(blob);
-  };
-
   if (!isVisible) {
     return;
   }
 
   return (
-    <div className={styles['flyout-box']} data-testid={'flyout'}>
+    <div className={styles['flyout-box']}>
       <p>Selected pokemon: {selectedNumber}</p>
       <div className={styles['btn-box']}>
-        <Button textContent="Unselect all" onClick={onDeselect} />
+        <Button textContent={t('unselect')} onClick={onDeselect} />
         {selectedNumber > 0 && (
-          <a
-            className={styles.link}
-            href={onDownLoad(selectedPokemons)}
-            download={`${selectedNumber}_items.csv`}
-          >
-            Download
-          </a>
+          <Button
+            textContent={t('download')}
+            onClick={() => downloadFile(selectedPokemons)}
+          />
         )}
       </div>
     </div>

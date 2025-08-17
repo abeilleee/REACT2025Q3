@@ -1,0 +1,43 @@
+{
+  "Header": {
+    "button": "Über die App"
+  },
+  "DetailedCard": {
+    "refetch": "Neu laden",
+    "close": "Schließen",
+    "refresh": "Refresh"
+  },
+  "AboutPage": {
+    "firstLine": "Die Anwendung wurde erstellt von",
+    "secondLine": "als Teil des",
+    "thirdLine": "Kurses",
+    "button": "Zurück zur Hauptseite"
+  },
+  "NotFoundPage": {
+    "notFound": "Seite nicht gefunden...",
+    "back": "Zurück zur Hauptseite"
+  },
+  "ErrorState": {
+    "noResults": "Keine Ergebnisse gefunden",
+    "msg": "Bitte versuche es erneut"
+  },
+  "ErrorFallback": {
+    "title": "Hoppla! Anscheinend ist ein Fehler aufgetreten...",
+    "paragraph": "Versuchen Sie, die Seite neu zu laden",
+    "reload": "Neu laden"
+  },
+  "Common": {
+    "loading": "Wird geladen…"
+  },
+  "Flyout": {
+    "unselect": "Alle abwählen",
+    "download": "Herunterladen"
+  },
+  "Search": {
+    "placeholder": "Pokémon-Namen vollständig eingeben",
+    "search": "Suchen"
+  },
+  "CardList": {
+    "refresh": "Aktualisieren"
+  }
+}

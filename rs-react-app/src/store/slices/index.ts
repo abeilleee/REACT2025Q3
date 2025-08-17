@@ -1,1 +1,0 @@
-export { pokemonReducer } from './pokemonSlice';

@@ -1,46 +1,30 @@
-import { type SerializedError } from '@reduxjs/toolkit';
-import { type FetchBaseQueryError } from '@reduxjs/toolkit/query';
+'use client';
+
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { type FC } from 'react';
-import {
-  Card,
-  ErrorState,
-  Pagination,
-  SkeletonCard,
-  SkeletonPagination,
-} from '@/components';
-import { useGetPokemonCountQuery } from '@/store/slices/api/pokemonApi';
-import type { PokemonData } from '@/store/slices/api/types';
-import { cloneComponent } from '@/utils';
-import { INITIAL_PAGE, LIMIT } from '@/utils/constants';
+import { ReturnedData } from '@/app/api/fetchData';
+import { Button, Card, ErrorState, Pagination } from '@/components';
+import { INITIAL_PAGE } from '@/utils/constants';
 import styles from './CardsList.module.scss';
 
 type CardsListProps = {
-  pokemonsData: PokemonData[] | undefined;
-  isLoading: boolean;
-  error: FetchBaseQueryError | SerializedError | undefined;
+  fetchData: ReturnedData;
   currentPage: number;
-  handlePageChange: (page: number) => void;
 };
 
-export const CardsList: FC<CardsListProps> = ({
-  pokemonsData,
-  isLoading,
-  error,
-  currentPage,
-  handlePageChange,
-}) => {
-  const { data: total } = useGetPokemonCountQuery();
+export const CardsList: FC<CardsListProps> = ({ fetchData, currentPage }) => {
+  const { pokemonData, total, error } = fetchData;
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const t = useTranslations('CardList');
 
-  if (isLoading) {
-    return (
-      <div className={styles.wrapper}>
-        <div className={styles.container}>
-          {cloneComponent({ element: <SkeletonCard />, count: LIMIT })}
-        </div>
-        <SkeletonPagination />
-      </div>
-    );
-  }
+  const handlePageChange = (newPage: number) => {
+    const params = new URLSearchParams(searchParams?.toString());
+    params.set('page', String(newPage));
+    const newUrl = `?${params.toString()}`;
+    router.push(newUrl);
+  };
 
   if (error) {
     return <ErrorState errorMessage={error} />;
@@ -49,18 +33,19 @@ export const CardsList: FC<CardsListProps> = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        {pokemonsData &&
-          pokemonsData.map((pokemon, index) => (
-            <Card key={index} pokemon={pokemon} />
+        {pokemonData &&
+          pokemonData.map((pokemonData, index) => (
+            <Card key={index} pokemon={pokemonData} />
           ))}
       </div>
-      {pokemonsData && pokemonsData?.length > 1 && (
+      {pokemonData && (
         <Pagination
           currentPage={currentPage}
-          total={total || INITIAL_PAGE}
+          total={total ?? INITIAL_PAGE}
           handlePageChange={handlePageChange}
         />
       )}
+      <Button textContent={t('refresh')} onClick={() => router.refresh()} />
     </div>
   );
 };

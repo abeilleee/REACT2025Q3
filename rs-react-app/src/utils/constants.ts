@@ -10,8 +10,18 @@ export const enum THEME {
   DARK = 'dark',
 }
 
-// tests
-export const TEST_ENDPOINT = 'test';
+export const enum LANGUAGE {
+  EN = 'en',
+  DE = 'de',
+}
+
+export const PATHS = {
+  ROOT: '/',
+  ABOUT: '/about',
+  PAGE: '/page',
+  DETAILS: '/pokemon/:name',
+  NOT_FOUND: '*',
+};
 
 // pagination
 export const LIMIT = 12;

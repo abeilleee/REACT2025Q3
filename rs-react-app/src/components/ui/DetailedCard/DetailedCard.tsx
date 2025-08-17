@@ -1,31 +1,31 @@
+'use client';
+
 import { skipToken } from '@reduxjs/toolkit/query';
+import Image from 'next/image';
+import { useParams, useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { type FC } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { placeholder } from '@/assets/images';
+import { placeholder } from '@/assets';
 import { Button, ErrorState, Spinner } from '@/components/ui';
-import { PATHS } from '@/services/router/constants';
-import { useGetPokemonDataQuery } from '@/store/slices/api/pokemonApi';
-import { getCurrentPage } from '@/utils';
+import { Link } from '@/i18n/navigation';
+import { useGetPokemonDataQuery } from '@/store/slices/pokemon';
 import styles from './DetailedCard.module.scss';
 
 const MAX_VALUE = 200;
 
 export const DetailedCard: FC = () => {
-  const { name } = useParams();
-  const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const params = useParams();
+  const searchParams = useSearchParams();
+  const t = useTranslations('DetailedCard');
+  const name = params?.name as string;
+  const page = searchParams.get('page');
+
   const {
     data: pokemon,
     isFetching: isLoading,
     error,
     refetch,
   } = useGetPokemonDataQuery(name ?? skipToken);
-  const currentPage = getCurrentPage(searchParams);
-
-  const onCLick = () => {
-    navigate(PATHS.ROOT);
-    setSearchParams({ page: String(currentPage) });
-  };
 
   if (isLoading) {
     return (
@@ -37,23 +37,31 @@ export const DetailedCard: FC = () => {
 
   if (error) {
     return (
-      <div className={styles.card} data-testid="error-container">
+      <div className={styles.card}>
         <ErrorState errorMessage={error} />
-        <Button onClick={onCLick} textContent="Close" />
+        <Link href={`/?page=${page}`} className="link">
+          {t('close')}
+        </Link>
       </div>
     );
   }
 
   if (pokemon)
     return (
-      <div className={styles.card} data-testid="detailed-card">
+      <div className={styles.card}>
         <div className={styles.title}>
           <span className={styles.name}>{name}</span>
         </div>
         <div className={styles.content}>
           <div className={styles['img-container']}>
             <div className={styles['img-box']}>
-              <img src={pokemon.sprites || placeholder} alt={pokemon.name} />
+              <Image
+                src={pokemon.sprites || placeholder}
+                alt={pokemon.name}
+                width={150}
+                height={150}
+                priority
+              />
             </div>
             <div className={styles.stats}>
               {pokemon.stats.name.map((stat, idx) => (
@@ -76,8 +84,10 @@ export const DetailedCard: FC = () => {
           </div>
         </div>
         <div className={styles.bottom}>
-          <Button onClick={onCLick} textContent="Close" />
-          <Button onClick={refetch} textContent="Refetch" />
+          <Link href={`/?page=${page}`} className="link">
+            {t('close')}
+          </Link>
+          <Button onClick={refetch} textContent={t('refetch')} />
         </div>
       </div>
     );

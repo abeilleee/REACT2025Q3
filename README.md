@@ -6,8 +6,7 @@ The application is created as a part of the [REACT2025Q3](https://rs.school/cour
 
 [![React](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![Typescript](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![React Router](https://img.shields.io/badge/React%20Router-D32F2F?style=for-the-badge&logo=reactrouter&logoColor=white)](https://reactrouter.com/en/main)
+[![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![Sass](https://img.shields.io/badge/sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)](https://sass-lang.com/)
 [![Eslint](https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)](https://eslint.org/)
 [![Prettier](https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black)](https://prettier.io/)
@@ -15,9 +14,6 @@ The application is created as a part of the [REACT2025Q3](https://rs.school/cour
 [![Lint Staged](https://img.shields.io/badge/lint--staged-blueviolet?style=for-the-badge&logo=git&logoColor=white)](https://github.com/okonet/lint-staged)
 [![Commitlint](https://img.shields.io/badge/commitlint-000000?style=for-the-badge&logo=commitlint&logoColor=white)](https://commitlint.js.org/#/)
 [![Husky](https://img.shields.io/badge/husky-DD0700?style=for-the-badge&logo=&logoColor=white)](https://typicode.github.io/husky/#/)
-[![Vitest](https://img.shields.io/badge/vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev/)
-[![MSW - Mock Service Worker](https://img.shields.io/badge/MSW-7B42F6?style=for-the-badge&logo=serviceworker&logoColor=white)](https://mswjs.io/)
-[![Testing Library](https://img.shields.io/badge/Testing%20Library-E33337?style=for-the-badge&logo=testing-library&logoColor=white)](https://testing-library.com/)
 [![Redux](https://img.shields.io/badge/Redux-673AB7?style=for-the-badge&logo=redux&logoColor=white)](https://redux.js.org/)
 [![Redux Toolkit](https://img.shields.io/badge/Redux%20Toolkit-673AB7?style=for-the-badge&logo=redux&logoColor=white)](https://redux-toolkit.js.org/)
 
@@ -36,7 +32,7 @@ The application consumes the [PokeAPI](https://pokeapi.co/)
 
 ## 💻 Available Scripts
 
--   `npm run dev` - run the application in development mode using Vite
+-   `npm run dev` - run the application in development mode
 -   `npm run build` - build the production version of the application
 -   `npm run lint` - run ESLint to check for code style issues and errors
 -   `npm run prepare` - set up Husky Git hooks (automatically called by npm on install)
@@ -45,9 +41,6 @@ The application consumes the [PokeAPI](https://pokeapi.co/)
 -   `npm run stylelint` - lint styles using Stylelint (for CSS/SCSS files)
 -   `npm run stylelint:fix` - automatically fix stylelint errors
 -   `npm run preview` - preview the production build locally on a dev server
--   `npm run test` - run unit tests using Vitest
--   `npm run test:coverage` - run unit tests using Vitest and display coverage report from v8
--   `npm run test:ui` - run ui for tests and display coverage report by istanbul
 
 ## 🚀 Installation
 

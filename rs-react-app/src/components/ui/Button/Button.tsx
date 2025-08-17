@@ -2,7 +2,7 @@ import { type FC } from 'react';
 import styles from './Button.module.scss';
 
 type ButtonProps = {
-  onClick: () => void;
+  onClick?: () => void;
   textContent: string;
   className?: string;
   disabled?: boolean;
@@ -18,12 +18,8 @@ export const Button: FC<ButtonProps> = ({
     ? `${className} ${styles.button} }`
     : styles.button;
 
-  const handleClick = () => {
-    onClick();
-  };
-
   return (
-    <button className={stylesName} onClick={handleClick} disabled={disabled}>
+    <button className={stylesName} onClick={onClick} disabled={disabled}>
       {textContent}
     </button>
   );
