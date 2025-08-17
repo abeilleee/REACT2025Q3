@@ -1,5 +1,5 @@
 import { ReactNode, type FC } from 'react';
-import { ReturnData } from '@/app/api/fetchData';
+import { ReturnedData } from '@/app/api/fetchData';
 import MainPage from '@/views/MainPage/MainPage';
 import styles from './MainLayout.module.scss';
 
@@ -7,7 +7,7 @@ interface MainLayoutProps {
   children: ReactNode;
   searchTerm: string;
   currentPage: number;
-  fetchData: ReturnData;
+  fetchData: ReturnedData;
 }
 
 export const MainLayout: FC<MainLayoutProps> = ({

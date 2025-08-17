@@ -3,13 +3,13 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { type FC } from 'react';
-import { ReturnData } from '@/app/api/fetchData';
+import { ReturnedData } from '@/app/api/fetchData';
 import { Button, Card, ErrorState, Pagination } from '@/components';
 import { INITIAL_PAGE } from '@/utils/constants';
 import styles from './CardsList.module.scss';
 
 type CardsListProps = {
-  fetchData: ReturnData;
+  fetchData: ReturnedData;
   currentPage: number;
 };
 

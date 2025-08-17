@@ -1,10 +1,10 @@
-import { ReturnData } from '@/app/api/fetchData';
+import { ReturnedData } from '@/app/api/fetchData';
 import { CardsList, Search, FlyoutPanel } from '@/components';
 
 type MainPageProps = {
   searchTerm: string;
   currentPage: number;
-  fetchData: ReturnData;
+  fetchData: ReturnedData;
 };
 
 export function MainPage({

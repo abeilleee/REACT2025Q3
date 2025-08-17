@@ -1,6 +1,6 @@
 import { fetchData } from '@/app/api/fetchData';
 import { DetailedCard, MainLayout } from '@/components';
-import { INITIAL_PAGE } from '@/utils/constants';
+import { getParams } from '@/utils/getParams';
 
 type PageProps = {
   searchParams: Promise<{
@@ -11,9 +11,7 @@ type PageProps = {
 
 export default async function Page({ searchParams }: PageProps) {
   const params = await searchParams;
-  const searchTerm = params.searchTerm ?? '';
-  const currentPage = params.page ? +params.page : INITIAL_PAGE;
-
+  const { searchTerm, currentPage } = getParams(params);
   const data = await fetchData(searchTerm, currentPage);
 
   return (
