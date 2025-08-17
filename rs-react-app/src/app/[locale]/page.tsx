@@ -1,6 +1,6 @@
+import { fetchData } from '@/app/api/fetchData';
 import { getParams } from '@/utils/getParams';
 import MainPage from '@/views/MainPage/MainPage';
-import { fetchData } from '@/app/api/fetchData';
 
 type PageProps = {
   searchParams: Promise<{
