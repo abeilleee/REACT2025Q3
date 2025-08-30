@@ -14,6 +14,10 @@ export const mapCo2DataToCountryData = (data: Co2Data) => {
       cement_co2: lastData?.cement_co2 ?? NOT_AVAILABLE,
       cement_co2_per_capita: lastData?.cement_co2_per_capita ?? NOT_AVAILABLE,
       cumulative_cement_co2: lastData?.cumulative_cement_co2 ?? NOT_AVAILABLE,
+      methane: lastData?.methane ?? NOT_AVAILABLE,
+      oil_co2: lastData?.oil_co2 ?? NOT_AVAILABLE,
+      temperature_change_from_co2:
+        lastData?.temperature_change_from_co2 ?? NOT_AVAILABLE,
     };
 
     result.push(mappedData);

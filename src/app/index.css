@@ -24,3 +24,7 @@ button {
 .spinner {
   @apply h-12 w-12 animate-spin rounded-full border-4 border-gray-600 border-t-white;
 }
+
+.pd-base {
+  @apply p-3.5;
+}
