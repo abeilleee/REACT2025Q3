@@ -1,7 +1,8 @@
 import './index.css';
+import { Router } from './router';
 
 export const App = () => {
-  return <div>React Perfomance</div>;
+  return <Router />;
 };
 
 export default App;

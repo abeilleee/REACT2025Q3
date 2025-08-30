@@ -4,4 +4,19 @@
 
 html {
   font-family: 'Nunito', sans-serif;
+  @apply bg-gray-800 text-amber-50;
+}
+
+button {
+  @apply rounded-xl bg-sky-300 p-2.5 transition-all duration-300;
+
+  @media (hover: hover) {
+    &:not(:disabled):hover {
+      @apply cursor-pointer bg-sky-600;
+    }
+  }
+}
+
+.icon {
+  @apply size-[30px];
 }
