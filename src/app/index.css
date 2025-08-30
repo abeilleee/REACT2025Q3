@@ -11,7 +11,7 @@ button {
   @apply rounded-xl bg-sky-300 p-2.5 transition-all duration-300;
 
   @media (hover: hover) {
-    &:not(:disabled):hover {
+    &:hover {
       @apply cursor-pointer bg-sky-600;
     }
   }
@@ -19,4 +19,8 @@ button {
 
 .icon {
   @apply size-[30px];
+}
+
+.spinner {
+  @apply h-12 w-12 animate-spin rounded-full border-4 border-gray-600 border-t-white;
 }

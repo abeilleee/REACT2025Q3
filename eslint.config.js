@@ -56,6 +56,8 @@ export default tseslint.config([
       '@typescript-eslint/restrict-template-expressions': 'off',
       '@typescript-eslint/prefer-promise-reject-errors': 'off',
       '@typescript-eslint/ban-types': 'off',
+      '@typescript-eslint/no-unsafe-enum-comparison': 'off',
+      '@typescript-eslint/no-unused-expressions': 'off',
       'import/order': [
         'error',
         {

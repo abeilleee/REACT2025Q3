@@ -1,9 +1,8 @@
-import { type FC } from 'react';
+import { Suspense, type FC } from 'react';
 import { RouterProvider } from 'react-router';
 import { createBrowserRouter } from 'react-router-dom';
-import { MainPage } from '@/pages/main-page';
-import { NotFoundPage } from '@/pages/not-found';
-import { Layout } from '@/shared/ui';
+import { MainPage, NotFoundPage } from '@/pages';
+import { Layout, Spinner } from '@/shared/ui';
 
 export const Router: FC = () => {
   const router = createBrowserRouter([
@@ -12,7 +11,11 @@ export const Router: FC = () => {
       children: [
         {
           path: '/',
-          element: <MainPage />,
+          element: (
+            <Suspense fallback={<Spinner />}>
+              <MainPage />
+            </Suspense>
+          ),
         },
       ],
     },
