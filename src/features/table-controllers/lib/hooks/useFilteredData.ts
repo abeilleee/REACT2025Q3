@@ -2,11 +2,18 @@ import { useMemo } from 'react';
 import { SORT_ORDER, SORT_VARIANTS, type FilterState } from '@/shared/lib';
 import { useCountriesStore } from '@/shared/model';
 
-export const useFilteredData = (filterState: FilterState) => {
+export const useFilteredData = (
+  filterState: FilterState,
+  searchValue: string
+) => {
   const { countries } = useCountriesStore();
 
   const sortedData = useMemo(() => {
-    const countriesCopy = [...countries];
+    const filteredBySearchTerm = countries.filter((country) =>
+      country.country.toLowerCase().includes(searchValue.toLowerCase())
+    );
+
+    const countriesCopy = [...filteredBySearchTerm];
 
     switch (filterState.sortVariant) {
       case SORT_VARIANTS.NAME:
@@ -38,7 +45,7 @@ export const useFilteredData = (filterState: FilterState) => {
       default:
         return countriesCopy;
     }
-  }, [countries, filterState.sortVariant, filterState.sortOrder]);
+  }, [countries, filterState.sortVariant, filterState.sortOrder, searchValue]);
 
   return { filteredData: sortedData };
 };

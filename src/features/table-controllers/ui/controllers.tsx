@@ -1,4 +1,5 @@
 import { useModalStore } from '@/widgets/model';
+import { Search } from './search';
 import { SelectYear } from './select-year';
 import { SortVariant } from './sort-variant';
 
@@ -10,6 +11,7 @@ export const Controllers = () => {
       <button onClick={toggleIsOpen}>Select columns</button>
       <SelectYear />
       <SortVariant />
+      <Search />
     </div>
   );
 };

@@ -21,6 +21,10 @@ option {
   @apply text-black;
 }
 
+input {
+  @apply rounded-xl bg-amber-50/20 p-1.5 focus:ring-1 focus:ring-sky-300 focus:outline-none;
+}
+
 .icon {
   @apply size-[30px];
 }

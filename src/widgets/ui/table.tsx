@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { useEffect, useMemo, useState, type FC } from 'react';
 import { useYearsStore } from '@/features/table-controllers';
 import { useFilteredData } from '@/features/table-controllers/lib';
+import { useSearchStore } from '@/features/table-controllers/model';
 import {
   lastYear,
   mapCo2DataToCountryData,
@@ -16,6 +17,7 @@ import { useFormStore } from '@/widgets/model';
 export const Table: FC = () => {
   const { selectedColumns: headers } = useFormStore();
   const { selectedYear } = useYearsStore();
+  const { searchTerm } = useSearchStore();
   const [isUpdated, setIsUpdated] = useState(false);
   const { sortVariant, sortOrder } = useCountriesStore();
 
@@ -27,7 +29,7 @@ export const Table: FC = () => {
     [sortVariant, sortOrder]
   );
 
-  const { filteredData } = useFilteredData(filterOptions);
+  const { filteredData } = useFilteredData(filterOptions, searchTerm);
 
   const countryData = useMemo(
     () => mapCo2DataToCountryData(filteredData, selectedYear ?? lastYear),
