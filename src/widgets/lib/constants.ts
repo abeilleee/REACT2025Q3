@@ -12,3 +12,5 @@ export enum TABLE_HEADERS_OPTIONAL {
   OIL_CO2 = 'Oil CO2',
   TEMPERATURE = 'Temperature change from co2',
 }
+
+export const NOT_HIGLIGHTED_COLUMNS = 2;

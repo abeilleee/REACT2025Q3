@@ -18,6 +18,12 @@ export interface Co2Data {
   };
 }
 
+export interface FlatCo2Data {
+  country: string;
+  iso_code: string;
+  data: Data[];
+}
+
 export interface CountryData extends Data {
   countryName: string;
   iso_code: string;
@@ -30,7 +36,7 @@ type PendingResult = {
 
 type SuccessResult = {
   status: STATUS.SUCCESS;
-  result: CountryData[];
+  result: Co2Data;
 };
 
 type ErrorResult = {

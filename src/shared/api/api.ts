@@ -1,6 +1,5 @@
 import {
   DEFAULT_ERROR,
-  mapCo2DataToCountryData,
   STATUS,
   type Co2Data,
   type ReturnedResult,
@@ -10,7 +9,7 @@ const fetchData = async () => {
   const response = await fetch('src/shared/lib/data.json');
   const data = (await response.json()) as Co2Data;
 
-  return mapCo2DataToCountryData(data);
+  return data;
 };
 
 const getData = () => {

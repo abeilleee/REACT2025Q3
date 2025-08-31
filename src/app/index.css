@@ -17,6 +17,10 @@ button {
   }
 }
 
+option {
+  @apply text-black;
+}
+
 .icon {
   @apply size-[30px];
 }

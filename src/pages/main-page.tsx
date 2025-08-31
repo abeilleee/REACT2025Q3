@@ -1,17 +1,40 @@
-import { useMemo, type FC } from 'react';
-import { Controllers } from '@/features/table-controllers';
-import { ColumnsList } from '@/features/table-controllers/ui/columns-list';
+import { useEffect, useMemo, type FC } from 'react';
+import {
+  ColumnsList,
+  Controllers,
+  useYearsStore,
+} from '@/features/table-controllers';
 import { getDataResult } from '@/shared/api';
-import { useFormStore } from '@/widgets/model';
-import { Modal } from '@/widgets/ui/modal/modal';
-import { Table } from '@/widgets/ui/table/table';
+import {
+  getAllYears,
+  lastYear,
+  mapCo2DataToCountryData,
+  mapCo2DataToFlatCo2Data,
+} from '@/shared/lib';
+import { useCountriesStore } from '@/shared/model';
+import { Modal, Table } from '@/widgets/ui';
 
 export const MainPage: FC = () => {
-  const { selectedColumns } = useFormStore();
+  const { setAllYears, selectedYear } = useYearsStore();
+  const { setCountries } = useCountriesStore();
+  const co2Data = getDataResult.read();
+
+  const flatData = useMemo(() => {
+    return mapCo2DataToFlatCo2Data(co2Data);
+  }, [co2Data]);
 
   const data = useMemo(() => {
-    return getDataResult.read();
-  }, [selectedColumns]);
+    return mapCo2DataToCountryData(co2Data, selectedYear || lastYear);
+  }, [co2Data, selectedYear]);
+
+  const years = useMemo(() => {
+    return getAllYears(flatData);
+  }, [flatData]);
+
+  useEffect(() => {
+    setCountries(mapCo2DataToFlatCo2Data(co2Data));
+    setAllYears(years);
+  }, [flatData, setCountries, co2Data, setAllYears, years]);
 
   return (
     <>
