@@ -7,7 +7,7 @@ export const Controllers = () => {
   const { toggleIsOpen } = useModalStore();
 
   return (
-    <div className="pd-base flex items-center gap-5 bg-amber-50/20">
+    <div className="pd-base sticky top-0 flex items-center gap-5 bg-gray-600">
       <button onClick={toggleIsOpen}>Select columns</button>
       <SelectYear />
       <SortVariant />

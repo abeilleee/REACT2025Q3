@@ -23,7 +23,7 @@ export const ColumnsList = () => {
         const isChecked = selectedColumns.includes(column);
 
         return (
-          <div key={idx} className="flex gap-3">
+          <div key={idx} className="flex justify-between gap-3">
             <label htmlFor={`checkbox-${idx}`}>{column}</label>
             <input
               type="checkbox"

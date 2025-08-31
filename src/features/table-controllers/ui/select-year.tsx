@@ -18,6 +18,7 @@ export const SelectYear: FC = () => {
         id="year-select"
         value={selectedYear || ''}
         onChange={handleChange}
+        className="hover:cursor-pointer"
       >
         <option>{lastYear}</option>
         {limitedYears.map((year, idx) => (

@@ -21,7 +21,11 @@ export const SortOrder = () => {
     isVisible && (
       <div>
         <label htmlFor="sort">Sort by:</label>
-        <select id="sort" onChange={handleChange}>
+        <select
+          id="sort"
+          onChange={handleChange}
+          className="hover:cursor-pointer"
+        >
           {Object.values(SORT_ORDER).map((value, idx) => (
             <option key={idx} value={value}>
               {value}

@@ -4,7 +4,7 @@
 
 html {
   font-family: 'Nunito', sans-serif;
-  @apply bg-gray-800 text-amber-50;
+  @apply bg-gray-800 text-xs text-amber-50;
 }
 
 button {
@@ -21,8 +21,18 @@ option {
   @apply text-black;
 }
 
+select {
+  @apply ml-1.5 rounded-xl bg-amber-50/20 p-1.5 focus:ring-1 focus:ring-sky-300 focus:outline-none;
+}
+
 input {
   @apply rounded-xl bg-amber-50/20 p-1.5 focus:ring-1 focus:ring-sky-300 focus:outline-none;
+}
+
+th,
+tr,
+td {
+  @apply border-collapse border-1 border-gray-400/30;
 }
 
 .icon {

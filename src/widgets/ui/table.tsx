@@ -50,8 +50,8 @@ export const Table: FC = () => {
 
   return (
     countryData && (
-      <table className="w-full">
-        <thead>
+      <table className="w-full table-auto">
+        <thead className="sticky top-[52px] bg-blue-950">
           <tr>
             {headers.map((header, idx) => (
               <th key={idx} className="font-extrabold">
@@ -71,7 +71,7 @@ export const Table: FC = () => {
                 return (
                   <td
                     className={clsx({
-                      'text-indigo-500': isHiglighted && isUpdated,
+                      'bg-sky-300': isHiglighted && isUpdated,
                     })}
                     key={headerIdx}
                   >
