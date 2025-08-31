@@ -75,7 +75,7 @@ export const Table: FC = () => {
                     })}
                     key={headerIdx}
                   >
-                    {value}{' '}
+                    {value}
                   </td>
                 );
               })}
