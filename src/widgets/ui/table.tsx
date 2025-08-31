@@ -1,18 +1,38 @@
 import clsx from 'clsx';
-import { useEffect, useState, type FC } from 'react';
+import { useEffect, useMemo, useState, type FC } from 'react';
 import { useYearsStore } from '@/features/table-controllers';
-import { type CountryData } from '@/shared/lib';
+import { useFilteredData } from '@/features/table-controllers/lib';
+import {
+  lastYear,
+  mapCo2DataToCountryData,
+  SORT_ORDER,
+  SORT_VARIANTS,
+  type FilterState,
+} from '@/shared/lib';
+import { useCountriesStore } from '@/shared/model';
 import { getTableDataValue, NOT_HIGLIGHTED_COLUMNS } from '@/widgets/lib';
 import { useFormStore } from '@/widgets/model';
 
-type TableProps = {
-  countryData: CountryData[] | undefined;
-};
-
-export const Table: FC<TableProps> = ({ countryData }) => {
+export const Table: FC = () => {
   const { selectedColumns: headers } = useFormStore();
   const { selectedYear } = useYearsStore();
   const [isUpdated, setIsUpdated] = useState(false);
+  const { sortVariant, sortOrder } = useCountriesStore();
+
+  const filterOptions = useMemo<FilterState>(
+    () => ({
+      sortVariant: sortVariant ?? SORT_VARIANTS.NONE,
+      sortOrder: sortOrder ?? SORT_ORDER.NONE,
+    }),
+    [sortVariant, sortOrder]
+  );
+
+  const { filteredData } = useFilteredData(filterOptions);
+
+  const countryData = useMemo(
+    () => mapCo2DataToCountryData(filteredData, selectedYear ?? lastYear),
+    [filteredData, selectedYear]
+  );
 
   useEffect(() => {
     if (selectedYear) {

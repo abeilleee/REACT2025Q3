@@ -3,16 +3,17 @@ import type { Co2Data, CountryData, FlatCo2Data } from './types';
 
 export const lastYear = 2023;
 
-export const mapCo2DataToCountryData = (data: Co2Data, year = lastYear) => {
-  const result = [];
+export const mapCo2DataToCountryData = (
+  data: FlatCo2Data[],
+  year = lastYear
+) => {
+  const result: CountryData[] = [];
 
-  for (const country in data) {
-    const targetData = data[country].data.find(
-      (country) => country.year === year
-    );
+  data.forEach((country) => {
+    const targetData = country.data.find((country) => country.year === year);
     const mappedData: CountryData = {
-      countryName: country,
-      iso_code: data[country].iso_code ?? NOT_AVAILABLE,
+      countryName: country.country,
+      iso_code: country.iso_code ?? NOT_AVAILABLE,
       year: targetData?.year ?? NOT_AVAILABLE,
       population: targetData?.population ?? NOT_AVAILABLE,
       cement_co2: targetData?.cement_co2 ?? NOT_AVAILABLE,
@@ -25,7 +26,7 @@ export const mapCo2DataToCountryData = (data: Co2Data, year = lastYear) => {
     };
 
     result.push(mappedData);
-  }
+  });
 
   return result;
 };

@@ -1,4 +1,4 @@
-import type { STATUS } from './constants';
+import type { SORT_ORDER, SORT_VARIANTS, STATUS } from './constants';
 
 export interface Data {
   year: number | string;
@@ -45,3 +45,8 @@ type ErrorResult = {
 };
 
 export type ReturnedResult = SuccessResult | PendingResult | ErrorResult;
+
+export type FilterState = {
+  sortVariant: SORT_VARIANTS;
+  sortOrder: SORT_ORDER | null;
+};
