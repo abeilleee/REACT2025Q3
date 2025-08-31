@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { SORT_ORDER, SORT_VARIANTS, type FilterState } from '@/shared/lib';
 import { useCountriesStore } from '@/shared/model';
 
@@ -8,7 +8,7 @@ export const useFilteredData = (
 ) => {
   const { countries } = useCountriesStore();
 
-  const sortedData = useMemo(() => {
+  const sortData = useCallback(() => {
     const filteredBySearchTerm = countries.filter((country) =>
       country.country.toLowerCase().includes(searchValue.toLowerCase())
     );
@@ -46,6 +46,8 @@ export const useFilteredData = (
         return countriesCopy;
     }
   }, [countries, filterState.sortVariant, filterState.sortOrder, searchValue]);
+
+  const sortedData = useMemo(() => sortData(), [sortData]);
 
   return { filteredData: sortedData };
 };

@@ -1,4 +1,4 @@
-import { useEffect, type FC, type ReactNode } from 'react';
+import { memo, useEffect, type FC, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { useModalStore } from '@/widgets/model';
 
@@ -6,7 +6,7 @@ type ModalProps = {
   children: ReactNode;
 };
 
-export const Modal: FC<ModalProps> = ({ children }) => {
+const Modal: FC<ModalProps> = ({ children }) => {
   const { isOpen, toggleIsOpen } = useModalStore();
 
   const handleBackdropClick = (
@@ -33,3 +33,5 @@ export const Modal: FC<ModalProps> = ({ children }) => {
     document.body
   );
 };
+
+export default memo(Modal);
