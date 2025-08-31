@@ -5,7 +5,6 @@ import { Select } from '@/shared/ui/select';
 
 export const SelectYear: FC = () => {
   const { allYears, setSelectedYear, selectedYear } = useYearsStore();
-  const limitedYears = allYears.slice(0, 5000);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const year = Number(event.target.value);
@@ -16,7 +15,7 @@ export const SelectYear: FC = () => {
     <Select
       label="Choose year:"
       id="year-select"
-      options={limitedYears}
+      options={allYears}
       onChange={handleChange}
       value={selectedYear || lastYear}
     />

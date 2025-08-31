@@ -42,13 +42,13 @@ export const mapCo2DataToFlatCo2Data = (data: Co2Data) => {
 };
 
 export const getAllYears = (data: FlatCo2Data[]) => {
-  const result: number[] = [];
+  const result = new Set(
+    data.flatMap((item) =>
+      item.data.map((countryData) => Number(countryData.year))
+    )
+  );
 
-  data.forEach((country) => {
-    const countryData = country.data;
-    const years = new Set(countryData.flatMap((item) => Number(item.year)));
-    result.push(...Array.from(years));
-  });
+  const years = Array.from(result).sort((a, b) => a - b);
 
-  return result;
+  return years;
 };
