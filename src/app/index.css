@@ -1,0 +1,48 @@
+@import 'tailwindcss';
+@import 'tailwindcss/preflight';
+@import 'tailwindcss/utilities';
+
+html {
+  font-family: 'Nunito', sans-serif;
+  @apply bg-gray-800 text-xs text-amber-50;
+}
+
+button {
+  @apply rounded-xl bg-sky-300 p-2.5 transition-all duration-300;
+
+  @media (hover: hover) {
+    &:hover {
+      @apply cursor-pointer bg-sky-600;
+    }
+  }
+}
+
+option {
+  @apply text-black;
+}
+
+select {
+  @apply ml-1.5 rounded-xl bg-amber-50/20 p-1.5 focus:ring-1 focus:ring-sky-300 focus:outline-none;
+}
+
+input {
+  @apply rounded-xl bg-amber-50/20 p-1.5 focus:ring-1 focus:ring-sky-300 focus:outline-none;
+}
+
+th,
+tr,
+td {
+  @apply border-collapse border-1 border-gray-400/30;
+}
+
+.icon {
+  @apply size-[30px];
+}
+
+.spinner {
+  @apply h-12 w-12 animate-spin rounded-full border-4 border-gray-600 border-t-white;
+}
+
+.pd-base {
+  @apply p-3.5;
+}
