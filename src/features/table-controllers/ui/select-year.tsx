@@ -1,6 +1,7 @@
 import { type FC } from 'react';
 import { useYearsStore } from '@/features/table-controllers/model';
 import { lastYear } from '@/shared/lib';
+import { Select } from '@/shared/ui/select';
 
 export const SelectYear: FC = () => {
   const { allYears, setSelectedYear, selectedYear } = useYearsStore();
@@ -12,21 +13,12 @@ export const SelectYear: FC = () => {
   };
 
   return (
-    <div>
-      <label htmlFor="year-select">Choose year:</label>
-      <select
-        id="year-select"
-        value={selectedYear || ''}
-        onChange={handleChange}
-        className="hover:cursor-pointer"
-      >
-        <option>{lastYear}</option>
-        {limitedYears.map((year, idx) => (
-          <option key={idx} value={year} defaultValue={lastYear}>
-            {year}
-          </option>
-        ))}
-      </select>
-    </div>
+    <Select
+      label="Choose year:"
+      id="year-select"
+      options={limitedYears}
+      onChange={handleChange}
+      value={selectedYear || lastYear}
+    />
   );
 };

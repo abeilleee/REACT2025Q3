@@ -1,6 +1,7 @@
 import { isSortVariant } from '@/features/table-controllers/lib';
 import { SORT_ORDER, SORT_VARIANTS } from '@/shared/lib';
 import { useCountriesStore } from '@/shared/model';
+import { Select } from '@/shared/ui';
 import { SortOrder } from './sort-order';
 
 export const SortVariant = () => {
@@ -20,20 +21,12 @@ export const SortVariant = () => {
 
   return (
     <div className="flex gap-3.5">
-      <div>
-        <label htmlFor="sort">Sort by:</label>
-        <select
-          id="sort"
-          onChange={handleChange}
-          className="hover:cursor-pointer"
-        >
-          {Object.values(SORT_VARIANTS).map((value, idx) => (
-            <option key={idx} value={value}>
-              {value}
-            </option>
-          ))}
-        </select>
-      </div>
+      <Select
+        label="Sort by:"
+        id="sort"
+        options={Object.values(SORT_VARIANTS)}
+        onChange={handleChange}
+      />
       <SortOrder />
     </div>
   );
