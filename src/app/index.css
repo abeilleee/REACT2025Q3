@@ -1,0 +1,101 @@
+@import 'tailwindcss';
+@import 'tailwindcss/preflight';
+@import 'tailwindcss/utilities';
+
+:root {
+  /* sizes */
+  --padding-base: 8px;
+  --padding-sm: 4px;
+
+  /* colors */
+  --text-shadow: 3px 1px 7px #ffffff;
+  --bg-color-gradient:
+    radial-gradient(
+      at 16.774710282822927% 25.37448913543528%,
+      #ff1c6b 0px,
+      transparent 50%
+    ),
+    radial-gradient(
+      at 89.31102665469685% 78.87386682572118%,
+      #eb2d4c 0px,
+      transparent 50%
+    ),
+    radial-gradient(
+      at 81.86871673792943% 18.618595024375285%,
+      #ff91c8 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 19.395241943656522% 100%, #fc6aac 0px, transparent 50%)
+      #ffffff;
+}
+
+@theme {
+  --font-body: 'Nunito', sans-serif;
+}
+
+body {
+  @apply font-body text-sm;
+  background: var(--bg-color-gradient);
+}
+
+input {
+  @apply w-full rounded-xl bg-amber-50/40 p-0.5 text-gray-600/70 focus:ring-1 focus:ring-cyan-500 focus:outline-none;
+
+  &:checked {
+    @apply text-amber-300;
+  }
+}
+
+fieldset {
+  @apply rounded-xl border border-white p-1.5;
+}
+
+button {
+  @apply rounded-xl bg-amber-600 p-2.5 transition-all duration-300;
+
+  &:disabled {
+    @apply cursor-not-allowed text-gray-500;
+  }
+
+  @media (hover: hover) {
+    &:not(:disabled):hover {
+      @apply cursor-pointer bg-amber-500;
+    }
+  }
+}
+
+.pd-base {
+  padding: var(--padding-base);
+}
+
+.pd-sm {
+  padding: var(--padding-sm);
+}
+
+.form {
+  @apply flex h-[700px] min-h-[60%] w-[650px] max-w-[90%] flex-col justify-center gap-2 rounded-lg bg-lime-100/30 p-2.5 text-amber-50 shadow-2xl;
+}
+
+.icon {
+  @apply size-[30px];
+}
+
+.group-col {
+  @apply flex flex-col;
+}
+
+.error {
+  @apply h-[14px] w-full text-xs break-words text-red-500;
+}
+
+.sm-w-input {
+  @apply w-[20px];
+}
+
+.file-input {
+  @apply cursor-pointer;
+}
+
+.tile-data {
+  @apply rounded-xl bg-amber-50/20 p-1;
+}
